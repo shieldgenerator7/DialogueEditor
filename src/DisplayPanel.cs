@@ -28,11 +28,7 @@ public class DisplayPanel : Panel
     Pen darken = new Pen(Color.FromArgb(100, 0, 0, 0), 1);
 
 
-    public DisplayPanel() : this(100, 100)
-    {
-    }
-
-    public DisplayPanel(int width, int height) : base()
+    public DisplayPanel() : base()
     {
         this.DoubleBuffered = true;
     }

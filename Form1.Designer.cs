@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pnlDisplay = new System.Windows.Forms.Panel();
+            this.pnlDisplay = new DisplayPanel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,7 +59,7 @@
             this.editToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1309, 42);
+            this.menuStrip1.Size = new System.Drawing.Size(1309, 40);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -129,6 +129,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmMain";
             this.Text = "Dialogue Editor";
+            this.Load += new System.EventHandler(this.frmMain_Load);
             this.pnlDisplay.ResumeLayout(false);
             this.pnlDisplay.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
