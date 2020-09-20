@@ -1,0 +1,9 @@
+C:\Users\shiel\source\repos\DialogueEditor\bin\Debug\DialogueEditor.exe.config
+C:\Users\shiel\source\repos\DialogueEditor\bin\Debug\DialogueEditor.exe
+C:\Users\shiel\source\repos\DialogueEditor\bin\Debug\DialogueEditor.pdb
+C:\Users\shiel\source\repos\DialogueEditor\obj\Debug\DialogueEditor.csprojAssemblyReference.cache
+C:\Users\shiel\source\repos\DialogueEditor\obj\Debug\DialogueEditor.Properties.Resources.resources
+C:\Users\shiel\source\repos\DialogueEditor\obj\Debug\DialogueEditor.csproj.GenerateResource.cache
+C:\Users\shiel\source\repos\DialogueEditor\obj\Debug\DialogueEditor.csproj.CoreCompileInputs.cache
+C:\Users\shiel\source\repos\DialogueEditor\obj\Debug\DialogueEditor.exe
+C:\Users\shiel\source\repos\DialogueEditor\obj\Debug\DialogueEditor.pdb
