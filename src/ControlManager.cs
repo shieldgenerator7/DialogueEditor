@@ -128,6 +128,16 @@ public class ControlManager
         }
     }
 
+    public void deletePressed()
+    {
+        if (selected && !selected.Editing)
+        {
+            selected.dispose();
+            Managers.Node.nodes.Remove(selected);
+            selected = null;
+        }
+    }
+
     public void receiveInfoDump(DialoguePath path, string[] textArray)
     {
         Node lastNode = Managers.Node.createNodes(path, textArray);

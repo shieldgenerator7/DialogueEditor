@@ -75,13 +75,27 @@ namespace DialogueEditor
             //2020-09-21: copied from https://stackoverflow.com/a/54960523/2336212
             if (keyData == Keys.Return)
             {
-                //do something
                 Managers.Control.enterPressed();
+                return true;
+            }
+            else if (keyData == Keys.Delete)
+            {
+                Managers.Control.deletePressed();
+                refresh();
                 return true;
             }
             else
             {
                 return base.ProcessCmdKey(ref msg, keyData);
+            }
+        }
+
+        private void frmMain_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                Managers.Control.deletePressed();
+                refresh();
             }
         }
     }

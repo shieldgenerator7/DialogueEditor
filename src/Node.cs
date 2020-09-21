@@ -160,6 +160,13 @@ namespace DialogueEditor.src
             }
         }
 
+        public void dispose()
+        {
+            DialoguePath path = quote.path;
+            path.quotes.Remove(quote);
+            Managers.Form.Controls.Remove(label);
+        }
+
         public static implicit operator Boolean(Node gameObjectSprite)
         {
             return gameObjectSprite != null;
