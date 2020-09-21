@@ -10,12 +10,14 @@ public class DisplayManager
     int BRUSH_THICKNESS = 4;
 
     Pen selectPen;
+    Pen overPen;
     Pen deletePen;
     Pen anchorPen;
     Pen changePen;
     Pen createPen;
 
     Brush rectBrush;
+    Brush textBrush;
 
     Font font;
 
@@ -23,13 +25,15 @@ public class DisplayManager
 
     public DisplayManager()
     {
-        selectPen = new Pen(Color.FromArgb(155, 155, 155), BRUSH_THICKNESS);
+        selectPen = new Pen(Color.FromArgb(131, 239, 76), BRUSH_THICKNESS);
+        overPen = new Pen(Color.FromArgb(255, 255, 255), BRUSH_THICKNESS);
         deletePen = new Pen(Color.FromArgb(247, 70, 70), BRUSH_THICKNESS);
         anchorPen = new Pen(Color.FromArgb(52, 175, 0), BRUSH_THICKNESS);
         changePen = new Pen(Color.FromArgb(137, 206, 255), BRUSH_THICKNESS);
         createPen = new Pen(Color.FromArgb(255, 230, 107), BRUSH_THICKNESS);
         //
-        rectBrush = new SolidBrush(Color.FromArgb(161, 187, 206));
+        rectBrush = new SolidBrush(Color.FromArgb(53, 70, 127));
+        textBrush = new SolidBrush(Color.FromArgb(240, 240, 200));
         //
         FontFamily fontFamily = new FontFamily("Microsoft Sans Serif");
         font = new Font(
@@ -69,20 +73,13 @@ public class DisplayManager
 
     public void displayRectangles(Graphics graphics, Node selected, Node mousedOver, Vector mousePos, bool mouseDown)
     {
-        if (!mousedOver)
+        if (selected)
         {
-            mousedOver = selected;
+            drawRectangle(graphics, selectPen, selected);
         }
         if (mousedOver)
         {
-            if (mouseDown)
-            {
-                drawRectangle(graphics, selectPen, mousedOver);
-            }
-            else
-            {
-                drawRectangle(graphics, selectPen, mousedOver);
-            }
+            drawRectangle(graphics, overPen, mousedOver);
         }
     }
     private void drawRectangle(Graphics graphics, Pen pen, Node node)
