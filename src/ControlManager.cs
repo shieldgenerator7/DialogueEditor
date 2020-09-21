@@ -95,6 +95,7 @@ public class ControlManager
         {
             //Create a new one
             selected = Managers.Node.createNode(null, mousePos);
+            selected.editNode(true);
         }
         //bool changedObjectState = false;
         //checkTrayDoubleClick(Managers.Command, mousePos);
@@ -119,9 +120,9 @@ public class ControlManager
             {
                 //Add new node at the end
                 selected = Managers.Node.createNode(
-                selected.quote.path,
-                selected.position + new Vector(0, 30)
-                );
+                    selected.quote.path,
+                    selected.position + new Vector(0, 30)
+                    );
                 selected.editNode(true);
             }
         }

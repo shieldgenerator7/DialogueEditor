@@ -15,13 +15,29 @@ namespace DialogueEditor.src
     {
 
         public Quote quote;
-        public Vector position;
+        private Vector _position;
+        public Vector position
+        {
+            get => _position;
+            set
+            {
+                _position = value;
+                if (label != null)
+                {
+                    label.Location = _position.toPoint();
+                    if (!label.Visible)
+                    {
+                        textBox.Location = _position.toPoint();
+                    }
+                }
+            }
+        }
         public Vector pickupOffset;
         public Size size => (label.Visible) ? label.Size : textBox.Size;
 
         private static RichTextBox textBox;
 
-        private Label label;
+        public readonly Label label;
 
         public Node(Quote quote) : this(quote, Vector.zero) { }
 
@@ -98,8 +114,20 @@ namespace DialogueEditor.src
 
         private void acceptText(object sender, EventArgs e)
         {
-            quote.text = ((RichTextBox)sender).Text;
-            label.Text = quote.text;
+            string text = ((RichTextBox)sender).Text;
+            if (text.Contains('\n'))
+            {
+                //Special processing,
+                //Create new nodes
+                string[] split = text.Split('\n');
+                text = split[0];
+                Node lastNode = Managers.Node.createNodes(quote.path, split);
+                editNode(false);
+                lastNode.editNode(true);
+            }
+            //Normal procedure
+            quote.text = text;
+            label.Text = text;
             Managers.Form.Refresh();
         }
 
@@ -124,7 +152,6 @@ namespace DialogueEditor.src
             {
                 position = pos;
             }
-            label.Location = position.toPoint();
         }
 
         public static implicit operator Boolean(Node gameObjectSprite)

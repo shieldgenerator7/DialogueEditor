@@ -73,7 +73,7 @@ public class DisplayManager
                 {
                     nextPos = node.position;
                 }
-                node.moveTo(nextPos, false);
+                node.position = nextPos;
                 nextPos.y += node.size.Height + 10;
             }
 

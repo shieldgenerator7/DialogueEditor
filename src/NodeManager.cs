@@ -30,10 +30,34 @@ namespace DialogueEditor.src
             //Auto-place
             Node startNode = nodes.First(snode => snode.quote == path.quotes[0]);
             int index = path.quotes.IndexOf(quote);
-            node.position.y = startNode.position.y + index * 30;
+            node.position = node.position
+                + new Vector(0,startNode.position.y + index * 30);
             //
-            node.editNode(true);
             return node;
+        }
+
+        /// <summary>
+        /// Creates a new node for each string in the given array
+        /// Returns the last created node
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="textArray"></param>
+        public Node createNodes(DialoguePath path, string[] textArray)
+        {
+            if (path == null)
+            {
+                path = new DialoguePath();
+                dialogues.Add(path);
+            }
+            Node lastNode = null;
+            foreach (string text in textArray)
+            {
+                Node node = createNode(path, Vector.zero);
+                node.quote.text = text;
+                node.label.Text = text;
+                lastNode = node;
+            }
+            return lastNode;
         }
 
         public Node getNodeAtPosition(Vector mousePos)
