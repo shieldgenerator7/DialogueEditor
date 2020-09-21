@@ -54,12 +54,14 @@ namespace DialogueEditor.src
                 textBox.TextChanged += acceptText;
                 textBox.Location = position.toPoint();
                 textBox.Text = quote.text;
+                textBox.Show();
+                textBox.BringToFront();
                 textBox.Focus();
             }
             else
             {
                 textBox.TextChanged -= acceptText;
-                Managers.Form.Controls.Remove(textBox);
+                textBox.Hide();
             }
             Managers.Form.Refresh();
         }

@@ -70,5 +70,19 @@ namespace DialogueEditor
             Managers.Control.mouseUp();
             refresh();
         }
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            //2020-09-21: copied from https://stackoverflow.com/a/54960523/2336212
+            if (keyData == Keys.Return)
+            {
+                //do something
+                Managers.Control.enterPressed();
+                return true;
+            }
+            else
+            {
+                return base.ProcessCmdKey(ref msg, keyData);
+            }
+        }
     }
 }

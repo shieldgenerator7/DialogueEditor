@@ -12,7 +12,7 @@ namespace DialogueEditor.src
         public List<DialoguePath> dialogues = new List<DialoguePath>();
         public List<Node> nodes = new List<Node>();
 
-        public void createNode(DialoguePath path, Vector mousePos)
+        public Node createNode(DialoguePath path, Vector mousePos)
         {
             //If no path,
             if (path == null)
@@ -23,10 +23,17 @@ namespace DialogueEditor.src
             }
             //Add a node to the path
             Quote quote = new Quote();
+            quote.path = path;
             path.quotes.Add(quote);
             Node node = new Node(quote, mousePos);
             nodes.Add(node);
+            //Auto-place
+            Node startNode = nodes.First(snode => snode.quote == path.quotes[0]);
+            int index = path.quotes.IndexOf(quote);
+            node.position.y = startNode.position.y + index * 30;
+            //
             node.editNode(true);
+            return node;
         }
 
         public Node getNodeAtPosition(Vector mousePos)
