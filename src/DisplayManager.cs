@@ -45,10 +45,14 @@ public class DisplayManager
     }
 
     public void displayObjects(Graphics graphics)
+    public void layoutNodes()
     {
         if (Managers.Node.nodes.Count > 0)
+        foreach (DialoguePath path in Managers.Node.dialogues)
         {
             foreach (Node node in Managers.Node.nodes)
+            Vector nextPos = Vector.zero;
+            for (int i = 0; i < path.quotes.Count; i++)
             {
                 Rectangle rect = node.getRect();
                 //Draw image
@@ -63,7 +67,16 @@ public class DisplayManager
                     rect.X,
                     rect.Y
                     );
+                Quote quote = path.quotes[i];
+                Node node = Managers.Node.nodes.First(n => n.quote == quote);
+                if (i == 0)
+                {
+                    nextPos = node.position;
+                }
+                node.moveTo(nextPos, false);
+                nextPos.y += node.size.Height + 10;
             }
+
         }
     }
 
