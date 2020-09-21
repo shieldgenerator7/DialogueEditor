@@ -33,7 +33,7 @@ namespace DialogueEditor.src
             this.label = new Label();
             this.label.AutoSize = true;
             this.label.BackColor = Color.FromArgb(53, 70, 127);
-            this.label.Font = new System.Drawing.Font("MV Boli", 7.875F);
+            this.label.Font = new System.Drawing.Font("Calibri", 7.875F);
             this.label.ForeColor = Color.FromArgb(240,240,200);
             this.label.Location = position.toPoint();
             this.label.MaximumSize = new Size(500, 0);
@@ -64,7 +64,7 @@ namespace DialogueEditor.src
                     textBox.Anchor = AnchorStyles.Left;
                     textBox.AutoSize = true;
                     textBox.ForeColor = Color.FromArgb(53, 70, 127);
-                    textBox.Font = new System.Drawing.Font("MV Boli", 7.875F);
+                    textBox.Font = new System.Drawing.Font("Calibri", 7.875F);
                     textBox.BackColor = Color.FromArgb(240, 240, 200);
                     textBox.MaximumSize = new Size(500, 0);
                     textBox.MinimumSize = new Size(100, 20);
@@ -111,6 +111,7 @@ namespace DialogueEditor.src
             {
                 position = pos;
             }
+            label.Location = position.toPoint();
         }
 
         public static implicit operator Boolean(Node gameObjectSprite)
