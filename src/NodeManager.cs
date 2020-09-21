@@ -31,7 +31,7 @@ namespace DialogueEditor.src
             Node startNode = nodes.First(snode => snode.quote == path.quotes[0]);
             int index = path.quotes.IndexOf(quote);
             node.position = node.position
-                + new Vector(0,startNode.position.y + index * 30);
+                + new Vector(0, startNode.position.y + index * 30);
             //
             return node;
         }
@@ -62,11 +62,11 @@ namespace DialogueEditor.src
 
         public Node getNodeAtPosition(Vector mousePos)
         {
-            foreach (Node gameObject in nodes)
+            foreach (Node node in nodes)
             {
-                if (nodeContainsPosition(gameObject, mousePos))
+                if (nodeContainsPosition(node, mousePos))
                 {
-                    return gameObject;
+                    return node;
                 }
             }
             return null;
@@ -75,13 +75,12 @@ namespace DialogueEditor.src
         private bool nodeContainsPosition(Node node, Vector pos)
         {
             Size size = node.size;
-            float halfWidth = size.Width / 2;
-            float halfHeight = size.Height / 2;
             Vector position = node.position;
-            return pos.x >= position.x - halfWidth
-                && pos.x <= position.x + halfWidth
-                && pos.y >= position.y - halfHeight
-                && pos.y <= position.y + halfHeight;
+            int buffer = 10;
+            return pos.x >= position.x - buffer
+                && pos.x <= position.x + size.Width + buffer
+                && pos.y >= position.y - buffer
+                && pos.y <= position.y + size.Height + buffer;
         }
     }
 }

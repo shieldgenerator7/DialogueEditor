@@ -25,7 +25,6 @@ public class ControlManager
         selected?.editNode(false);
         selected = mousedOver;
         selected?.pickup(mousePos);
-        selected?.editNode(true);
     }
 
     public bool mouseMove(Vector mousePos)
@@ -52,7 +51,7 @@ public class ControlManager
             Cursor neededCursor = Cursor.Current;
             if (mousedOver)
             {
-                neededCursor = Cursors.SizeAll;
+                neededCursor = Cursors.Hand;
             }
             else
             {
@@ -155,6 +154,12 @@ public class ControlManager
             selected = null;
         }
     }
+
+    //public void setMousedOver(object sender, EventArgs e)
+    //{
+    //    mousedOver = ((NodeLabel)sender).node;
+    //    Managers.Form.Refresh();
+    //}
 
     public void receiveInfoDump(DialoguePath path, string[] textArray)
     {
