@@ -24,26 +24,16 @@ public struct Vector
         }
     }
 
-    public static Vector zero
-    {
-        get => new Vector(0, 0);
-    }
-    public static Vector up
-    {
-        get => new Vector(0, -1);
-    }
-    public static Vector down
-    {
-        get => new Vector(0, 1);
-    }
-    public static Vector left
-    {
-        get => new Vector(-1, 0);
-    }
-    public static Vector right
-    {
-        get => new Vector(1, 0);
-    }
+    public static readonly Vector zero = new Vector(0, 0);
+
+    public static readonly Vector up = new Vector(0, -1);
+
+    public static readonly Vector down = new Vector(0, 1);
+
+    public static readonly Vector left = new Vector(-1, 0);
+
+    public static readonly Vector right = new Vector(1, 0);
+
 
     public override string ToString()
     {

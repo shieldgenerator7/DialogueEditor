@@ -16,7 +16,15 @@ namespace DialogueEditor.src
         public Quote quote;
         public Vector position;
         public Vector pickupOffset;
-        public Size size = new Size(10, 50);
+        public Size size = new Size(100, 20);
+
+        public Node(Quote quote) : this(quote, Vector.zero) { }
+
+        public Node(Quote quote, Vector position)
+        {
+            this.quote = quote;
+            this.position = position;
+        }
 
         public virtual Rectangle getRect()
         {

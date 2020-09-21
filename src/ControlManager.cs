@@ -23,13 +23,7 @@ public class ControlManager
         this.isMouseHover = false;
         origMousePos = mousePos;
         selected = mousedOver;
-        if (selected) {
-            selected.pickup(mousePos);
-        }
-        else
-        {
-            //Create a new one
-        }
+        selected?.pickup(mousePos);
     }
 
     public bool mouseMove(Vector mousePosWorld)
@@ -89,6 +83,15 @@ public class ControlManager
 
     public void mouseDoubleClick()
     {
+        if (selected)
+        {
+            selected?.pickup(mousePos);
+        }
+        else
+        {
+            //Create a new one
+            Managers.Node.createNode(null, mousePos);
+        }
         //bool changedObjectState = false;
         //checkTrayDoubleClick(Managers.Command, mousePos);
 

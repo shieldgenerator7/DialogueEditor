@@ -46,14 +46,11 @@ public class DisplayManager
         {
             foreach (Node node in Managers.Node.nodes)
             {
+                Rectangle rect = node.getRect();
                 //Draw image
-                Vector topLeftScreen = Vector.zero;
                 graphics.FillRectangle(
                     rectBrush,
-                    topLeftScreen.x,
-                    topLeftScreen.y,
-                    node.size.Width,
-                    node.size.Height
+                    rect
                     );
             }
         }

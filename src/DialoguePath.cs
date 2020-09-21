@@ -9,6 +9,6 @@ namespace DialogueEditor.src
     public class DialoguePath
     {
 
-        public List<Quote> quotes;
+        public List<Quote> quotes = new List<Quote>();
     }
 }

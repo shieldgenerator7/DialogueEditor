@@ -50,6 +50,12 @@
             this.pnlDisplay.Name = "pnlDisplay";
             this.pnlDisplay.Size = new System.Drawing.Size(1309, 905);
             this.pnlDisplay.TabIndex = 0;
+            //this.pnlDisplay.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlDisplay_Paint);
+            this.pnlDisplay.DoubleClick += new System.EventHandler(this.pnlDisplay_DoubleClick);
+            this.pnlDisplay.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.pnlDisplay_MouseDoubleClick);
+            this.pnlDisplay.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlDisplay_MouseDown);
+            this.pnlDisplay.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlDisplay_MouseMove);
+            this.pnlDisplay.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pnlDisplay_MouseUp);
             // 
             // menuStrip1
             // 
@@ -70,25 +76,25 @@
             this.openToolStripMenuItem,
             this.saveToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(72, 38);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(72, 36);
             this.fileToolStripMenuItem.Text = "&File";
             // 
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(208, 44);
             this.newToolStripMenuItem.Text = "&New";
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(208, 44);
             this.openToolStripMenuItem.Text = "&Open";
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(208, 44);
             this.saveToolStripMenuItem.Text = "&Save";
             // 
             // editToolStripMenuItem
@@ -96,7 +102,7 @@
             this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addNewToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(75, 38);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(75, 36);
             this.editToolStripMenuItem.Text = "&Edit";
             // 
             // addNewToolStripMenuItem
@@ -105,19 +111,19 @@
             this.dialoguePathToolStripMenuItem,
             this.quoteToolStripMenuItem});
             this.addNewToolStripMenuItem.Name = "addNewToolStripMenuItem";
-            this.addNewToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.addNewToolStripMenuItem.Size = new System.Drawing.Size(247, 44);
             this.addNewToolStripMenuItem.Text = "&Add New";
             // 
             // dialoguePathToolStripMenuItem
             // 
             this.dialoguePathToolStripMenuItem.Name = "dialoguePathToolStripMenuItem";
-            this.dialoguePathToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.dialoguePathToolStripMenuItem.Size = new System.Drawing.Size(298, 44);
             this.dialoguePathToolStripMenuItem.Text = "&Dialogue Path";
             // 
             // quoteToolStripMenuItem
             // 
             this.quoteToolStripMenuItem.Name = "quoteToolStripMenuItem";
-            this.quoteToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.quoteToolStripMenuItem.Size = new System.Drawing.Size(298, 44);
             this.quoteToolStripMenuItem.Text = "&Quote";
             // 
             // frmMain
@@ -139,8 +145,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel pnlDisplay;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
@@ -150,6 +154,7 @@
         private System.Windows.Forms.ToolStripMenuItem addNewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dialoguePathToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem quoteToolStripMenuItem;
+        private DisplayPanel pnlDisplay;
     }
 }
 

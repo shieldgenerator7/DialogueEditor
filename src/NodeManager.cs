@@ -12,9 +12,20 @@ namespace DialogueEditor.src
         public List<DialoguePath> dialogues = new List<DialoguePath>();
         public List<Node> nodes = new List<Node>();
 
-        public void paint(Graphics g)
+        public void createNode(DialoguePath path, Vector mousePos)
         {
-
+            //If no path,
+            if (path == null)
+            {
+                //create a path
+                path = new DialoguePath();
+                dialogues.Add(path);
+            }
+            //Add a node to the path
+            Quote quote = new Quote();
+            path.quotes.Add(quote);
+            Node node = new Node(quote, mousePos);
+            nodes.Add(node);
         }
 
         public Node getNodeAtPosition(Vector mousePos)
