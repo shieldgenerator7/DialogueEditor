@@ -9,7 +9,7 @@ public class Quote
 
 	public DialoguePath path;
 
-	public Quote(string charName="TEST1", string txt="Text test 2.")
+	public Quote(string charName="", string txt="")
 	{
 		this.characterName = charName;
 		this.text = txt;

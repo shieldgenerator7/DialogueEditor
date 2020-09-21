@@ -17,9 +17,11 @@ namespace DialogueEditor.src
         public Quote quote;
         public Vector position;
         public Vector pickupOffset;
-        public Size size = new Size(100, 20);
+        public Size size => label.Size;
 
         private static TextBox textBox;
+
+        private Label label;
 
         public Node(Quote quote) : this(quote, Vector.zero) { }
 
@@ -27,6 +29,18 @@ namespace DialogueEditor.src
         {
             this.quote = quote;
             this.position = position;
+            //
+            this.label = new Label();
+            this.label.AutoSize = true;
+            this.label.BackColor = Color.FromArgb(53, 70, 127);
+            this.label.Font = new System.Drawing.Font("MV Boli", 7.875F);
+            this.label.ForeColor = Color.FromArgb(240,240,200);
+            this.label.Location = position.toPoint();
+            this.label.MaximumSize = new Size(500, 0);
+            this.label.MinimumSize = new Size(100, 20);
+            this.label.Size = new Size(100, 28);
+            this.label.Text = quote.text;
+            Managers.Form.Controls.Add(this.label);
         }
 
         public virtual Rectangle getRect()
@@ -42,11 +56,19 @@ namespace DialogueEditor.src
         {
             if (edit)
             {
+                label.BringToFront();
+                label.Hide();
                 if (textBox == null)
                 {
                     textBox = new TextBox();
                     textBox.Anchor = AnchorStyles.Left;
-                    textBox.Size = new System.Drawing.Size(100, 31);
+                    textBox.AutoSize = true;
+                    textBox.ForeColor = Color.FromArgb(53, 70, 127);
+                    textBox.Font = new System.Drawing.Font("MV Boli", 7.875F);
+                    textBox.BackColor = Color.FromArgb(240, 240, 200);
+                    textBox.MaximumSize = new Size(500, 0);
+                    textBox.MinimumSize = new Size(100, 20);
+                    textBox.Size = new Size(100, 41);
                     Managers.Form.Controls.Add(textBox);
                     textBox.BringToFront();
                 }
@@ -62,21 +84,16 @@ namespace DialogueEditor.src
             {
                 textBox.TextChanged -= acceptText;
                 textBox.Hide();
+                label.Show();
             }
             Managers.Form.Refresh();
         }
 
         private void acceptText(object sender, EventArgs e)
         {
-            quote.text = ((TextBox)sender).Text;            
+            quote.text = ((TextBox)sender).Text;
+            label.Text = quote.text;
             Managers.Form.Refresh();
-        }
-
-        public void adjustSize(Graphics g, Font f)
-        {
-            SizeF textSize = g.MeasureString(quote.text, f);
-            size.Width = Math.Max(100, (int)textSize.Width);
-            size.Height = Math.Max(20, (int)textSize.Height);
         }
 
         public void pickup(Vector pickupPos)

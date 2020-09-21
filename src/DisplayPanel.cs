@@ -80,7 +80,6 @@ public class DisplayPanel : Panel
         base.OnPaint(e);
         Graphics g = e.Graphics;
         g.Clear(Color.DarkGray);
-        Managers.Display.displayObjects(g);
         Managers.Display.displayRectangles(g);
     }
 

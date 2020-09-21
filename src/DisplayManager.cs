@@ -50,7 +50,6 @@ public class DisplayManager
         {
             foreach (Node node in Managers.Node.nodes)
             {
-                node.adjustSize(graphics, font);
                 Rectangle rect = node.getRect();
                 //Draw image
                 graphics.FillRectangle(
