@@ -127,5 +127,13 @@ public class ControlManager
             }
         }
     }
+
+    public void receiveInfoDump(DialoguePath path, string[] textArray)
+    {
+        Node lastNode = Managers.Node.createNodes(path, textArray);
+        selected?.editNode(false);
+        lastNode.editNode(true);
+        selected = lastNode;
+    }
 }
 

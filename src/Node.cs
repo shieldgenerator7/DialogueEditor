@@ -57,6 +57,7 @@ namespace DialogueEditor.src
             this.label.Size = new Size(100, 28);
             this.label.Text = quote.text;
             Managers.Form.Controls.Add(this.label);
+            this.label.BringToFront();
         }
 
         public virtual Rectangle getRect()
@@ -102,6 +103,8 @@ namespace DialogueEditor.src
                 textBox.Show();
                 textBox.BringToFront();
                 textBox.Focus();
+                textBox.SelectionStart = textBox.Text.Length;
+                textBox.SelectionLength = 0;
             }
             else
             {
@@ -121,9 +124,10 @@ namespace DialogueEditor.src
                 //Create new nodes
                 string[] split = text.Split('\n');
                 text = split[0];
-                Node lastNode = Managers.Node.createNodes(quote.path, split);
-                editNode(false);
-                lastNode.editNode(true);
+                List<string> splitList = new List<string>(split);
+                splitList.RemoveAt(0);
+                split = splitList.ToArray();
+                Managers.Control.receiveInfoDump(quote.path, split);
             }
             //Normal procedure
             quote.text = text;
