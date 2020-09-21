@@ -128,6 +128,24 @@ public class ControlManager
         }
     }
 
+    public void escapePressed()
+    {
+        if (selected)
+        {
+            //If editing current node,
+            if (selected.Editing)
+            {
+                //Stop editing it
+                selected.editNode(false);
+            }
+            else
+            {
+                //Else just stop selecting it
+                selected = null;
+            }
+        }
+    }
+
     public void deletePressed()
     {
         if (selected && !selected.Editing)

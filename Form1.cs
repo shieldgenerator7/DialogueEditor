@@ -76,6 +76,13 @@ namespace DialogueEditor
             if (keyData == Keys.Return)
             {
                 Managers.Control.enterPressed();
+                refresh();
+                return true;
+            }
+            else if (keyData == Keys.Escape)
+            {
+                Managers.Control.escapePressed();
+                refresh();
                 return true;
             }
             else if (keyData == Keys.Delete)
