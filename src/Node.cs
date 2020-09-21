@@ -25,7 +25,7 @@ namespace DialogueEditor.src
                 if (label != null)
                 {
                     label.Location = _position.toPoint();
-                    if (!label.Visible)
+                    if (Editing)
                     {
                         textBox.Location = _position.toPoint();
                     }
@@ -33,11 +33,13 @@ namespace DialogueEditor.src
             }
         }
         public Vector pickupOffset;
-        public Size size => (label.Visible) ? label.Size : textBox.Size;
+        public Size size => (Editing) ? textBox.Size : label.Size;
 
         private static RichTextBox textBox;
 
         public readonly Label label;
+
+        public bool Editing => !label.Visible;
 
         public Node(Quote quote) : this(quote, Vector.zero) { }
 
