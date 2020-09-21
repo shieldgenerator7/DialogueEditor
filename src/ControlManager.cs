@@ -89,7 +89,7 @@ public class ControlManager
     {
         if (selected)
         {
-            //Managers.Node.getNodeAtPosition(mousePos).editNode(true);
+            selected.editNode(true);
         }
         else
         {
