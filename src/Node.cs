@@ -17,9 +17,9 @@ namespace DialogueEditor.src
         public Quote quote;
         public Vector position;
         public Vector pickupOffset;
-        public Size size => label.Size;
+        public Size size => (label.Visible) ? label.Size : textBox.Size;
 
-        private static TextBox textBox;
+        private static RichTextBox textBox;
 
         private Label label;
 
@@ -33,10 +33,10 @@ namespace DialogueEditor.src
             this.label = new Label();
             this.label.AutoSize = true;
             this.label.BackColor = Color.FromArgb(53, 70, 127);
-            this.label.Font = new System.Drawing.Font("Calibri", 7.875F);
-            this.label.ForeColor = Color.FromArgb(240,240,200);
+            this.label.Font = new System.Drawing.Font("Calibri", 12);
+            this.label.ForeColor = Color.FromArgb(240, 240, 200);
             this.label.Location = position.toPoint();
-            this.label.MaximumSize = new Size(500, 0);
+            this.label.MaximumSize = new Size(200, 0);
             this.label.MinimumSize = new Size(100, 20);
             this.label.Size = new Size(100, 28);
             this.label.Text = quote.text;
@@ -60,18 +60,25 @@ namespace DialogueEditor.src
                 label.Hide();
                 if (textBox == null)
                 {
-                    textBox = new TextBox();
+                    textBox = new RichTextBox();
                     textBox.Anchor = AnchorStyles.Left;
                     textBox.AutoSize = true;
+                    textBox.Multiline = true;
+                    textBox.ScrollBars = RichTextBoxScrollBars.None;
                     textBox.ForeColor = Color.FromArgb(53, 70, 127);
-                    textBox.Font = new System.Drawing.Font("Calibri", 7.875F);
+                    textBox.Font = new System.Drawing.Font("Calibri", 12);
                     textBox.BackColor = Color.FromArgb(240, 240, 200);
-                    textBox.MaximumSize = new Size(500, 0);
+                    textBox.MaximumSize = new Size(200, 0);
                     textBox.MinimumSize = new Size(100, 20);
-                    textBox.Size = new Size(100, 41);
+                    textBox.ContentsResized += rtb_ContentsResized;
+                    //textBox.Size = new Size(100, 41);
                     Managers.Form.Controls.Add(textBox);
                     textBox.BringToFront();
                 }
+                textBox.Size = new Size(
+                    200,
+                    label.Size.Height + 10
+                    );
                 textBox.TextChanged -= acceptText;
                 textBox.TextChanged += acceptText;
                 textBox.Location = position.toPoint();
@@ -91,9 +98,15 @@ namespace DialogueEditor.src
 
         private void acceptText(object sender, EventArgs e)
         {
-            quote.text = ((TextBox)sender).Text;
+            quote.text = ((RichTextBox)sender).Text;
             label.Text = quote.text;
             Managers.Form.Refresh();
+        }
+
+        //2020-09-21: copied from https://stackoverflow.com/a/16607756/2336212
+        private void rtb_ContentsResized(object sender, ContentsResizedEventArgs e)
+        {
+            ((RichTextBox)sender).Height = e.NewRectangle.Height + 5;
         }
 
         public void pickup(Vector pickupPos)
