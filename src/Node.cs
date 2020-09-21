@@ -68,8 +68,15 @@ namespace DialogueEditor.src
 
         private void acceptText(object sender, EventArgs e)
         {
-            quote.text = ((TextBox)sender).Text;
+            quote.text = ((TextBox)sender).Text;            
             Managers.Form.Refresh();
+        }
+
+        public void adjustSize(Graphics g, Font f)
+        {
+            SizeF textSize = g.MeasureString(quote.text, f);
+            size.Width = Math.Max(100, (int)textSize.Width);
+            size.Height = Math.Max(20, (int)textSize.Height);
         }
 
         public void pickup(Vector pickupPos)
