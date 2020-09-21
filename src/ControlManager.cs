@@ -113,11 +113,17 @@ public class ControlManager
         if (selected)
         {
             selected.editNode(false);
-            selected = Managers.Node.createNode(
+            //If it's the last in the path,
+            DialoguePath path = selected.quote.path;
+            if (selected.quote == path.quotes[path.quotes.Count - 1])
+            {
+                //Add new node at the end
+                selected = Managers.Node.createNode(
                 selected.quote.path,
                 selected.position + new Vector(0, 30)
                 );
-            selected.editNode(true);
+                selected.editNode(true);
+            }
         }
     }
 }
