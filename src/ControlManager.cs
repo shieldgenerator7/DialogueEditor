@@ -22,18 +22,21 @@ public class ControlManager
         this.isMouseDown = true;
         this.isMouseHover = false;
         origMousePos = mousePos;
+        selected?.editNode(false);
         selected = mousedOver;
         selected?.pickup(mousePos);
+        selected?.editNode(true);
     }
 
-    public bool mouseMove(Vector mousePosWorld)
+    public bool mouseMove(Vector mousePos)
     {
-        this.mousePos = mousePosWorld;
+        this.mousePos = mousePos;
         if (isMouseDown)
         {
             if (selected)
             {
-                selected.moveTo(mousePosWorld);
+                selected.moveTo(mousePos);
+                selected.editNode(false);
             }
             return true;
         }
@@ -43,8 +46,8 @@ public class ControlManager
             mousedOver = null;
             if (!mousedOver)
             {
-                mousedOver = Managers.Node.getNodeAtPosition(mousePosWorld);
-                mousedOver?.pickup(mousePosWorld);
+                mousedOver = Managers.Node.getNodeAtPosition(mousePos);
+                mousedOver?.pickup(mousePos);
             }
             Cursor neededCursor = Cursor.Current;
             if (mousedOver)
@@ -70,10 +73,11 @@ public class ControlManager
     public void mouseUp()
     {
         this.isMouseDown = false;
-        if (selected)
-        {
-        }
-        selected = null;
+        //if (selected)
+        //{
+        //    selected.editNode(false);
+        //}
+        //selected = null;
     }
 
     public void mouseHover()
@@ -85,7 +89,7 @@ public class ControlManager
     {
         if (selected)
         {
-            selected?.pickup(mousePos);
+            //Managers.Node.getNodeAtPosition(mousePos).editNode(true);
         }
         else
         {

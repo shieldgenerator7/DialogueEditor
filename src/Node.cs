@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace DialogueEditor.src
 {
@@ -17,6 +18,8 @@ namespace DialogueEditor.src
         public Vector position;
         public Vector pickupOffset;
         public Size size = new Size(100, 20);
+
+        private static TextBox textBox;
 
         public Node(Quote quote) : this(quote, Vector.zero) { }
 
@@ -33,6 +36,38 @@ namespace DialogueEditor.src
                 position.y,
                 size.Width,
                 size.Height);
+        }
+
+        public void editNode(bool edit)
+        {
+            if (edit)
+            {
+                if (textBox == null)
+                {
+                    textBox = new TextBox();
+                    textBox.Anchor = AnchorStyles.Left;
+                    textBox.Size = new System.Drawing.Size(100, 31);
+                    Managers.Form.Controls.Add(textBox);
+                    textBox.BringToFront();
+                }
+                textBox.TextChanged -= acceptText;
+                textBox.TextChanged += acceptText;
+                textBox.Location = position.toPoint();
+                textBox.Text = quote.text;
+                textBox.Focus();
+            }
+            else
+            {
+                textBox.TextChanged -= acceptText;
+                Managers.Form.Controls.Remove(textBox);
+            }
+            Managers.Form.Refresh();
+        }
+
+        private void acceptText(object sender, EventArgs e)
+        {
+            quote.text = ((TextBox)sender).Text;
+            Managers.Form.Refresh();
         }
 
         public void pickup(Vector pickupPos)
@@ -64,14 +99,14 @@ namespace DialogueEditor.src
             return (int)(this.size.toVector().Magnitude - gos.size.toVector().Magnitude);
         }
 
-        public static bool operator < (Node a, Node b)
+        public static bool operator <(Node a, Node b)
         {
             float aSize = a.size.toVector().Magnitude;
             float bSize = b.size.toVector().Magnitude;
             return aSize < bSize;
         }
 
-        public static bool operator > (Node a, Node b)
+        public static bool operator >(Node a, Node b)
         {
             float aSize = a.size.toVector().Magnitude;
             float bSize = b.size.toVector().Magnitude;

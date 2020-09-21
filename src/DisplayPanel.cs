@@ -81,6 +81,7 @@ public class DisplayPanel : Panel
         Graphics g = e.Graphics;
         g.Clear(Color.DarkGray);
         Managers.Display.displayObjects(g);
+        Managers.Display.displayRectangles(g);
     }
 
     Brush getBrush(Color color)

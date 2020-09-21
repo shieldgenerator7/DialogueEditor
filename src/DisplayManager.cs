@@ -56,6 +56,13 @@ public class DisplayManager
                     rectBrush,
                     rect
                     );
+                graphics.DrawString(
+                    node.quote.text,
+                    font,
+                    textBrush,
+                    rect.X,
+                    rect.Y
+                    );
             }
         }
     }

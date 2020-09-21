@@ -28,6 +28,11 @@ public class Managers
         get => instance.displayManager;
     }
 
+    public static frmMain Form
+    {
+        get => instance.mainForm;
+    }
+
     public static void init(frmMain mf)
     {
         if (instance == null)

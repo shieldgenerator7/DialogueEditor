@@ -26,6 +26,7 @@ namespace DialogueEditor.src
             path.quotes.Add(quote);
             Node node = new Node(quote, mousePos);
             nodes.Add(node);
+            node.editNode(true);
         }
 
         public Node getNodeAtPosition(Vector mousePos)
