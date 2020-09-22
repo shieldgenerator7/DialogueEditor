@@ -69,5 +69,12 @@ namespace DialogueEditor
             }
         }
 
+        public void newFile()
+        {
+            Managers.Node.clearNodes();
+            Managers.Node.dialogues.Clear();
+            Managers.Control.createQuote();
+        }
+
     }
 }

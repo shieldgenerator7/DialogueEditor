@@ -26,7 +26,7 @@ namespace DialogueEditor
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            Managers.Control.createQuote();
+            Managers.File.newFile();
         }
 
         //private void pnlDisplay_Click(object sender, EventArgs e)
@@ -139,6 +139,11 @@ namespace DialogueEditor
         {
             Managers.File.openFile();
             Refresh();
+        }
+
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Managers.File.newFile();
         }
     }
 }
