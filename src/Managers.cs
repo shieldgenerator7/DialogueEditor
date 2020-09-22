@@ -12,26 +12,23 @@ public class Managers
 
     private NodeManager nodeManager;
     public static NodeManager Node
-    {
-        get => instance.nodeManager;
-    }
+        => instance.nodeManager;
 
     private ControlManager controlManager;
     public static ControlManager Control
-    {
-        get => instance.controlManager;
-    }
+        => instance.controlManager;
+
 
     private DisplayManager displayManager;
     public static DisplayManager Display
-    {
-        get => instance.displayManager;
-    }
+        => instance.displayManager;
+
+    private FileManager fileManager;
+    public static FileManager File
+        => instance.fileManager;
 
     public static frmMain Form
-    {
-        get => instance.mainForm;
-    }
+   => instance.mainForm;
 
     public static void init(frmMain mf)
     {
