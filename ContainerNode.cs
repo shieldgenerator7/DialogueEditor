@@ -71,6 +71,22 @@ namespace DialogueEditor
             this.path = path;
             this.position = position;
         }
+
+        public override void dispose()
+        {
+            Managers.Node.containers.Remove(this);
+            Managers.Node.dialogues.Remove(path);
+            Managers.Form.Controls.Remove(label);
+            Managers.Node.nodes.ForEach(
+                    n =>
+                    {
+                        if (n.quote.path == path)
+                        {
+                            n.dispose();
+                        }
+                    }
+                );
+            Managers.Node.nodes.RemoveAll(n => n.quote.path == path);
         }
 
     }

@@ -179,7 +179,7 @@ namespace DialogueEditor.src
             }
         }
 
-        public void dispose()
+        public virtual void dispose()
         {
             DialoguePath path = quote.path;
             path.quotes.Remove(quote);
