@@ -18,7 +18,6 @@ public class Managers
     public static ControlManager Control
         => instance.controlManager;
 
-
     private DisplayManager displayManager;
     public static DisplayManager Display
         => instance.displayManager;
@@ -28,7 +27,7 @@ public class Managers
         => instance.fileManager;
 
     public static frmMain Form
-   => instance.mainForm;
+        => instance.mainForm;
 
     public static void init(frmMain mf)
     {
@@ -45,6 +44,7 @@ public class Managers
         this.nodeManager = new NodeManager();
         this.controlManager = new ControlManager();
         this.displayManager = new DisplayManager();
+        this.fileManager = new FileManager();
     }
 
     public static bool Initialized => instance != null;

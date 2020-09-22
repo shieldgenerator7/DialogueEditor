@@ -129,5 +129,10 @@ namespace DialogueEditor
         {
             Managers.Control.createQuote();
         }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Managers.File.saveFile();
+        }
     }
 }

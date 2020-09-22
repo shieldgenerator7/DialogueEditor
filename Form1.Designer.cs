@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pnlDisplay = new DisplayPanel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,21 +51,9 @@
             this.moveToTopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.moveToBottomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pnlDisplay = new DisplayPanel();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // pnlDisplay
-            // 
-            this.pnlDisplay.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlDisplay.Location = new System.Drawing.Point(0, 0);
-            this.pnlDisplay.Name = "pnlDisplay";
-            this.pnlDisplay.Size = new System.Drawing.Size(1309, 905);
-            this.pnlDisplay.TabIndex = 0;
-            this.pnlDisplay.DoubleClick += new System.EventHandler(this.pnlDisplay_DoubleClick);
-            this.pnlDisplay.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.pnlDisplay_MouseDoubleClick);
-            this.pnlDisplay.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlDisplay_MouseDown);
-            this.pnlDisplay.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlDisplay_MouseMove);
-            this.pnlDisplay.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pnlDisplay_MouseUp);
             // 
             // menuStrip1
             // 
@@ -110,11 +97,11 @@
             // 
             // saveToolStripMenuItem
             // 
-            this.saveToolStripMenuItem.Enabled = false;
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
             this.saveToolStripMenuItem.Size = new System.Drawing.Size(377, 44);
             this.saveToolStripMenuItem.Text = "&Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
@@ -266,6 +253,19 @@
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(85, 38);
             this.helpToolStripMenuItem.Text = "&Help";
             this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
+            // 
+            // pnlDisplay
+            // 
+            this.pnlDisplay.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlDisplay.Location = new System.Drawing.Point(0, 0);
+            this.pnlDisplay.Name = "pnlDisplay";
+            this.pnlDisplay.Size = new System.Drawing.Size(1309, 905);
+            this.pnlDisplay.TabIndex = 0;
+            this.pnlDisplay.DoubleClick += new System.EventHandler(this.pnlDisplay_DoubleClick);
+            this.pnlDisplay.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.pnlDisplay_MouseDoubleClick);
+            this.pnlDisplay.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlDisplay_MouseDown);
+            this.pnlDisplay.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlDisplay_MouseMove);
+            this.pnlDisplay.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pnlDisplay_MouseUp);
             // 
             // frmMain
             // 
