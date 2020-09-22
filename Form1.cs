@@ -26,6 +26,7 @@ namespace DialogueEditor
 
         private void frmMain_Load(object sender, EventArgs e)
         {
+            Managers.Control.createQuote();
         }
 
         //private void pnlDisplay_Click(object sender, EventArgs e)
