@@ -33,13 +33,32 @@ namespace DialogueEditor.src
             }
         }
         public Vector pickupOffset;
-        public Size size => (Editing) ? textBox.Size : label.Size;
+        public virtual Size size
+        {
+            get => (Editing) ? textBox.Size : label.Size;
+            set
+            {
+                if (Editing)
+                {
+                    textBox.Size = value;
+                }
+                else
+                {
+                    label.Size = value;
+                }
+            }
+        }
 
         private static RichTextBox textBox;
 
-        public readonly Label label;
+        public Label label { get; protected set; }
 
         public bool Editing => !label.Visible;
+
+        /// <summary>
+        /// Only to be called by subclasses
+        /// </summary>
+        protected Node() { }
 
         public Node(Quote quote) : this(quote, Vector.zero) { }
 

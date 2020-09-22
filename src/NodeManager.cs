@@ -11,6 +11,7 @@ namespace DialogueEditor.src
     {
         public List<DialoguePath> dialogues = new List<DialoguePath>();
         public List<Node> nodes = new List<Node>();
+        public List<ContainerNode> containers = new List<ContainerNode>();
 
         public Node createNode(DialoguePath path, Vector mousePos)
         {
@@ -18,8 +19,7 @@ namespace DialogueEditor.src
             if (path == null)
             {
                 //create a path
-                path = new DialoguePath();
-                dialogues.Add(path);
+                path = createContainerNode(mousePos).path;
             }
             //Add a node to the path
             Quote quote = new Quote();
@@ -46,8 +46,7 @@ namespace DialogueEditor.src
         {
             if (path == null)
             {
-                path = new DialoguePath();
-                dialogues.Add(path);
+                path = createContainerNode(Vector.zero).path;
             }
             Node lastNode = null;
             foreach (string text in textArray)
@@ -60,8 +59,17 @@ namespace DialogueEditor.src
             return lastNode;
         }
 
+        public ContainerNode createContainerNode(Vector mousePos)
+        {
+            DialoguePath path = new DialoguePath();
+            dialogues.Add(path);
+            ContainerNode container = new ContainerNode(path, mousePos);
+            containers.Add(container);
+            return container;
+        }
         public Node getNodeAtPosition(Vector mousePos)
         {
+            //Check normal nodes first
             foreach (Node node in nodes)
             {
                 if (nodeContainsPosition(node, mousePos))
@@ -69,7 +77,10 @@ namespace DialogueEditor.src
                     return node;
                 }
             }
-            return null;
+            //Check containers second
+            return containers.FirstOrDefault(
+                cn => cn.getRect().Contains(mousePos.toPoint())
+                );
         }
 
         private bool nodeContainsPosition(Node node, Vector pos)
