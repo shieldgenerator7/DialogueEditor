@@ -9,8 +9,8 @@ namespace DialogueEditor.src
 {
     public class NodeManager
     {
-        const int BUFFER_NODE = 10;
-        const int BUFFER_CONTAINER = 20;
+        public const int BUFFER_NODE = 10;
+        public const int BUFFER_CONTAINER = 20;
 
         public List<DialoguePath> dialogues = new List<DialoguePath>();
         public List<Node> nodes = new List<Node>();

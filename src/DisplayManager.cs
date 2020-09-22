@@ -21,6 +21,7 @@ public class DisplayManager
     Brush rectBrush;
     Brush textBrush;
     Brush containerBrush;
+    Brush insertBrush;
 
     Font font;
 
@@ -39,6 +40,7 @@ public class DisplayManager
         rectBrush = new SolidBrush(Color.FromArgb(53, 70, 127));
         textBrush = new SolidBrush(Color.FromArgb(240, 240, 200));
         containerBrush = new SolidBrush(Color.LightGray);
+        insertBrush = new SolidBrush(Color.Yellow);
         //
         FontFamily fontFamily = new FontFamily("Microsoft Sans Serif");
         font = new Font(
@@ -78,6 +80,24 @@ public class DisplayManager
         if (mousedOver)
         {
             drawRectangle(graphics, overPen, mousedOver);
+            //If the user is mousing over an insertion point,
+            if (mousedOver is ContainerNode)
+            {
+                Node node = Managers.Node.getIndexAtPosition(mousePos);
+                if (node)
+                {
+                    //Highlight the insertion point
+                    graphics.FillRectangle(
+                        insertBrush,
+                        new Rectangle(
+                            node.position.x,
+                            node.position.y - NodeManager.BUFFER_NODE,
+                            node.size.Width,
+                            NodeManager.BUFFER_NODE
+                            )
+                        );
+                }
+            }
         }
     }
     private void drawRectangle(Graphics graphics, Pen pen, Node node)
