@@ -134,5 +134,10 @@ namespace DialogueEditor
         {
             Managers.File.saveFile();
         }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Managers.File.openFile();
+        }
     }
 }

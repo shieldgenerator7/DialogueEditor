@@ -12,17 +12,24 @@ namespace DialogueEditor.src
         public const int BUFFER_NODE = 10;
         public const int BUFFER_CONTAINER = 20;
 
-        public List<DialoguePath> dialogues = new List<DialoguePath>();
+        public List<DialoguePath> dialogues { get; private set; } = new List<DialoguePath>();
         public List<Node> nodes = new List<Node>();
         public List<ContainerNode> containers = new List<ContainerNode>();
 
+        /// <summary>
+        /// Creates a UI Node and a Quote,
+        /// Also creates a DialoguePath if none is provided
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="index"></param>
+        /// <returns></returns>
         public Node createNode(DialoguePath path = null, int index = -1)
         {
             //If no path,
             if (path == null)
             {
                 //create a path
-                path = createContainerNode(Vector.zero).path;
+                path = createContainerNode().path;
             }
             //Add a node to the path
             Quote quote = new Quote();
@@ -41,6 +48,19 @@ namespace DialogueEditor.src
         }
 
         /// <summary>
+        /// This method makes a UI node for the given quote in the given dialogue path
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="quote"></param>
+        /// <returns></returns>
+        public Node createNode(DialoguePath path, Quote quote)
+        {
+            Node node = new Node(quote);
+            nodes.Add(node);
+            return node;
+        }
+
+        /// <summary>
         /// Creates a new node for each string in the given array
         /// Returns the last created node
         /// </summary>
@@ -50,7 +70,7 @@ namespace DialogueEditor.src
         {
             if (path == null)
             {
-                path = createContainerNode(Vector.zero).path;
+                path = createContainerNode().path;
             }
             Node lastNode = null;
             foreach (string text in textArray)
@@ -62,11 +82,14 @@ namespace DialogueEditor.src
             return lastNode;
         }
 
-        public ContainerNode createContainerNode(Vector mousePos)
+        public ContainerNode createContainerNode(DialoguePath path = null)
         {
-            DialoguePath path = new DialoguePath();
-            dialogues.Add(path);
-            ContainerNode container = new ContainerNode(path, mousePos);
+            if (path == null)
+            {
+                path = new DialoguePath();
+                dialogues.Add(path);
+            }
+            ContainerNode container = new ContainerNode(path);
             containers.Add(container);
             return container;
         }
@@ -139,6 +162,42 @@ namespace DialogueEditor.src
                 selectArea.Y = n.position.y - BUFFER_NODE;
                 return selectArea.Contains(pos);
             });
+        }
+
+        public void acceptInfoFromFile(List<DialoguePath> dialogues)
+        {
+            clearNodes();
+            this.dialogues = dialogues;
+            this.dialogues.ForEach(d => d.inflate());
+            populateNodes(this.dialogues);
+        }
+
+        /// <summary>
+        /// Clears all UI nodes
+        /// </summary>
+        public void clearNodes()
+        {
+            nodes.ForEach(n => n.disposeLabel());
+            nodes.Clear();
+            containers.ForEach(cn => cn.disposeLabel());
+            containers.Clear();
+        }
+
+        /// <summary>
+        /// Creates nodes for the dialogue paths and quotes in the list
+        /// </summary>
+        /// <param name="dialogues"></param>
+        public void populateNodes(List<DialoguePath> dialogues)
+        {
+            dialogues.ForEach(
+                d =>
+                {
+                    createContainerNode(d);
+                    d.quotes.ForEach(
+                        q => createNode(d, q)
+                        );
+                }
+                );
         }
     }
 }

@@ -67,9 +67,8 @@ namespace DialogueEditor.src
         /// </summary>
         protected Node() { }
 
-        public Node(Quote quote) : this(quote, Vector.zero) { }
 
-        public Node(Quote quote, Vector position)
+        public Node(Quote quote)
         {
             this.quote = quote;
             this.position = position;
@@ -233,7 +232,12 @@ namespace DialogueEditor.src
         {
             DialoguePath path = quote.path;
             path.quotes.Remove(quote);
+            disposeLabel();
+        }
+        public void disposeLabel()
+        {
             Managers.Form.Controls.Remove(label);
+            label.Dispose();
         }
 
         public static implicit operator Boolean(Node gameObjectSprite)

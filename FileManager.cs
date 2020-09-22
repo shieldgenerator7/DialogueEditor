@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using DialogueEditor.src;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,14 +16,22 @@ namespace DialogueEditor
         public string filename = null;
 
         private SaveFileDialog sfd;
+        private OpenFileDialog ofd;
 
         public FileManager()
         {
+            //Save Dialog
             sfd = new SaveFileDialog();
             sfd.Filter = "Dialogue JSON Files (*.json)|*.json|All files|*.*";
             sfd.FileName = filename;
             sfd.Title = "Save Dialogue";
             sfd.DefaultExt = ".json";
+            //Open Dialog
+            ofd = new OpenFileDialog();
+            ofd.Filter = "Dialogue JSON Files (*.json)|*.json|All files|*.*";
+            ofd.FileName = filename;
+            ofd.Title = "Open Dialogue";
+            ofd.DefaultExt = ".json";
         }
 
         public void saveFile()
@@ -33,7 +42,6 @@ namespace DialogueEditor
                 DialogResult dr = sfd.ShowDialog();
                 if (dr == DialogResult.OK)
                 {
-                    MessageBox.Show("Here's where the file would be saved.");
                     //2020-09-22: copied from https://stackoverflow.com/a/16921677/2336212
                     using (StreamWriter file = new StreamWriter(sfd.OpenFile()))
                     {
@@ -47,7 +55,18 @@ namespace DialogueEditor
 
         public void openFile()
         {
-
+            ofd.FileName = filename;
+            DialogResult dr = ofd.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+                //2020-09-22: copied from https://stackoverflow.com/a/13297964/2336212
+                using (StreamReader r = new StreamReader(ofd.OpenFile()))
+                {
+                    string json = r.ReadToEnd();
+                    List<DialoguePath> dialogues = JsonConvert.DeserializeObject<List<DialoguePath>>(json);
+                    Managers.Node.acceptInfoFromFile(dialogues);
+                }
+            }
         }
 
     }

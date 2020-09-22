@@ -60,9 +60,8 @@ namespace DialogueEditor
             }
         }
 
-        public ContainerNode(DialoguePath path) : this(path, Vector.zero) { }
 
-        public ContainerNode(DialoguePath path, Vector position)
+        public ContainerNode(DialoguePath path)
         {
             //Instance variables
             this.path = path;
