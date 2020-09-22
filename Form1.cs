@@ -107,7 +107,7 @@ namespace DialogueEditor
         private void helpToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show(
-                "Double-click the background to make a new dialogue path.\n"
+                "Use menus to make a new dialogue path.\n"
                 + "Press ENTER to finish a quote. "
                 + "If you're at the end, it will create a new quote.\n"
                 + "Double-click a quote to edit it, press ENTER or ESC to finish.\n"
@@ -115,7 +115,8 @@ namespace DialogueEditor
                 + "It will automatically split it into more quotes if necessary.\n"
                 + "If a quote is selected, it will have a green border.\n"
                 + "Press DEL and the selected quote will be deleted. "
-                + "This works on dialogue paths too. "
+                + "This works on dialogue paths too.\n"
+                + "Double-click above a quote to insert a quote before it. "
                 );
         }
 
