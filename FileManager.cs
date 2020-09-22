@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,6 +34,13 @@ namespace DialogueEditor
                 if (dr == DialogResult.OK)
                 {
                     MessageBox.Show("Here's where the file would be saved.");
+                    //2020-09-22: copied from https://stackoverflow.com/a/16921677/2336212
+                    using (StreamWriter file = new StreamWriter(sfd.OpenFile()))
+                    {
+                        JsonSerializer serializer = new JsonSerializer();
+                        //serialize object directly into file stream
+                        serializer.Serialize(file, Managers.Node.dialogues);
+                    }
                 }
             }
         }
