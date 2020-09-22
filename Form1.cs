@@ -138,6 +138,7 @@ namespace DialogueEditor
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Managers.File.openFile();
+            Refresh();
         }
     }
 }

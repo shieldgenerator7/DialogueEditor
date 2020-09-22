@@ -170,6 +170,7 @@ namespace DialogueEditor.src
             this.dialogues = dialogues;
             this.dialogues.ForEach(d => d.inflate());
             populateNodes(this.dialogues);
+            Managers.Control.deselect();
         }
 
         /// <summary>

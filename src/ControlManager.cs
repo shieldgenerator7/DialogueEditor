@@ -230,6 +230,12 @@ public class ControlManager
         Managers.Form.Refresh();
     }
 
+    public void deselect()
+    {
+        selected?.editNode(false);
+        selected = null;
+    }
+
     public void processDoubleClick(object sender, EventArgs e)
     {
         selected?.editNode(false);
