@@ -52,7 +52,6 @@
             this.moveToTopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.moveToBottomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pnlDisplay.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -166,11 +165,11 @@
             // 
             // quoteToolStripMenuItem
             // 
-            this.quoteToolStripMenuItem.Enabled = false;
             this.quoteToolStripMenuItem.Name = "quoteToolStripMenuItem";
             this.quoteToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.I)));
             this.quoteToolStripMenuItem.Size = new System.Drawing.Size(449, 44);
             this.quoteToolStripMenuItem.Text = "&Quote";
+            this.quoteToolStripMenuItem.Click += new System.EventHandler(this.quoteToolStripMenuItem_Click);
             // 
             // conditionToolStripMenuItem
             // 
@@ -279,11 +278,10 @@
             this.Name = "frmMain";
             this.Text = "Dialogue Editor";
             this.Load += new System.EventHandler(this.frmMain_Load);
-            this.pnlDisplay.ResumeLayout(false);
-            this.pnlDisplay.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

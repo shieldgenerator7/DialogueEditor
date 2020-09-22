@@ -110,7 +110,7 @@ namespace DialogueEditor.src
                 size.Height);
         }
 
-        public virtual void editNode(bool edit)
+        public virtual void editNode(bool edit = true)
         {
             if (edit)
             {

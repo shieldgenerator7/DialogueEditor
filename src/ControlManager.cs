@@ -131,9 +131,37 @@ public class ControlManager
 
     public void createDialoguePath()
     {
-        //Create a new one
+        //Create a new quote with no path,
+        //which will auto-create a new path with a new quote
         selected = Managers.Node.createNode();
         selected.editNode(true);
+    }
+
+    public void createQuote()
+    {
+        //Create a new quote
+        if (selected)
+        {
+            if (selected is ContainerNode)
+            {
+                ContainerNode container = (ContainerNode)selected;
+                selected = Managers.Node.createNode(container.path);
+                selected.editNode();
+            }
+            else
+            {
+                Node node = selected;
+                selected = Managers.Node.createNode(
+                    node.quote.path,
+                    node.quote.Index
+                    );
+                selected.editNode();
+            }
+        }
+        else
+        {
+            createDialoguePath();
+        }
     }
 
     public void enterPressed()
@@ -197,6 +225,7 @@ public class ControlManager
 
     public void setSelected(object sender, EventArgs e)
     {
+        selected?.editNode(false);
         selected = ((NodeLabel)sender).node;
         Managers.Form.Refresh();
     }

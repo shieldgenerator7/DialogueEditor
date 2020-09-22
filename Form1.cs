@@ -122,5 +122,10 @@ namespace DialogueEditor
         {
             Managers.Control.createDialoguePath();
         }
+
+        private void quoteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Managers.Control.createQuote();
+        }
     }
 }
