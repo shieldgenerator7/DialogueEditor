@@ -58,3 +58,7 @@ Mkfile.old
 dkms.conf
 *.CopyComplete
 *.p7s
+DialogueEditor.zip
+*.pfx
+publish/Application Files/DialogueEditor_1_0_0_0/DialogueEditor.exe.deploy
+publish/Application Files/DialogueEditor_1_0_0_0/Newtonsoft.Json.dll.deploy
