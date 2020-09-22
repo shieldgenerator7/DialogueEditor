@@ -177,14 +177,16 @@ public class ControlManager
         }
     }
 
-    public void deletePressed()
+    public bool deletePressed()
     {
         if (selected && !selected.Editing)
         {
             selected.dispose();
             Managers.Node.nodes.Remove(selected);
             selected = null;
+            return true;
         }
+        return false;
     }
 
     public void setMousedOver(object sender, EventArgs e)
