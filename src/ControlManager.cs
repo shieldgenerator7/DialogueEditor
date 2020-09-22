@@ -100,9 +100,6 @@ public class ControlManager
         }
         else
         {
-            //Create a new one
-            selected = Managers.Node.createNode(null, mousePos);
-            selected.editNode(true);
         }
         //bool changedObjectState = false;
         //checkTrayDoubleClick(Managers.Command, mousePos);
@@ -114,6 +111,13 @@ public class ControlManager
         //    //changedObjectState = true;
         //    node.gameObject.changeState();
         //}
+    }
+
+    public void createDialoguePath()
+    {
+        //Create a new one
+        selected = Managers.Node.createNode();
+        selected.editNode(true);
     }
 
     public void enterPressed()

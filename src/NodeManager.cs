@@ -13,7 +13,7 @@ namespace DialogueEditor.src
         public List<Node> nodes = new List<Node>();
         public List<ContainerNode> containers = new List<ContainerNode>();
 
-        public Node createNode(DialoguePath path, Vector mousePos)
+        public Node createNode(DialoguePath path = null, int index = -1)
         {
             //If no path,
             if (path == null)

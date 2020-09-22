@@ -158,12 +158,12 @@
             // 
             // dialoguePathToolStripMenuItem
             // 
-            this.dialoguePathToolStripMenuItem.Enabled = false;
             this.dialoguePathToolStripMenuItem.Name = "dialoguePathToolStripMenuItem";
             this.dialoguePathToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.N)));
             this.dialoguePathToolStripMenuItem.Size = new System.Drawing.Size(449, 44);
             this.dialoguePathToolStripMenuItem.Text = "&Dialogue Path";
+            this.dialoguePathToolStripMenuItem.Click += new System.EventHandler(this.dialoguePathToolStripMenuItem_Click);
             // 
             // quoteToolStripMenuItem
             // 

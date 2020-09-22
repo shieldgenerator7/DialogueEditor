@@ -111,5 +111,10 @@ namespace DialogueEditor
                 +"This works on dialogue paths too. "
                 );
         }
+
+        private void dialoguePathToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Managers.Control.createDialoguePath();
+        }
     }
 }
