@@ -52,10 +52,26 @@ namespace DialogueEditor.src
         protected Label label { get; private set; }
         public virtual string Text
         {
-            get => quote.text;
+            get => quote.characterName + ": " + quote.text;
             set
             {
-                quote.text = value;
+                if (value.Contains(":"))
+                {
+                    int index = value.IndexOf(':');
+                    quote.characterName = value.Substring(0, index).Trim();
+                    if (index < value.Length - 1)
+                    {
+                        quote.text = value.Substring(index + 1).Trim();
+                    }
+                    else
+                    {
+                        quote.text = "";
+                    }
+                }
+                else
+                {
+                    quote.text = value;
+                }
                 label.Text = value;
             }
         }
@@ -146,7 +162,7 @@ namespace DialogueEditor.src
                 textBox.Location = position.toPoint();
                 if (quote != null)
                 {
-                    textBox.Text = quote.text;
+                    textBox.Text = this.Text;
                 }
                 textBox.Show();
                 textBox.BringToFront();
@@ -169,21 +185,25 @@ namespace DialogueEditor.src
 
         protected virtual void acceptText(object sender, EventArgs e)
         {
-            string text = ((RichTextBox)sender).Text;
-            if (text.Contains('\n'))
+            string sentText = ((RichTextBox)sender).Text;
+            if (sentText.Contains('\n'))
             {
                 //Special processing,
                 //Create new nodes
-                string[] split = text.Split('\n');
-                text = split[0];
+                string[] split = sentText.Split('\n');
+                sentText = split[0];
                 List<string> splitList = new List<string>(split);
                 splitList.RemoveAt(0);
                 split = splitList.ToArray();
                 Managers.Control.receiveInfoDump(quote.path, split);
             }
             //Normal procedure
-            quote.text = text;
-            label.Text = text;
+            sentText = sentText.Trim();
+            if (sentText.StartsWith(":"))
+            {
+                sentText = sentText.Substring(1).Trim();
+            }
+            this.Text = sentText;
             Managers.Form.Refresh();
         }
 
