@@ -83,6 +83,7 @@ public class DisplayPanel : Panel
         if (Managers.Initialized)
         {
             Managers.Node.layoutNodes();
+            Managers.Display.displayDialoguePaths(g);
             Managers.Display.displayRectangles(g);
         }
     }

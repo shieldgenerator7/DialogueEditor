@@ -1,4 +1,5 @@
-﻿using DialogueEditor.src;
+﻿using DialogueEditor;
+using DialogueEditor.src;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -15,9 +16,11 @@ public class DisplayManager
     Pen anchorPen;
     Pen changePen;
     Pen createPen;
+    Pen containerPen;
 
     Brush rectBrush;
     Brush textBrush;
+    Brush containerBrush;
 
     Font font;
 
@@ -31,9 +34,11 @@ public class DisplayManager
         anchorPen = new Pen(Color.FromArgb(52, 175, 0), BRUSH_THICKNESS);
         changePen = new Pen(Color.FromArgb(137, 206, 255), BRUSH_THICKNESS);
         createPen = new Pen(Color.FromArgb(255, 230, 107), BRUSH_THICKNESS);
+        containerPen = new Pen(Color.Black);
         //
         rectBrush = new SolidBrush(Color.FromArgb(53, 70, 127));
         textBrush = new SolidBrush(Color.FromArgb(240, 240, 200));
+        containerBrush = new SolidBrush(Color.LightGray);
         //
         FontFamily fontFamily = new FontFamily("Microsoft Sans Serif");
         font = new Font(
@@ -44,8 +49,12 @@ public class DisplayManager
             );
     }
 
+    public void displayDialoguePaths(Graphics graphics)
     {
+        foreach (ContainerNode container in Managers.Node.containers)
         {
+            graphics.FillRectangle(containerBrush, container.getRect());
+            drawRectangle(graphics, containerPen, container);
         }
     }
 
