@@ -52,7 +52,13 @@ namespace DialogueEditor.src
         protected Label label { get; private set; }
         public virtual string Text
         {
-            get => quote.characterName + ": " + quote.text;
+            get =>
+                (
+                    (quote.characterName != "" && quote.characterName != null)
+                        ? quote.characterName + ": "
+                        : ""
+                )
+                + quote.text;
             set
             {
                 if (value.Contains(":"))
