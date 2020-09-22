@@ -8,7 +8,7 @@ namespace DialogueEditor.src
 {
     public class DialoguePath
     {
-
+        public string title = "Dialogue Title";
         public List<Quote> quotes = new List<Quote>();
     }
 }

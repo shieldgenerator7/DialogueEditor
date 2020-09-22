@@ -35,11 +35,16 @@ namespace DialogueEditor
                         _size.Width - (bufferEdges * 2),
                         bufferTop
                         );
+                    if (Editing)
+                    {
+                        textBox.Size = label.Size;
+                    }
                 }
             }
         }
 
-        public override Vector position { 
+        public override Vector position
+        {
             get => base.position;
             set
             {
@@ -47,11 +52,13 @@ namespace DialogueEditor
                 if (label != null)
                 {
                     label.Location = (position + new Vector(bufferEdges, bufferEdges)).toPoint();
+                    if (Editing)
+                    {
+                        textBox.Location = label.Location;
+                    }
                 }
             }
         }
-
-        public override bool Editing => false;
 
         public ContainerNode(DialoguePath path) : this(path, Vector.zero) { }
 
@@ -59,7 +66,10 @@ namespace DialogueEditor
         {
             //Label
             this.label = new Label();
-            this.label.Text = "Dialogue Title";
+            label.AutoSize = true;
+            this.label.Text = path.title;
+            bufferTop = label.Size.Height;
+            label.AutoSize = false;
             this.label.AutoSize = false;
             this.label.BackColor = System.Drawing.Color.LightGray;
             this.label.Font = new System.Drawing.Font("Calibri", 12);
@@ -70,6 +80,50 @@ namespace DialogueEditor
             //Instance variables
             this.path = path;
             this.position = position;
+        }
+
+        public override void editNode(bool edit)
+        {
+            if (edit)
+            {
+                label.Hide();
+                if (textBox == null)
+                {
+                    initTextBox();
+                }
+                textBox.TextChanged -= acceptText;
+                textBox.TextChanged += acceptText;
+                textBox.Text = path.title;
+                textBox.Show();
+                textBox.BringToFront();
+                textBox.Focus();
+                textBox.SelectionStart = textBox.Text.Length;
+                textBox.SelectionLength = 0;
+            }
+            else
+            {
+                textBox.TextChanged -= acceptText;
+                textBox.Hide();
+                label.Show();
+            }
+            //Automatically update the size of the textbox / label
+            this.position = this.position;
+            this.size = this.size;
+            //
+            Managers.Form.Refresh();
+        }
+
+        protected override void acceptText(object sender, EventArgs e)
+        {
+            string text = ((RichTextBox)sender).Text;
+            //Normal procedure
+            path.title = text;
+            label.AutoSize = true;
+            label.Text = text;
+            bufferTop = label.Size.Height;
+            label.AutoSize = false;
+            size = size;
+            Managers.Form.Refresh();
         }
 
         public override void dispose()

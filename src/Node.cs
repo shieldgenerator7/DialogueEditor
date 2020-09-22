@@ -38,18 +38,15 @@ namespace DialogueEditor.src
             get => (Editing) ? textBox.Size : label.Size;
             set
             {
+                label.Size = value;
                 if (Editing)
                 {
                     textBox.Size = value;
                 }
-                else
-                {
-                    label.Size = value;
-                }
             }
         }
 
-        private static RichTextBox textBox;
+        protected static RichTextBox textBox;
 
         public Label label { get; protected set; }
 
@@ -90,7 +87,7 @@ namespace DialogueEditor.src
                 size.Height);
         }
 
-        public void editNode(bool edit)
+        public virtual void editNode(bool edit)
         {
             if (edit)
             {
@@ -98,20 +95,7 @@ namespace DialogueEditor.src
                 label.Hide();
                 if (textBox == null)
                 {
-                    textBox = new RichTextBox();
-                    textBox.Anchor = AnchorStyles.Left;
-                    textBox.AutoSize = true;
-                    textBox.Multiline = true;
-                    textBox.ScrollBars = RichTextBoxScrollBars.None;
-                    textBox.ForeColor = Color.FromArgb(53, 70, 127);
-                    textBox.Font = new System.Drawing.Font("Calibri", 12);
-                    textBox.BackColor = Color.FromArgb(240, 240, 200);
-                    textBox.MaximumSize = new Size(200, 0);
-                    textBox.MinimumSize = new Size(100, 20);
-                    textBox.ContentsResized += rtb_ContentsResized;
-                    //textBox.Size = new Size(100, 41);
-                    Managers.Form.Controls.Add(textBox);
-                    textBox.BringToFront();
+                    initTextBox();
                 }
                 textBox.Size = new Size(
                     200,
@@ -136,7 +120,7 @@ namespace DialogueEditor.src
             Managers.Form.Refresh();
         }
 
-        private void acceptText(object sender, EventArgs e)
+        protected virtual void acceptText(object sender, EventArgs e)
         {
             string text = ((RichTextBox)sender).Text;
             if (text.Contains('\n'))
@@ -154,6 +138,24 @@ namespace DialogueEditor.src
             quote.text = text;
             label.Text = text;
             Managers.Form.Refresh();
+        }
+
+        protected void initTextBox()
+        {
+            textBox = new RichTextBox();
+            textBox.Anchor = AnchorStyles.Left;
+            textBox.AutoSize = true;
+            textBox.Multiline = true;
+            textBox.ScrollBars = RichTextBoxScrollBars.None;
+            textBox.ForeColor = Color.FromArgb(53, 70, 127);
+            textBox.Font = new System.Drawing.Font("Calibri", 12);
+            textBox.BackColor = Color.FromArgb(240, 240, 200);
+            textBox.MaximumSize = new Size(200, 0);
+            textBox.MinimumSize = new Size(100, 20);
+            textBox.ContentsResized += rtb_ContentsResized;
+            //textBox.Size = new Size(100, 41);
+            Managers.Form.Controls.Add(textBox);
+            textBox.BringToFront();
         }
 
         //2020-09-21: copied from https://stackoverflow.com/a/16607756/2336212

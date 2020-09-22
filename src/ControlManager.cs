@@ -1,4 +1,5 @@
-﻿using DialogueEditor.src;
+﻿using DialogueEditor;
+using DialogueEditor.src;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -113,16 +114,23 @@ public class ControlManager
         if (selected)
         {
             selected.editNode(false);
-            //If it's the last in the path,
-            DialoguePath path = selected.quote.path;
-            if (selected.quote == path.quotes[path.quotes.Count - 1])
+            if (selected is ContainerNode)
             {
-                //Add new node at the end
-                selected = Managers.Node.createNode(
-                    selected.quote.path,
-                    selected.position + new Vector(0, 30)
-                    );
-                selected.editNode(true);
+                //do nothing else
+            }
+            else
+            {
+                //If it's the last in the path,
+                DialoguePath path = selected.quote.path;
+                if (selected.quote == path.quotes[path.quotes.Count - 1])
+                {
+                    //Add new node at the end
+                    selected = Managers.Node.createNode(
+                        selected.quote.path,
+                        selected.position + new Vector(0, 30)
+                        );
+                    selected.editNode(true);
+                }
             }
         }
     }
