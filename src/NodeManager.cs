@@ -56,8 +56,7 @@ namespace DialogueEditor.src
             foreach (string text in textArray)
             {
                 Node node = createNode(path);
-                node.quote.text = text;
-                node.label.Text = text;
+                node.Text = text;
                 lastNode = node;
             }
             return lastNode;

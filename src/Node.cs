@@ -49,7 +49,16 @@ namespace DialogueEditor.src
         protected static RichTextBox textBox;
         protected static Node textBoxUser = null;
 
-        public Label label { get; protected set; }
+        protected Label label { get; private set; }
+        public virtual string Text
+        {
+            get => quote.text;
+            set
+            {
+                quote.text = value;
+                label.Text = value;
+            }
+        }
 
         public virtual bool Editing => !label.Visible;
 

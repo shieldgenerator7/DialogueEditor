@@ -50,6 +50,16 @@ namespace DialogueEditor
             }
         }
 
+        public override string Text
+        {
+            get => path.title;
+            set
+            {
+                path.title = value;
+                label.Text = value;
+            }
+        }
+
         public ContainerNode(DialoguePath path) : this(path, Vector.zero) { }
 
         public ContainerNode(DialoguePath path, Vector position)
