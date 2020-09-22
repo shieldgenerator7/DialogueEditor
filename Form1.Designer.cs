@@ -58,7 +58,6 @@
             // 
             // pnlDisplay
             // 
-            this.pnlDisplay.Controls.Add(this.menuStrip1);
             this.pnlDisplay.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlDisplay.Location = new System.Drawing.Point(0, 0);
             this.pnlDisplay.Name = "pnlDisplay";
@@ -274,6 +273,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1309, 905);
+            this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.pnlDisplay);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmMain";
