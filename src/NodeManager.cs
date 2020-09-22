@@ -67,6 +67,31 @@ namespace DialogueEditor.src
             containers.Add(container);
             return container;
         }
+
+        public void layoutNodes()
+        {
+            int BUFFER_NODE = 10;
+            foreach (DialoguePath path in dialogues)
+            {
+                ContainerNode container = containers.First(cn => cn.path == path);
+                Vector nextPos = container.position + new Vector(
+                    container.bufferEdges,
+                    container.bufferEdges + container.bufferTop + BUFFER_NODE
+                    );
+                for (int i = 0; i < path.quotes.Count; i++)
+                {
+                    Quote quote = path.quotes[i];
+                    Node node = nodes.First(n => n.quote == quote);
+                    node.position = nextPos;
+                    nextPos.y += node.size.Height + BUFFER_NODE;
+                }
+                container.size = new Size(
+                    200 + container.bufferEdges * 2,
+                    nextPos.y - BUFFER_NODE + container.bufferEdges - container.position.y
+                    );
+            }
+        }
+
         public Node getNodeAtPosition(Vector mousePos)
         {
             //Check normal nodes first

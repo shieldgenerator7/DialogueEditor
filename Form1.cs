@@ -96,14 +96,5 @@ namespace DialogueEditor
                 return base.ProcessCmdKey(ref msg, keyData);
             }
         }
-
-        private void frmMain_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Delete)
-            {
-                Managers.Control.deletePressed();
-                refresh();
-            }
-        }
     }
 }

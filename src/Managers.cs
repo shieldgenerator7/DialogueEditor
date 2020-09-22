@@ -49,4 +49,6 @@ public class Managers
         this.controlManager = new ControlManager();
         this.displayManager = new DisplayManager();
     }
+
+    public static bool Initialized => instance != null;
 }

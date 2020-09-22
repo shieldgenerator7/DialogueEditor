@@ -44,23 +44,8 @@ public class DisplayManager
             );
     }
 
-    public void layoutNodes()
     {
-        foreach (DialoguePath path in Managers.Node.dialogues)
         {
-            Vector nextPos = Vector.zero;
-            for (int i = 0; i < path.quotes.Count; i++)
-            {
-                Quote quote = path.quotes[i];
-                Node node = Managers.Node.nodes.First(n => n.quote == quote);
-                if (i == 0)
-                {
-                    nextPos = node.position;
-                }
-                node.position = nextPos;
-                nextPos.y += node.size.Height + 10;
-            }
-
         }
     }
 
