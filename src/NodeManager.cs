@@ -42,6 +42,10 @@ namespace DialogueEditor.src
             {
                 path.quotes.Insert(index, quote);
             }
+            if (quote.Index >= 2)
+            {
+                quote.characterName = quote.path.quotes[quote.Index - 2].characterName;
+            }
             Node node = new Node(quote);
             nodes.Add(node);
             return node;

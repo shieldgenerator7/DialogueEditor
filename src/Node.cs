@@ -104,7 +104,7 @@ namespace DialogueEditor.src
             this.label.Cursor = Cursors.Hand;
             if (quote != null)
             {
-                this.label.Text = quote.text;
+                this.label.Text = this.Text;
             }
             Managers.Form.Controls.Add(this.label);
             this.label.BringToFront();
