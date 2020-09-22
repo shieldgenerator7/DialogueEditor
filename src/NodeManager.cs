@@ -9,6 +9,9 @@ namespace DialogueEditor.src
 {
     public class NodeManager
     {
+        const int BUFFER_NODE = 10;
+        const int BUFFER_CONTAINER = 20;
+
         public List<DialoguePath> dialogues = new List<DialoguePath>();
         public List<Node> nodes = new List<Node>();
         public List<ContainerNode> containers = new List<ContainerNode>();
@@ -70,7 +73,17 @@ namespace DialogueEditor.src
 
         public void layoutNodes()
         {
-            int BUFFER_NODE = 10;
+            //Layout dialogue paths
+            Vector nextCorner = new Vector(BUFFER_CONTAINER, BUFFER_CONTAINER * 2);
+            foreach (ContainerNode container in containers)
+            {
+                container.position = nextCorner;
+                nextCorner += new Vector(
+                    container.bufferEdges * 2 + 200 + BUFFER_CONTAINER,
+                    0
+                    );
+            }
+            //Layout quotes
             foreach (DialoguePath path in dialogues)
             {
                 ContainerNode container = containers.First(cn => cn.path == path);
