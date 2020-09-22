@@ -16,7 +16,8 @@ namespace DialogueEditor
     {
         public readonly DialoguePath path;
 
-        public int bufferTop = 30;//how much extra buffer to add to top
+        public int bufferTop 
+            => (Editing) ? textBox.Size.Height : label.Size.Height;
         public int bufferEdges = 10;
 
         //It doesn't store its children;
@@ -29,17 +30,6 @@ namespace DialogueEditor
             set
             {
                 _size = value;
-                if (label != null)
-                {
-                    label.Size = new Size(
-                        _size.Width - (bufferEdges * 2),
-                        bufferTop
-                        );
-                    if (Editing)
-                    {
-                        textBox.Size = label.Size;
-                    }
-                }
             }
         }
 
@@ -68,12 +58,11 @@ namespace DialogueEditor
             this.label = new Label();
             label.AutoSize = true;
             this.label.Text = path.title;
-            bufferTop = label.Size.Height;
-            label.AutoSize = false;
-            this.label.AutoSize = false;
             this.label.BackColor = System.Drawing.Color.LightGray;
             this.label.Font = new System.Drawing.Font("Calibri", 12);
             this.label.ForeColor = Color.Black;
+            this.label.MinimumSize = new Size(200, 0);
+            this.label.MaximumSize = new Size(200, 0);
             Managers.Form.Controls.Add(this.label);
             this.label.BringToFront();
 
@@ -118,10 +107,7 @@ namespace DialogueEditor
             string text = ((RichTextBox)sender).Text;
             //Normal procedure
             path.title = text;
-            label.AutoSize = true;
             label.Text = text;
-            bufferTop = label.Size.Height;
-            label.AutoSize = false;
             size = size;
             Managers.Form.Refresh();
         }
