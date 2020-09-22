@@ -96,5 +96,20 @@ namespace DialogueEditor
                 return base.ProcessCmdKey(ref msg, keyData);
             }
         }
+
+        private void helpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(
+                "Double-click the background to make a new dialogue path.\n"
+                +"Press ENTER to finish a quote. "
+                +"If you're at the end, it will create a new quote.\n"
+                +"Double-click a quote to edit it, press ENTER or ESC to finish.\n"
+                +"You can paste (CTRL+V) pre-written lines into a quote. "
+                +"It will automatically split it into more quotes if necessary.\n"
+                +"If a quote is selected, it will have a green border.\n"
+                +"Press DEL and the selected quote will be deleted. "
+                +"This works on dialogue paths too. "
+                );
+        }
     }
 }
