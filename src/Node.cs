@@ -15,7 +15,7 @@ namespace DialogueEditor.src
     {
 
         public Quote quote;
-        private Vector _position;
+        protected Vector _position;
         public virtual Vector position
         {
             get => _position;
@@ -27,7 +27,7 @@ namespace DialogueEditor.src
                     label.Location = _position.toPoint();
                     if (Editing)
                     {
-                        textBox.Location = _position.toPoint();
+                        textBox.Location = label.Location;
                     }
                 }
             }

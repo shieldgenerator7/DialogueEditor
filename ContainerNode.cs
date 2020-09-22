@@ -35,10 +35,10 @@ namespace DialogueEditor
 
         public override Vector position
         {
-            get => base.position;
+            get => _position;
             set
             {
-                base.position = value;
+                _position = value;
                 if (label != null)
                 {
                     label.Location = (position + new Vector(bufferEdges, bufferEdges)).toPoint();
