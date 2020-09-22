@@ -39,23 +39,38 @@ namespace DialogueEditor
             }
         }
 
+        public override Vector position { 
+            get => base.position;
+            set
+            {
+                base.position = value;
+                if (label != null)
+                {
+                    label.Location = (position + new Vector(bufferEdges, bufferEdges)).toPoint();
+                }
+            }
+        }
+
+        public override bool Editing => false;
+
         public ContainerNode(DialoguePath path) : this(path, Vector.zero) { }
 
         public ContainerNode(DialoguePath path, Vector position)
         {
-            this.path = path;
-            this.position = position;
             //Label
             this.label = new Label();
-            this.label.Text = "Dialogue";
-            this.label.AutoSize = true;
-            this.label.BackColor = System.Drawing.Color.Transparent;
-            this.label.Location = position.toPoint();
-            this.label.Size = new System.Drawing.Size(70, 25);
+            this.label.Text = "Dialogue Title";
+            this.label.AutoSize = false;
+            this.label.BackColor = System.Drawing.Color.LightGray;
             this.label.Font = new System.Drawing.Font("Calibri", 12);
-            this.label.ForeColor = Color.FromArgb(240, 240, 200);
+            this.label.ForeColor = Color.Black;
             Managers.Form.Controls.Add(this.label);
             this.label.BringToFront();
+
+            //Instance variables
+            this.path = path;
+            this.position = position;
+        }
         }
 
     }

@@ -16,7 +16,7 @@ namespace DialogueEditor.src
 
         public Quote quote;
         private Vector _position;
-        public Vector position
+        public virtual Vector position
         {
             get => _position;
             set
@@ -53,7 +53,7 @@ namespace DialogueEditor.src
 
         public Label label { get; protected set; }
 
-        public bool Editing => !label.Visible;
+        public virtual bool Editing => !label.Visible;
 
         /// <summary>
         /// Only to be called by subclasses
