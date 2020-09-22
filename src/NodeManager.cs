@@ -22,20 +22,21 @@ namespace DialogueEditor.src
             if (path == null)
             {
                 //create a path
-                path = createContainerNode(mousePos).path;
+                path = createContainerNode(Vector.zero).path;
             }
             //Add a node to the path
             Quote quote = new Quote();
             quote.path = path;
-            path.quotes.Add(quote);
-            Node node = new Node(quote, mousePos);
+            if (index < 0)
+            {
+                path.quotes.Add(quote);
+            }
+            else
+            {
+                path.quotes.Insert(index, quote);
+            }
+            Node node = new Node(quote);
             nodes.Add(node);
-            //Auto-place
-            Node startNode = nodes.First(snode => snode.quote == path.quotes[0]);
-            int index = path.quotes.IndexOf(quote);
-            node.position = node.position
-                + new Vector(0, startNode.position.y + index * 30);
-            //
             return node;
         }
 
@@ -54,7 +55,7 @@ namespace DialogueEditor.src
             Node lastNode = null;
             foreach (string text in textArray)
             {
-                Node node = createNode(path, Vector.zero);
+                Node node = createNode(path);
                 node.quote.text = text;
                 node.label.Text = text;
                 lastNode = node;
@@ -120,6 +121,25 @@ namespace DialogueEditor.src
             return containers.FirstOrDefault(
                 cn => cn.getRect().Contains(mousePos.toPoint())
                 );
+        }
+
+        /// <summary>
+        /// Returns the index of the node directly below the mousePos
+        /// This assumes the mousePos is between two nodes in the same path
+        /// </summary>
+        /// <param name="mousePos"></param>
+        /// <returns></returns>
+        public Node getIndexAtPosition(Vector mousePos)
+        {
+            Size size = new Size(200, BUFFER_NODE);
+            Point pos = mousePos.toPoint();
+            Rectangle selectArea = new Rectangle(0, 0, 200, BUFFER_NODE);
+            return nodes.FirstOrDefault(n =>
+            {
+                selectArea.X = n.position.x;
+                selectArea.Y = n.position.y - BUFFER_NODE;
+                return selectArea.Contains(pos);
+            });
         }
     }
 }

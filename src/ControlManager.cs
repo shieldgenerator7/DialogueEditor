@@ -96,7 +96,23 @@ public class ControlManager
     {
         if (selected)
         {
-            selected.editNode(true);
+            if (selected is ContainerNode)
+            {
+                Node node = Managers.Node.getIndexAtPosition(mousePos);
+                if (node)
+                {
+                    Node newNode = Managers.Node.createNode(
+                        node.quote.path,
+                        node.quote.Index
+                        );
+                    selected = newNode;
+                    newNode.editNode(true);
+                }
+            }
+            else
+            {
+                selected.editNode(true);
+            }
         }
         else
         {
@@ -136,10 +152,7 @@ public class ControlManager
                 if (selected.quote == path.quotes[path.quotes.Count - 1])
                 {
                     //Add new node at the end
-                    selected = Managers.Node.createNode(
-                        selected.quote.path,
-                        selected.position + new Vector(0, 30)
-                        );
+                    selected = Managers.Node.createNode(selected.quote.path);
                     selected.editNode(true);
                 }
             }

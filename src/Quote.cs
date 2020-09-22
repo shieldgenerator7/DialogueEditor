@@ -9,6 +9,8 @@ public class Quote
 
 	public DialoguePath path;
 
+	public int Index => path.quotes.IndexOf(this);
+
 	public Quote(string charName="", string txt="")
 	{
 		this.characterName = charName;
