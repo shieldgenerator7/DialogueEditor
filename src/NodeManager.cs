@@ -94,29 +94,19 @@ namespace DialogueEditor.src
 
         public Node getNodeAtPosition(Vector mousePos)
         {
+            Node node = null;
             //Check normal nodes first
-            foreach (Node node in nodes)
+            node = nodes.FirstOrDefault(
+                n => n.getRect().Contains(mousePos.toPoint())
+                );
+            if (node)
             {
-                if (nodeContainsPosition(node, mousePos))
-                {
-                    return node;
-                }
+                return node;
             }
             //Check containers second
             return containers.FirstOrDefault(
                 cn => cn.getRect().Contains(mousePos.toPoint())
                 );
-        }
-
-        private bool nodeContainsPosition(Node node, Vector pos)
-        {
-            Size size = node.size;
-            Vector position = node.position;
-            int buffer = 10;
-            return pos.x >= position.x - buffer
-                && pos.x <= position.x + size.Width + buffer
-                && pos.y >= position.y - buffer
-                && pos.y <= position.y + size.Height + buffer;
         }
     }
 }

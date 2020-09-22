@@ -47,6 +47,7 @@ namespace DialogueEditor.src
         }
 
         protected static RichTextBox textBox;
+        protected static Node textBoxUser = null;
 
         public Label label { get; protected set; }
 
@@ -63,19 +64,32 @@ namespace DialogueEditor.src
         {
             this.quote = quote;
             this.position = position;
-            //
-            this.label = new Label();
+            setupLabel();
+        }
+
+        protected virtual void setupLabel()
+        {
+            this.label = new NodeLabel(this);
             this.label.AutoSize = true;
             this.label.BackColor = Color.FromArgb(53, 70, 127);
             this.label.Font = new System.Drawing.Font("Calibri", 12);
             this.label.ForeColor = Color.FromArgb(240, 240, 200);
             this.label.Location = position.toPoint();
+            this.label.MinimumSize = new Size(200, 0);
             this.label.MaximumSize = new Size(200, 0);
-            this.label.MinimumSize = new Size(100, 20);
-            this.label.Size = new Size(100, 28);
-            this.label.Text = quote.text;
+            this.label.Cursor = Cursors.Hand;
+            if (quote != null)
+            {
+                this.label.Text = quote.text;
+            }
             Managers.Form.Controls.Add(this.label);
             this.label.BringToFront();
+            //Event Listeners
+            label.MouseEnter += Managers.Control.setMousedOver;
+            label.Click += Managers.Control.setSelected;
+            label.MouseClick += Managers.Control.setSelected;
+            label.DoubleClick += Managers.Control.processDoubleClick;
+            label.MouseDoubleClick += Managers.Control.processDoubleClick;
         }
 
         public virtual Rectangle getRect()
@@ -91,6 +105,24 @@ namespace DialogueEditor.src
         {
             if (edit)
             {
+                //If another node is already using the textbox,
+                if (textBoxUser)
+                {
+                    //If that node is this one,
+                    if (textBoxUser == this)
+                    {
+                        //do nothing
+                        return;
+                    }
+                    //If that node is not this one,
+                    else
+                    {
+                        //Tell that node to stop using it.
+                        textBoxUser.editNode(false);
+                    }
+                }
+                textBoxUser = this;
+                //
                 label.BringToFront();
                 label.Hide();
                 if (textBox == null)
@@ -104,7 +136,10 @@ namespace DialogueEditor.src
                 textBox.TextChanged -= acceptText;
                 textBox.TextChanged += acceptText;
                 textBox.Location = position.toPoint();
-                textBox.Text = quote.text;
+                if (quote != null)
+                {
+                    textBox.Text = quote.text;
+                }
                 textBox.Show();
                 textBox.BringToFront();
                 textBox.Focus();
@@ -116,6 +151,10 @@ namespace DialogueEditor.src
                 textBox.TextChanged -= acceptText;
                 textBox.Hide();
                 label.Show();
+                if (textBoxUser == this)
+                {
+                    textBoxUser = null;
+                }
             }
             Managers.Form.Refresh();
         }

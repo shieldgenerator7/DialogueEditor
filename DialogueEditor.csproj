@@ -63,6 +63,9 @@
     </Compile>
     <Compile Include="src\Managers.cs" />
     <Compile Include="src\Node.cs" />
+    <Compile Include="src\NodeLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="src\NodeManager.cs" />
     <Compile Include="src\Quote.cs" />
     <Compile Include="src\RGB.cs" />

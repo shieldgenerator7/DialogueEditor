@@ -24,7 +24,10 @@ public class ControlManager
         this.isMouseHover = false;
         origMousePos = mousePos;
         selected?.editNode(false);
-        selected = mousedOver;
+        if (mousedOver)
+        {
+            selected = mousedOver;
+        }
         selected?.pickup(mousePos);
     }
 
@@ -33,6 +36,10 @@ public class ControlManager
         this.mousePos = mousePos;
         if (isMouseDown)
         {
+            if (!selected)
+            {
+                selected = mousedOver;
+            }
             if (selected)
             {
                 selected.moveTo(mousePos);
@@ -163,11 +170,25 @@ public class ControlManager
         }
     }
 
-    //public void setMousedOver(object sender, EventArgs e)
-    //{
-    //    mousedOver = ((NodeLabel)sender).node;
-    //    Managers.Form.Refresh();
-    //}
+    public void setMousedOver(object sender, EventArgs e)
+    {
+        mousedOver = ((NodeLabel)sender).node;
+        Managers.Form.Refresh();
+    }
+
+    public void setSelected(object sender, EventArgs e)
+    {
+        selected = ((NodeLabel)sender).node;
+        Managers.Form.Refresh();
+    }
+
+    public void processDoubleClick(object sender, EventArgs e)
+    {
+        selected?.editNode(false);
+        selected = ((NodeLabel)sender).node;
+        selected.editNode(true);
+        Managers.Form.Refresh();
+    }
 
     public void receiveInfoDump(DialoguePath path, string[] textArray)
     {
