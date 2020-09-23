@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,11 +30,14 @@ namespace DialogueEditor.src
             //Instance variables
             this.path = path;
             //Settings
+            AutoSize = true;
+            AutoScroll = false;
             FlowDirection = FlowDirection.TopDown;
             Padding = new Padding(10);
-            MinimumSize = new Size(220, 150);
+            MinimumSize = new Size(250, 150);
             BackColor = Managers.Colors.platformColor;
             BorderStyle = BorderStyle.FixedSingle;
+            WrapContents = false;
             //Title Box
             titleBox = new TextBox();
             titleBox.Size = new Size(200, 24);
@@ -49,7 +53,7 @@ namespace DialogueEditor.src
 
         protected virtual void acceptText(object sender, EventArgs e)
         {
-            string sentText = ((RichTextBox)sender).Text;
+            string sentText = ((TextBox)sender).Text;
             if (sentText.Contains('\n'))
             {
                 sentText = sentText.Split('\n')[0];

@@ -51,27 +51,18 @@ public class DisplayManager
             );
     }
 
-    public void displayDialoguePaths(Graphics graphics)
-    {
-        foreach (ContainerNode container in Managers.Node.containers)
-        {
-            graphics.FillRectangle(containerBrush, container.getRect());
-            drawRectangle(graphics, containerPen, container);
-        }
-    }
-
     public void displayRectangles(Graphics graphics)
     {
-        displayRectangles(
-            graphics,
-            Managers.Control.selected,
-            Managers.Control.mousedOver,
-            Managers.Control.mousePos,
-            Managers.Control.isMouseDown
-            );
+        //displayRectangles(
+        //    graphics,
+        //    Managers.Control.selected,
+        //    Managers.Control.mousedOver,
+        //    Managers.Control.mousePos,
+        //    Managers.Control.isMouseDown
+        //    );
     }
 
-    public void displayRectangles(Graphics graphics, Node selected, Node mousedOver, Vector mousePos, bool mouseDown)
+    public void displayRectangles(Graphics graphics, NodeLabel selected, NodeLabel mousedOver, Vector mousePos, bool mouseDown)
     {
         if (selected)
         {
@@ -80,44 +71,17 @@ public class DisplayManager
         if (mousedOver)
         {
             drawRectangle(graphics, overPen, mousedOver);
-            //If the user is mousing over an insertion point,
-            if (mousedOver is ContainerNode)
-            {
-                Node node = Managers.Node.getIndexAtPosition(mousePos);
-                if (node)
-                {
-                    //Highlight the insertion point
-                    graphics.FillRectangle(
-                        insertBrush,
-                        new Rectangle(
-                            node.position.x,
-                            node.position.y - NodeManager.BUFFER_NODE,
-                            node.size.Width,
-                            NodeManager.BUFFER_NODE
-                            )
-                        );
-                }
-            }
         }
     }
-    private void drawRectangle(Graphics graphics, Pen pen, Node node)
+    private void drawRectangle(Graphics graphics, Pen pen, NodeLabel node)
     {
-        graphics.DrawRectangle(
-            pen,
-            convertToScreen(node.getRect())
-            );
+        //graphics.DrawRectangle(
+        //    pen,
+        //    convertToScreen(node.getRect())
+        //    );
     }
 
-    public void displayDescription(Graphics graphics)
-    {
-        displayDescription(
-            graphics,
-            Managers.Control.mousedOver,
-            Managers.Control.mousePos
-            );
-    }
-
-    public void displayDescription(Graphics graphics, Node mousedOver, Vector mousePos)
+    public void displayDescription(Graphics graphics, NodeLabel mousedOver, Vector mousePos)
     {
         mousePos = convertToScreen(mousePos);
         //Object Description

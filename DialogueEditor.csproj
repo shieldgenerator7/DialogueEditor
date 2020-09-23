@@ -77,7 +77,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ContainerNode.cs" />
     <Compile Include="FileManager.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -87,18 +86,18 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\ColorSettings.cs" />
     <Compile Include="src\ControlManager.cs" />
     <Compile Include="src\DialoguePath.cs" />
     <Compile Include="src\DisplayManager.cs" />
-    <Compile Include="src\DisplayPanel.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="src\Managers.cs" />
-    <Compile Include="src\Node.cs" />
     <Compile Include="src\NodeLabel.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="src\NodeManager.cs" />
+    <Compile Include="src\NodePanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="src\Quote.cs" />
     <Compile Include="src\RGB.cs" />
     <Compile Include="src\Utility.cs" />

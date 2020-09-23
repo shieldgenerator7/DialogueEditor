@@ -12,9 +12,9 @@ namespace DialogueEditor.src
         public Color spaceColor = Color.DarkGray;
         public Color platformColor = Color.LightGray;
         public Color titleColor = Color.Black;
-        public Color labelBackColor = Color.SteelBlue;
-        public Color labelForeColor = Color.White;
-        public Color textBackColor = Color.White;
-        public Color textForeColor = Color.Black;
+        public Color labelBackColor = Color.FromArgb(53, 70, 127);
+        public Color labelForeColor = Color.FromArgb(240, 240, 200);
+        public Color textBackColor = Color.FromArgb(240, 240, 200);
+        public Color textForeColor = Color.FromArgb(53, 70, 127);
     }
 }

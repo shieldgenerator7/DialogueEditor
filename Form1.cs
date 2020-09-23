@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DialogueEditor.src;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,61 +17,20 @@ namespace DialogueEditor
         {
             InitializeComponent();
             Managers.init(this);
+            Managers.Node.dialoguePanel = this.pnlDialogue;
         }
 
         void refresh()
         {
             this.Invalidate();
-            pnlDisplay.Invalidate();
         }
 
         private void frmMain_Load(object sender, EventArgs e)
         {
             Managers.File.newFile();
-        }
-
-        //private void pnlDisplay_Click(object sender, EventArgs e)
-        //{
-        //    //Managers.Control.mouseDown
-        //}
-
-        private void pnlDisplay_DoubleClick(object sender, EventArgs e)
-        {
-            Managers.Control.mouseDoubleClick();
             refresh();
         }
 
-        //private void pnlDisplay_MouseClick(object sender, MouseEventArgs e)
-        //{
-
-        //}
-
-        private void pnlDisplay_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            Managers.Control.mouseDoubleClick();
-            refresh();
-        }
-
-        private void pnlDisplay_MouseDown(object sender, MouseEventArgs e)
-        {
-            Managers.Control.mouseDown();
-            refresh();
-        }
-
-        private void pnlDisplay_MouseMove(object sender, MouseEventArgs e)
-        {
-            Vector mouseVector = e.Location.toVector();
-            if (Managers.Control.mouseMove(mouseVector))
-            {
-                refresh();
-            }
-        }
-
-        private void pnlDisplay_MouseUp(object sender, MouseEventArgs e)
-        {
-            Managers.Control.mouseUp();
-            refresh();
-        }
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             //2020-09-21: copied from https://stackoverflow.com/a/54960523/2336212
@@ -123,11 +83,13 @@ namespace DialogueEditor
         private void dialoguePathToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Managers.Control.createDialoguePath();
+            refresh();
         }
 
         private void quoteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Managers.Control.createQuote();
+            refresh();
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -138,12 +100,13 @@ namespace DialogueEditor
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Managers.File.openFile();
-            Refresh();
+            refresh();
         }
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Managers.File.newFile();
+            refresh();
         }
     }
 }

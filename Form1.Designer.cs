@@ -51,7 +51,7 @@
             this.moveToTopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.moveToBottomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pnlDisplay = new DisplayPanel();
+            this.pnlDialogue = new System.Windows.Forms.FlowLayoutPanel();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -64,7 +64,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1309, 42);
+            this.menuStrip1.Size = new System.Drawing.Size(1309, 40);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -76,7 +76,7 @@
             this.saveToolStripMenuItem,
             this.saveAsToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(72, 38);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(72, 36);
             this.fileToolStripMenuItem.Text = "&File";
             // 
             // newToolStripMenuItem
@@ -127,7 +127,7 @@
             this.moveToTopToolStripMenuItem,
             this.moveToBottomToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(75, 38);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(75, 36);
             this.editToolStripMenuItem.Text = "&Edit";
             // 
             // addNewToolStripMenuItem
@@ -250,30 +250,29 @@
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(85, 38);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(85, 36);
             this.helpToolStripMenuItem.Text = "&Help";
             this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
             // 
-            // pnlDisplay
+            // pnlDialogue
             // 
-            this.pnlDisplay.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlDisplay.Location = new System.Drawing.Point(0, 0);
-            this.pnlDisplay.Name = "pnlDisplay";
-            this.pnlDisplay.Size = new System.Drawing.Size(1309, 905);
-            this.pnlDisplay.TabIndex = 0;
-            this.pnlDisplay.DoubleClick += new System.EventHandler(this.pnlDisplay_DoubleClick);
-            this.pnlDisplay.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.pnlDisplay_MouseDoubleClick);
-            this.pnlDisplay.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlDisplay_MouseDown);
-            this.pnlDisplay.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlDisplay_MouseMove);
-            this.pnlDisplay.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pnlDisplay_MouseUp);
+            this.pnlDialogue.AutoScroll = true;
+            this.pnlDialogue.AutoSize = true;
+            this.pnlDialogue.BackColor = System.Drawing.Color.DarkGray;
+            this.pnlDialogue.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlDialogue.Location = new System.Drawing.Point(0, 40);
+            this.pnlDialogue.Name = "pnlDialogue";
+            this.pnlDialogue.Size = new System.Drawing.Size(1309, 865);
+            this.pnlDialogue.TabIndex = 2;
+            this.pnlDialogue.WrapContents = false;
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1309, 905);
+            this.Controls.Add(this.pnlDialogue);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.pnlDisplay);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmMain";
             this.Text = "Dialogue Editor";
@@ -295,7 +294,6 @@
         private System.Windows.Forms.ToolStripMenuItem addNewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dialoguePathToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem quoteToolStripMenuItem;
-        private DisplayPanel pnlDisplay;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem moveUpToolStripMenuItem;
@@ -310,6 +308,7 @@
         private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pasteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.FlowLayoutPanel pnlDialogue;
     }
 }
 

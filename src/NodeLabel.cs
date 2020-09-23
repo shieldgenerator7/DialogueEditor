@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace DialogueEditor.src
 {
-    class NodeLabel : RichTextBox
+    public class NodeLabel : RichTextBox
     {
         public Quote quote;
 
@@ -79,19 +79,17 @@ namespace DialogueEditor.src
             Font = new Font("Calibri", 12);
             MinimumSize = new Size(200, 0);
             MaximumSize = new Size(200, 0);
+            Size = new Size(100, 96);
+            Location = new System.Drawing.Point(3, 40);
             Cursor = Cursors.Hand;
             ScrollBars = RichTextBoxScrollBars.None;
             Text = QuoteText;
             //Event Listeners
-            MouseEnter += Managers.Control.setMousedOver;
-            Click += Managers.Control.setSelected;
-            MouseClick += Managers.Control.setSelected;
-            DoubleClick += Managers.Control.processDoubleClick;
-            MouseDoubleClick += Managers.Control.processDoubleClick;
             ContentsResized += rtb_ContentsResized;
             TextChanged += acceptText;
             //
             Editing = false;
+            BringToFront();
         }
 
         //2020-09-21: copied from https://stackoverflow.com/a/16607756/2336212
@@ -100,7 +98,7 @@ namespace DialogueEditor.src
             ((RichTextBox)sender).Height = e.NewRectangle.Height + 5;
         }
 
-        protected virtual void acceptText(object sender, EventArgs e)
+        protected void acceptText(object sender, EventArgs e)
         {
             string sentText = ((RichTextBox)sender).Text;
             if (sentText.Contains('\n'))

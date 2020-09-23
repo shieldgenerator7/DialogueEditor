@@ -7,155 +7,84 @@ using System.Windows.Forms;
 
 public class ControlManager
 {
-    public bool isMouseDown { get; private set; } = false;
-    public Node selected { get; private set; } = null;
-    public Node mousedOver { get; private set; } = null;
-    public Vector mousePos { get; private set; }
-    public bool isMouseHover { get; private set; } = false;
-    public Vector origMousePos { get; private set; }
 
     public ControlManager()
     {
     }
 
-    public void mouseDown()
+    public Control ActiveControl
     {
-        this.isMouseDown = true;
-        this.isMouseHover = false;
-        origMousePos = mousePos;
-        selected?.editNode(false);
-        if (mousedOver)
+        get
         {
-            selected = mousedOver;
+            Control activeControl = Managers.Form.ActiveControl;
+            if (activeControl == null)
+            {
+                return null;
+            }
+            while (!(activeControl is NodeLabel)
+                && !(activeControl is NodePanel)
+                && activeControl.Parent != null)
+            {
+                activeControl = activeControl.Parent;
+            }
+            return activeControl;
         }
-        selected?.pickup(mousePos);
     }
 
-    public bool mouseMove(Vector mousePos)
+    public NodeLabel ActiveNode
     {
-        this.mousePos = mousePos;
-        if (isMouseDown)
+        get
         {
-            if (!selected)
+            Control activeControl = ActiveControl;
+            if (activeControl is NodeLabel)
             {
-                selected = mousedOver;
+                return (NodeLabel)activeControl;
             }
-            if (selected)
-            {
-                selected.moveTo(mousePos);
-                selected.editNode(false);
-            }
-            return true;
+            return null;
         }
-        else
-        {
-            Node prevMousedOver = mousedOver;
-            mousedOver = null;
-            if (!mousedOver)
-            {
-                mousedOver = Managers.Node.getNodeAtPosition(mousePos);
-                mousedOver?.pickup(mousePos);
-            }
-            Cursor neededCursor = Cursor.Current;
-            if (mousedOver)
-            {
-                neededCursor = Cursors.Hand;
-            }
-            else
-            {
-                neededCursor = Cursors.Default;
-            }
-            if (Cursor.Current != neededCursor)
-            {
-                Cursor.Current = neededCursor;
-            }
-            if (prevMousedOver != mousedOver)
-            {
-                return true;
-            }
-        }
-        return false;
     }
 
-    public void mouseUp()
+    public NodePanel ActivePanel
     {
-        this.isMouseDown = false;
-        //if (selected)
-        //{
-        //    selected.editNode(false);
-        //}
-        //selected = null;
-    }
-
-    public void mouseHover()
-    {
-        this.isMouseHover = true;
-    }
-
-    public void mouseDoubleClick()
-    {
-        if (selected)
+        get
         {
-            if (selected is ContainerNode)
+            Control activeControl = ActiveControl;
+            if (activeControl is NodePanel)
             {
-                Node node = Managers.Node.getIndexAtPosition(mousePos);
-                if (node)
-                {
-                    Node newNode = Managers.Node.createNode(
-                        node.quote.path,
-                        node.quote.Index
-                        );
-                    selected = newNode;
-                    newNode.editNode(true);
-                }
+                return (NodePanel)activeControl;
             }
-            else
-            {
-                selected.editNode(true);
-            }
+            return null;
         }
-        else
-        {
-        }
-        //bool changedObjectState = false;
-        //checkTrayDoubleClick(Managers.Command, mousePos);
-
-        //Find an object to change its state
-        //Node node = Managers.Node.getNodeAtPosition(mousePos);
-        //if (node && node.gameObject.canChangeState() && node.gameObject.Permissions.canInteract)
-        //{
-        //    //changedObjectState = true;
-        //    node.gameObject.changeState();
-        //}
     }
 
     public void createDialoguePath()
     {
         //Create a new quote with no path,
         //which will auto-create a new path with a new quote
-        selected = Managers.Node.createNode();
-        selected.editNode(true);
+        NodeLabel node = Managers.Node.createNode();
+        node.Editing = true;
     }
 
     public void createQuote()
     {
+        Control activeControl = ActiveControl;
         //Create a new quote
-        if (selected)
+        if (activeControl != null)
         {
-            if (selected is ContainerNode)
+            NodePanel container = ActivePanel;
+            if (container != null)
             {
-                ContainerNode container = (ContainerNode)selected;
-                selected = Managers.Node.createNode(container.path);
-                selected.editNode();
+                NodeLabel node = Managers.Node.createNode(container.path);
+                node.Editing = true;
             }
-            else
+            NodeLabel activeNode = ActiveNode;
+            if (activeNode != null)
             {
-                Node node = selected;
-                selected = Managers.Node.createNode(
-                    node.quote.path,
-                    node.quote.Index
+                NodeLabel node = Managers.Node.createNode(
+                    activeNode.quote.path,
+                    activeNode.quote.Index
                     );
-                selected.editNode();
+                node.Editing = true;
             }
         }
         else
@@ -166,90 +95,76 @@ public class ControlManager
 
     public void enterPressed()
     {
-        if (selected)
+        NodeLabel activeNode = ActiveNode;
+        if (activeNode != null)
         {
-            selected.editNode(false);
-            if (selected is ContainerNode)
+            activeNode.Editing = false;
+            //If it's the last in the path,
+            DialoguePath path = activeNode.quote.path;
+            if (activeNode.quote.Index == path.quotes.Count - 1)
             {
-                //do nothing else
-            }
-            else
-            {
-                //If it's the last in the path,
-                DialoguePath path = selected.quote.path;
-                if (selected.quote == path.quotes[path.quotes.Count - 1])
-                {
-                    //Add new node at the end
-                    selected = Managers.Node.createNode(selected.quote.path);
-                    selected.editNode(true);
-                }
+                //Add new node at the end
+                NodeLabel newNode = Managers.Node.createNode(activeNode.quote.path);
+                newNode.Editing = true;
             }
         }
     }
 
     public void escapePressed()
     {
-        if (selected)
+        NodeLabel activeNode = ActiveNode;
+        if (activeNode != null)
         {
-            //If editing current node,
-            if (selected.Editing)
-            {
-                //Stop editing it
-                selected.editNode(false);
-            }
-            else
-            {
-                //Else just stop selecting it
-                selected = null;
-            }
+            //Stop editing it
+            activeNode.Editing = false;
         }
     }
 
+    /// <summary>
+    /// Deletes the active control if it's a NodeLabel or NodePanel
+    /// </summary>
+    /// <returns>true if deleted, false if not deleted</returns>
     public bool deletePressed()
     {
-        if (selected && !selected.Editing)
+        NodeLabel activeNode = ActiveNode;
+        if (activeNode != null)
         {
-            selected.dispose();
-            Managers.Node.nodes.Remove(selected);
-            selected = null;
-            return true;
+            if (!activeNode.Editing)
+            {
+                activeNode.Dispose();
+                activeNode.Parent.Controls.Remove(activeNode);
+                return true;
+            }
+        }
+        NodePanel activePanel = ActivePanel;
+        if (activePanel != null)
+        {
+            DialogResult dr = MessageBox.Show(
+                "Are you sure you want to delete dialogue path \""
+                + activePanel.path.title + "\"?",
+                "Delete?",
+                MessageBoxButtons.OKCancel
+                );
+            if (dr == DialogResult.OK)
+            {
+                Managers.Node.containers.Remove(activePanel);
+                activePanel.Parent.Controls.Remove(activePanel);
+                activePanel.Dispose();
+                return true;
+            }
         }
         return false;
     }
 
-    public void setMousedOver(object sender, EventArgs e)
-    {
-        mousedOver = ((NodeLabel)sender).node;
-        Managers.Form.Refresh();
-    }
-
-    public void setSelected(object sender, EventArgs e)
-    {
-        selected?.editNode(false);
-        selected = ((NodeLabel)sender).node;
-        Managers.Form.Refresh();
-    }
-
-    public void deselect()
-    {
-        selected?.editNode(false);
-        selected = null;
-    }
-
-    public void processDoubleClick(object sender, EventArgs e)
-    {
-        selected?.editNode(false);
-        selected = ((NodeLabel)sender).node;
-        selected.editNode(true);
-        Managers.Form.Refresh();
-    }
-
     public void receiveInfoDump(DialoguePath path, string[] textArray)
     {
-        Node lastNode = Managers.Node.createNodes(path, textArray);
-        selected?.editNode(false);
-        lastNode.editNode(true);
-        selected = lastNode;
+        NodeLabel lastNode = Managers.Node.createNodes(path, textArray);
+        NodeLabel activeNode = ActiveNode;
+        if (activeNode != null)
+        {
+            activeNode.Editing = false;
+        }
+        lastNode.Editing = true;
     }
 }
 
