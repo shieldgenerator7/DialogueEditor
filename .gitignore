@@ -62,3 +62,8 @@ DialogueEditor.zip
 *.pfx
 publish/Application Files/DialogueEditor_1_0_0_0/DialogueEditor.exe.deploy
 publish/Application Files/DialogueEditor_1_0_0_0/Newtonsoft.Json.dll.deploy
+obj/Debug/DialogueEditor.exe.manifest
+obj/Debug/DialogueEditor.application
+publish/Application Files/DialogueEditor_1_0_0_1/DialogueEditor.exe.deploy
+publish/Application Files/DialogueEditor_1_0_0_1/Newtonsoft.Json.dll.deploy
+*.zip
