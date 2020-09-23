@@ -26,6 +26,10 @@ public class Managers
     public static FileManager File
         => instance.fileManager;
 
+    private ColorSettings colorSettings;
+    public static ColorSettings Colors
+        => instance.colorSettings;
+
     public static frmMain Form
         => instance.mainForm;
 
@@ -45,6 +49,7 @@ public class Managers
         this.controlManager = new ControlManager();
         this.displayManager = new DisplayManager();
         this.fileManager = new FileManager();
+        this.colorSettings = new ColorSettings();
     }
 
     public static bool Initialized => instance != null;
