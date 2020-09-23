@@ -28,7 +28,6 @@ namespace DialogueEditor
         private void frmMain_Load(object sender, EventArgs e)
         {
             Managers.File.newFile();
-            refresh();
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -106,7 +105,6 @@ namespace DialogueEditor
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Managers.File.newFile();
-            refresh();
         }
     }
 }

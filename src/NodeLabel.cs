@@ -80,13 +80,13 @@ namespace DialogueEditor.src
             MinimumSize = new Size(200, 0);
             MaximumSize = new Size(200, 0);
             Size = new Size(100, 96);
-            Location = new System.Drawing.Point(3, 40);
             Cursor = Cursors.Hand;
             ScrollBars = RichTextBoxScrollBars.None;
             Text = QuoteText;
             //Event Listeners
             ContentsResized += rtb_ContentsResized;
             TextChanged += acceptText;
+            DoubleClick += (sender, e) => Editing = !Editing;
             //
             Editing = false;
             BringToFront();

@@ -34,7 +34,7 @@ namespace DialogueEditor.src
             AutoScroll = false;
             FlowDirection = FlowDirection.TopDown;
             Padding = new Padding(10);
-            MinimumSize = new Size(250, 150);
+            MinimumSize = new Size(230, 150);
             BackColor = Managers.Colors.platformColor;
             BorderStyle = BorderStyle.FixedSingle;
             WrapContents = false;
