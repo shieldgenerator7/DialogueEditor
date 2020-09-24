@@ -88,6 +88,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\ColorSettings.cs" />
     <Compile Include="src\ControlManager.cs" />
+    <Compile Include="src\Model\DialogueData.cs" />
     <Compile Include="src\Model\DialoguePath.cs" />
     <Compile Include="src\DisplayManager.cs" />
     <Compile Include="src\Managers.cs" />
