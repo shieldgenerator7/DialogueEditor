@@ -27,7 +27,24 @@ namespace DialogueEditor
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            Managers.File.newFile();
+            try
+            {
+                bool fileOpened = Managers.File.openFile();
+                if (!fileOpened)
+                {
+                    Managers.File.newFile();
+                }
+            }
+            catch(UnauthorizedAccessException uae)
+            {
+                Managers.File.newFile();
+            }
+        }
+
+        private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Managers.File.saveFile();
+            Managers.File.savePropertiesBeforeClose();
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -93,12 +110,12 @@ namespace DialogueEditor
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Managers.File.saveFile();
+            Managers.File.saveFileWithDialog();
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Managers.File.openFile();
+            Managers.File.openFileWithDialog();
             refresh();
         }
 
@@ -106,5 +123,6 @@ namespace DialogueEditor
         {
             Managers.File.newFile();
         }
+
     }
 }

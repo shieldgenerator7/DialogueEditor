@@ -13,7 +13,7 @@ namespace DialogueEditor
     public class FileManager
     {
 
-        public string filename = null;
+        public string defaultFileName = null;
 
         private SaveFileDialog sfd;
         private OpenFileDialog ofd;
@@ -23,59 +23,56 @@ namespace DialogueEditor
             //Save Dialog
             sfd = new SaveFileDialog();
             sfd.Filter = "Dialogue JSON Files (*.json)|*.json|All files|*.*";
-            sfd.FileName = filename;
+            sfd.FileName = defaultFileName;
             sfd.Title = "Save Dialogue";
             sfd.DefaultExt = ".json";
             //Open Dialog
             ofd = new OpenFileDialog();
             ofd.Filter = "Dialogue JSON Files (*.json)|*.json|All files|*.*";
-            ofd.FileName = filename;
+            ofd.FileName = defaultFileName;
             ofd.Title = "Open Dialogue";
             ofd.DefaultExt = ".json";
+            //Default file
+            defaultFileName = DialogueEditor.Properties.Settings.Default.defaultFileName;
         }
 
-        public void saveFile()
+        public void savePropertiesBeforeClose()
         {
-            if (filename == null)
-            {
-                sfd.FileName = filename;
-                DialogResult dr = sfd.ShowDialog();
-                if (dr == DialogResult.OK)
-                {
-                    //2020-09-22: copied from https://stackoverflow.com/a/16921677/2336212
-                    using (StreamWriter file = new StreamWriter(sfd.OpenFile()))
-                    {
-                        string jsonString = JsonConvert.SerializeObject(Managers.Node.dialogueData, Formatting.Indented);
+            DialogueEditor.Properties.Settings.Default.defaultFileName = defaultFileName;
+            DialogueEditor.Properties.Settings.Default.Save();
+        }
 
-                        file.Write(jsonString);
-                    }
+        public void saveFileWithDialog()
+        {
+            if (defaultFileName != null && defaultFileName != "")
+            {
+                sfd.FileName = defaultFileName;
+            }
+            DialogResult dr = sfd.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+                if (sfd.FileName != null && sfd.FileName.ToLower().EndsWith(".json"))
+                {
+                    defaultFileName = sfd.FileName;
                 }
+                saveFile(sfd.FileName);
             }
         }
 
-        public void openFile()
+        public void openFileWithDialog()
         {
-            ofd.FileName = filename;
+            if (defaultFileName != null && defaultFileName != "")
+            {
+                ofd.FileName = defaultFileName;
+            }
             DialogResult dr = ofd.ShowDialog();
             if (dr == DialogResult.OK)
             {
-                //2020-09-22: copied from https://stackoverflow.com/a/13297964/2336212
-                using (StreamReader r = new StreamReader(ofd.OpenFile()))
+                if (ofd.FileName != null && ofd.FileName.ToLower().EndsWith(".json"))
                 {
-                    string json = r.ReadToEnd();
-                    try
-                    {
-                        //Open file from version 0.0.3 onward
-                        DialogueData dialogueData = JsonConvert.DeserializeObject<DialogueData>(json);
-                        Managers.Node.acceptInfoFromFile(dialogueData);
-                    }
-                    catch (JsonSerializationException jse)
-                    {
-                        //Open file from version 0.0.2
-                        List<DialoguePath> dialogues = JsonConvert.DeserializeObject<List<DialoguePath>>(json);
-                        Managers.Node.acceptInfoFromFile(new DialogueData(dialogues));
-                    }
+                    defaultFileName = ofd.FileName;
                 }
+                openFile(ofd.FileName);
             }
         }
 
@@ -83,6 +80,62 @@ namespace DialogueEditor
         {
             Managers.Node.clear();
             Managers.Control.createQuote();
+        }
+
+        public void saveFile(string filename = null)
+        {
+            if (filename == null || filename == "")
+            {
+                filename = defaultFileName;
+            }
+            //If it's still null
+            if (filename == null || filename == "")
+            {
+                //don't do anything
+                return;
+            }
+            sfd.FileName = filename;
+            //2020-09-22: copied from https://stackoverflow.com/a/16921677/2336212
+            using (StreamWriter file = new StreamWriter(sfd.OpenFile()))
+            {
+                string jsonString = JsonConvert.SerializeObject(Managers.Node.dialogueData, Formatting.Indented);
+
+                file.Write(jsonString);
+            }
+        }
+
+        public bool openFile(string filename = null)
+        {
+            if (filename == null || filename == "")
+            {
+                filename = defaultFileName;
+            }
+            //If it's still null,
+            if (filename == null || filename == "")
+            {
+                //can't open the file
+                return false;
+            }
+            //
+            ofd.FileName = filename;
+            //2020-09-22: copied from https://stackoverflow.com/a/13297964/2336212
+            using (StreamReader r = new StreamReader(ofd.OpenFile()))
+            {
+                string json = r.ReadToEnd();
+                try
+                {
+                    //Open file from version 0.0.3 onward
+                    DialogueData dialogueData = JsonConvert.DeserializeObject<DialogueData>(json);
+                    Managers.Node.acceptInfoFromFile(dialogueData);
+                }
+                catch (JsonSerializationException jse)
+                {
+                    //Open file from version 0.0.2
+                    List<DialoguePath> dialogues = JsonConvert.DeserializeObject<List<DialoguePath>>(json);
+                    Managers.Node.acceptInfoFromFile(new DialogueData(dialogues));
+                }
+            }
+            return true;
         }
 
     }

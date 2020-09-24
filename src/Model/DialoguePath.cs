@@ -1,4 +1,5 @@
 ﻿
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,7 @@ public class DialoguePath
     /// <summary>
     /// Returns a list of the characters in this dialogue path
     /// </summary>
+    [JsonIgnore]
     public List<string> Characters
         => quotes.Select(q => q.characterName).Distinct().ToList();
 }
