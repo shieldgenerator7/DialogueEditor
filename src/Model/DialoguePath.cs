@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 [Serializable]
 public class DialoguePath
@@ -17,4 +18,10 @@ public class DialoguePath
             q => q.path = this
             );
     }
+
+    /// <summary>
+    /// Returns a list of the characters in this dialogue path
+    /// </summary>
+    public List<string> Characters
+        => quotes.Select(q => q.characterName).Distinct().ToList();
 }
