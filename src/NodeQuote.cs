@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace DialogueEditor.src
 {
-    public class NodeLabel : RichTextBox
+    public class NodeQuote : RichTextBox
     {
         public Quote quote;
 
@@ -70,7 +70,7 @@ namespace DialogueEditor.src
             }
         }
 
-        public NodeLabel(Quote quote) : base()
+        public NodeQuote(Quote quote) : base()
         {
             this.quote = quote;
 
@@ -124,17 +124,17 @@ namespace DialogueEditor.src
             this.QuoteText = sentText;
         }
 
-        public static implicit operator bool(NodeLabel node)
+        public static implicit operator bool(NodeQuote node)
             => node != null;
 
-        public int CompareTo(NodeLabel gos)
+        public int CompareTo(NodeQuote gos)
             => this.quote.Index - gos.quote.Index;
 
-        public static bool operator <(NodeLabel a, NodeLabel b)
+        public static bool operator <(NodeQuote a, NodeQuote b)
             => a.quote.Index < b.quote.Index;
 
 
-        public static bool operator >(NodeLabel a, NodeLabel b)
+        public static bool operator >(NodeQuote a, NodeQuote b)
             => a.quote.Index > b.quote.Index;
 
     }

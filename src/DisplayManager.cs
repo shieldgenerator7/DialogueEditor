@@ -62,7 +62,7 @@ public class DisplayManager
         //    );
     }
 
-    public void displayRectangles(Graphics graphics, NodeLabel selected, NodeLabel mousedOver, Vector mousePos, bool mouseDown)
+    public void displayRectangles(Graphics graphics, NodeQuote selected, NodeQuote mousedOver, Vector mousePos, bool mouseDown)
     {
         if (selected)
         {
@@ -73,7 +73,7 @@ public class DisplayManager
             drawRectangle(graphics, overPen, mousedOver);
         }
     }
-    private void drawRectangle(Graphics graphics, Pen pen, NodeLabel node)
+    private void drawRectangle(Graphics graphics, Pen pen, NodeQuote node)
     {
         //graphics.DrawRectangle(
         //    pen,
@@ -81,7 +81,7 @@ public class DisplayManager
         //    );
     }
 
-    public void displayDescription(Graphics graphics, NodeLabel mousedOver, Vector mousePos)
+    public void displayDescription(Graphics graphics, NodeQuote mousedOver, Vector mousePos)
     {
         mousePos = convertToScreen(mousePos);
         //Object Description

@@ -21,8 +21,8 @@ public class ControlManager
             {
                 return null;
             }
-            while (!(activeControl is NodeLabel)
-                && !(activeControl is NodePanel)
+            while (!(activeControl is NodeQuote)
+                && !(activeControl is NodeDialogue)
                 && activeControl.Parent != null)
             {
                 activeControl = activeControl.Parent;
@@ -31,27 +31,27 @@ public class ControlManager
         }
     }
 
-    public NodeLabel ActiveNode
+    public NodeQuote ActiveNode
     {
         get
         {
             Control activeControl = ActiveControl;
-            if (activeControl is NodeLabel)
+            if (activeControl is NodeQuote)
             {
-                return (NodeLabel)activeControl;
+                return (NodeQuote)activeControl;
             }
             return null;
         }
     }
 
-    public NodePanel ActivePanel
+    public NodeDialogue ActivePanel
     {
         get
         {
             Control activeControl = ActiveControl;
-            if (activeControl is NodePanel)
+            if (activeControl is NodeDialogue)
             {
-                return (NodePanel)activeControl;
+                return (NodeDialogue)activeControl;
             }
             return null;
         }
@@ -61,7 +61,7 @@ public class ControlManager
     {
         //Create a new quote with no path,
         //which will auto-create a new path with a new quote
-        NodeLabel node = Managers.Node.createNode();
+        NodeQuote node = Managers.Node.createNode();
         node.Editing = true;
     }
 
@@ -71,16 +71,16 @@ public class ControlManager
         //Create a new quote
         if (activeControl != null)
         {
-            NodePanel container = ActivePanel;
+            NodeDialogue container = ActivePanel;
             if (container != null)
             {
-                NodeLabel node = Managers.Node.createNode(container.path);
+                NodeQuote node = Managers.Node.createNode(container.path);
                 node.Editing = true;
             }
-            NodeLabel activeNode = ActiveNode;
+            NodeQuote activeNode = ActiveNode;
             if (activeNode != null)
             {
-                NodeLabel node = Managers.Node.createNode(
+                NodeQuote node = Managers.Node.createNode(
                     activeNode.quote.path,
                     activeNode.quote.Index
                     );
@@ -95,7 +95,7 @@ public class ControlManager
 
     public void enterPressed()
     {
-        NodeLabel activeNode = ActiveNode;
+        NodeQuote activeNode = ActiveNode;
         if (activeNode != null)
         {
             activeNode.Editing = false;
@@ -104,7 +104,7 @@ public class ControlManager
             if (activeNode.quote.Index == path.quotes.Count - 1)
             {
                 //Add new node at the end
-                NodeLabel newNode = Managers.Node.createNode(activeNode.quote.path);
+                NodeQuote newNode = Managers.Node.createNode(activeNode.quote.path);
                 newNode.Editing = true;
             }
         }
@@ -112,7 +112,7 @@ public class ControlManager
 
     public void escapePressed()
     {
-        NodeLabel activeNode = ActiveNode;
+        NodeQuote activeNode = ActiveNode;
         if (activeNode != null)
         {
             //Stop editing it
@@ -126,7 +126,7 @@ public class ControlManager
     /// <returns>true if deleted, false if not deleted</returns>
     public bool deletePressed()
     {
-        NodeLabel activeNode = ActiveNode;
+        NodeQuote activeNode = ActiveNode;
         if (activeNode != null)
         {
             if (!activeNode.Editing)
@@ -136,7 +136,7 @@ public class ControlManager
                 return true;
             }
         }
-        NodePanel activePanel = ActivePanel;
+        NodeDialogue activePanel = ActivePanel;
         if (activePanel != null)
         {
             DialogResult dr = MessageBox.Show(
@@ -158,8 +158,8 @@ public class ControlManager
 
     public void receiveInfoDump(DialoguePath path, string[] textArray)
     {
-        NodeLabel lastNode = Managers.Node.createNodes(path, textArray);
-        NodeLabel activeNode = ActiveNode;
+        NodeQuote lastNode = Managers.Node.createNodes(path, textArray);
+        NodeQuote activeNode = ActiveNode;
         if (activeNode != null)
         {
             activeNode.Editing = false;

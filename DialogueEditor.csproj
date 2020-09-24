@@ -92,11 +92,11 @@
     <Compile Include="src\Model\DialoguePath.cs" />
     <Compile Include="src\DisplayManager.cs" />
     <Compile Include="src\Managers.cs" />
-    <Compile Include="src\NodeLabel.cs">
+    <Compile Include="src\NodeQuote.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="src\NodeManager.cs" />
-    <Compile Include="src\NodePanel.cs">
+    <Compile Include="src\NodeDialogue.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="src\Model\Quote.cs" />

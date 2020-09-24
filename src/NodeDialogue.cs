@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace DialogueEditor.src
 {
-    public class NodePanel : FlowLayoutPanel
+    public class NodeDialogue : FlowLayoutPanel
     {
         public readonly DialoguePath path;
 
@@ -25,7 +25,7 @@ namespace DialogueEditor.src
 
         private TextBox titleBox;
 
-        public NodePanel(DialoguePath path) : base()
+        public NodeDialogue(DialoguePath path) : base()
         {
             //Instance variables
             this.path = path;

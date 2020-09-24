@@ -15,7 +15,7 @@ namespace DialogueEditor.src
 
         public DialogueData dialogueData { get; private set; } = new DialogueData();
         public Panel dialoguePanel;
-        public List<NodePanel> containers = new List<NodePanel>();
+        public List<NodeDialogue> containers = new List<NodeDialogue>();
 
         /// <summary>
         /// Creates a UI Node and a Quote,
@@ -24,7 +24,7 @@ namespace DialogueEditor.src
         /// <param name="path"></param>
         /// <param name="index"></param>
         /// <returns></returns>
-        public NodeLabel createNode(DialoguePath path = null, int index = -1)
+        public NodeQuote createNode(DialoguePath path = null, int index = -1)
         {
             //If no path,
             if (path == null)
@@ -32,7 +32,7 @@ namespace DialogueEditor.src
                 //create a path
                 path = createContainerNode().path;
             }
-            NodePanel container = containers.First(cn => cn.path == path);
+            NodeDialogue container = containers.First(cn => cn.path == path);
             //Add a node to the path
             Quote quote = new Quote();
             quote.path = path;
@@ -48,7 +48,7 @@ namespace DialogueEditor.src
             {
                 quote.characterName = quote.path.quotes[quote.Index - 2].characterName;
             }
-            NodeLabel node = new NodeLabel(quote);
+            NodeQuote node = new NodeQuote(quote);
             container.Controls.Add(node);
             return node;
         }
@@ -59,10 +59,10 @@ namespace DialogueEditor.src
         /// <param name="path"></param>
         /// <param name="quote"></param>
         /// <returns></returns>
-        public NodeLabel createNode(DialoguePath path, Quote quote)
+        public NodeQuote createNode(DialoguePath path, Quote quote)
         {
-            NodeLabel node = new NodeLabel(quote);
-            NodePanel container = containers.First(cn => cn.path == path);
+            NodeQuote node = new NodeQuote(quote);
+            NodeDialogue container = containers.First(cn => cn.path == path);
             container.Controls.Add(node);
             return node;
         }
@@ -73,30 +73,30 @@ namespace DialogueEditor.src
         /// </summary>
         /// <param name="path"></param>
         /// <param name="textArray"></param>
-        public NodeLabel createNodes(DialoguePath path, string[] textArray)
+        public NodeQuote createNodes(DialoguePath path, string[] textArray)
         {
             if (path == null)
             {
                 path = createContainerNode().path;
             }
-            NodeLabel lastNode = null;
+            NodeQuote lastNode = null;
             foreach (string text in textArray)
             {
-                NodeLabel node = createNode(path);
+                NodeQuote node = createNode(path);
                 node.Text = text;
                 lastNode = node;
             }
             return lastNode;
         }
 
-        public NodePanel createContainerNode(DialoguePath path = null)
+        public NodeDialogue createContainerNode(DialoguePath path = null)
         {
             if (path == null)
             {
                 path = new DialoguePath();
                 dialogueData.dialogues.Add(path);
             }
-            NodePanel container = new NodePanel(path);
+            NodeDialogue container = new NodeDialogue(path);
             containers.Add(container);
             dialoguePanel.Controls.Add(container);
             return container;
