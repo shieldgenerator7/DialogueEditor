@@ -45,9 +45,9 @@ namespace DialogueEditor
                     //2020-09-22: copied from https://stackoverflow.com/a/16921677/2336212
                     using (StreamWriter file = new StreamWriter(sfd.OpenFile()))
                     {
-                        JsonSerializer serializer = new JsonSerializer();
-                        //serialize object directly into file stream
-                        serializer.Serialize(file, Managers.Node.dialogueData);
+                        string jsonString = JsonConvert.SerializeObject(Managers.Node.dialogueData, Formatting.Indented);
+
+                        file.Write(jsonString);
                     }
                 }
             }
