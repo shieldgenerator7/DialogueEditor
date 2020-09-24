@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="DialogueEditor.exe" size="29152">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="DialogueEditor.exe" size="31200">
       <assemblyIdentity name="DialogueEditor" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>yQnPDfMmkjxhcIs+PV8CB5sKsqxPCBnPeUoN5wwirhY=</dsig:DigestValue>
+        <dsig:DigestValue>KgLolmMsmbrlTVAdTl00qFHxsiDoZuBwAZABEQE1ghM=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -65,13 +65,13 @@
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="DialogueEditor.exe.config" size="189">
+  <file name="DialogueEditor.exe.config" size="935">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>R+Wg8QGvQVHX8T0ta/qbhH1bXkqY0fRnS3wBV3J0bN8=</dsig:DigestValue>
+      <dsig:DigestValue>B91CfRWDcRkIaUA8uZiSXQnKCoWbkODOHhbrO11IEXQ=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>
