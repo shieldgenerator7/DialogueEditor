@@ -8,9 +8,15 @@ using System.Windows.Forms;
 
 namespace DialogueEditor.src
 {
-    public class NodeQuote : RichTextBox
+    public class NodeQuote : Panel
     {
+        public const int SIZE_PICTURE = 43;
+        public const int WIDTH_LABEL = 200;
+
         public Quote quote;
+
+        private RichTextBox textBox;
+        private PictureBox pictureBox;
 
         public string QuoteText
         {
@@ -52,21 +58,21 @@ namespace DialogueEditor.src
                 _editing = value;
                 if (_editing)
                 {
-                    BackColor = Managers.Colors.textBackColor;
-                    ForeColor = Managers.Colors.textForeColor;
-                    BorderStyle = BorderStyle.Fixed3D;
+                    textBox.BackColor = Managers.Colors.textBackColor;
+                    textBox.ForeColor = Managers.Colors.textForeColor;
+                    textBox.BorderStyle = BorderStyle.Fixed3D;
                     //
-                    Focus();
-                    SelectionStart = Text.Length;
-                    SelectionLength = 0;
+                    textBox.Focus();
+                    textBox.SelectionStart = Text.Length;
+                    textBox.SelectionLength = 0;
                 }
                 else
                 {
-                    BackColor = Managers.Colors.labelBackColor;
-                    ForeColor = Managers.Colors.labelForeColor;
-                    BorderStyle = BorderStyle.None;
+                    textBox.BackColor = Managers.Colors.labelBackColor;
+                    textBox.ForeColor = Managers.Colors.labelForeColor;
+                    textBox.BorderStyle = BorderStyle.None;
                 }
-                ReadOnly = !_editing;
+                textBox.ReadOnly = !_editing;
             }
         }
 
@@ -74,24 +80,38 @@ namespace DialogueEditor.src
         {
             this.quote = quote;
 
-            //Set properties
+            // Panel (self) properties
             AutoSize = true;
-            Font = new Font("Calibri", 12);
-            MinimumSize = new Size(200, 0);
-            MaximumSize = new Size(200, 0);
-            Size = new Size(100, 96);
-            Cursor = Cursors.Hand;
-            ScrollBars = RichTextBoxScrollBars.None;
-            Text = QuoteText;
+            AutoScroll = false;
+            Location = new System.Drawing.Point(3, 3);
+            Size = new System.Drawing.Size(280, 80);
+
+            // PictureBox properties
+            pictureBox = new PictureBox();
+            this.Controls.Add(pictureBox);
+            pictureBox.BackColor = System.Drawing.Color.LightGray;
+            pictureBox.Location = new System.Drawing.Point(0,0);
+            pictureBox.BackgroundImageLayout = ImageLayout.Stretch;
+            pictureBox.BackgroundImage = DialogueEditor.Properties.Resources.defaultQuoteImage;
+            pictureBox.Size = new System.Drawing.Size(SIZE_PICTURE, SIZE_PICTURE);
+
+            // TextBox properties
+            textBox = new RichTextBox();
+            this.Controls.Add(textBox);
+            textBox.AutoSize = true;
+            textBox.Font = new Font("Calibri", 12);
+            textBox.Location = new System.Drawing.Point(SIZE_PICTURE+5, 0);
+            textBox.MinimumSize = new Size(WIDTH_LABEL, SIZE_PICTURE);
+            textBox.MaximumSize = new Size(WIDTH_LABEL, 0);
+            textBox.Size = new Size(100, 96);
+            textBox.ScrollBars = RichTextBoxScrollBars.None;
+            textBox.Text = QuoteText;
             //Event Listeners
-            ContentsResized += rtb_ContentsResized;
-            TextChanged += acceptText;
-            DoubleClick += (sender, e) => Editing = !Editing;
-            //GotFocus += (sender, e) => Editing = true;
-            //LostFocus += (sender, e) =>  Editing = false; 
+            textBox.ContentsResized += rtb_ContentsResized;
+            textBox.TextChanged += acceptText;
+            textBox.DoubleClick += (sender, e) => Editing = !Editing;
             //
             Editing = false;
-            BringToFront();
         }
 
         //2020-09-21: copied from https://stackoverflow.com/a/16607756/2336212
@@ -113,7 +133,7 @@ namespace DialogueEditor.src
                 splitList.RemoveAt(0);
                 split = splitList.ToArray();
                 Managers.Control.receiveInfoDump(quote.path, split);
-                Text = sentText;
+                textBox.Text = sentText;
             }
             //Normal procedure
             sentText = sentText.Trim();
