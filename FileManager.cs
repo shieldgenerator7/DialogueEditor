@@ -47,7 +47,7 @@ namespace DialogueEditor
                     {
                         JsonSerializer serializer = new JsonSerializer();
                         //serialize object directly into file stream
-                        serializer.Serialize(file, Managers.Node.dialogues);
+                        serializer.Serialize(file, Managers.Node.dialogueData);
                     }
                 }
             }
@@ -63,16 +63,25 @@ namespace DialogueEditor
                 using (StreamReader r = new StreamReader(ofd.OpenFile()))
                 {
                     string json = r.ReadToEnd();
-                    List<DialoguePath> dialogues = JsonConvert.DeserializeObject<List<DialoguePath>>(json);
-                    Managers.Node.acceptInfoFromFile(dialogues);
+                    try
+                    {
+                        //Open file from version 0.0.3 onward
+                        DialogueData dialogueData = JsonConvert.DeserializeObject<DialogueData>(json);
+                        Managers.Node.acceptInfoFromFile(dialogueData);
+                    }
+                    catch (JsonSerializationException jse)
+                    {
+                        //Open file from version 0.0.2
+                        List<DialoguePath> dialogues = JsonConvert.DeserializeObject<List<DialoguePath>>(json);
+                        Managers.Node.acceptInfoFromFile(new DialogueData(dialogues));
+                    }
                 }
             }
         }
 
         public void newFile()
         {
-            Managers.Node.clearNodes();
-            Managers.Node.dialogues.Clear();
+            Managers.Node.clear();
             Managers.Control.createQuote();
         }
 

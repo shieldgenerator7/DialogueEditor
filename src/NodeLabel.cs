@@ -87,6 +87,8 @@ namespace DialogueEditor.src
             ContentsResized += rtb_ContentsResized;
             TextChanged += acceptText;
             DoubleClick += (sender, e) => Editing = !Editing;
+            //GotFocus += (sender, e) => Editing = true;
+            //LostFocus += (sender, e) =>  Editing = false; 
             //
             Editing = false;
             BringToFront();

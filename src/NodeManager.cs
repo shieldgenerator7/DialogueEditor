@@ -13,7 +13,7 @@ namespace DialogueEditor.src
         public const int BUFFER_NODE = 10;
         public const int BUFFER_CONTAINER = 20;
 
-        public List<DialoguePath> dialogues { get; private set; } = new List<DialoguePath>();
+        public DialogueData dialogueData { get; private set; } = new DialogueData();
         public Panel dialoguePanel;
         public List<NodePanel> containers = new List<NodePanel>();
 
@@ -94,7 +94,7 @@ namespace DialogueEditor.src
             if (path == null)
             {
                 path = new DialoguePath();
-                dialogues.Add(path);
+                dialogueData.dialogues.Add(path);
             }
             NodePanel container = new NodePanel(path);
             containers.Add(container);
@@ -102,12 +102,18 @@ namespace DialogueEditor.src
             return container;
         }
 
-        public void acceptInfoFromFile(List<DialoguePath> dialogues)
+        public void acceptInfoFromFile(DialogueData dialogueData)
         {
             clearNodes();
-            this.dialogues = dialogues;
-            this.dialogues.ForEach(d => d.inflate());
-            populateNodes(this.dialogues);
+            this.dialogueData = dialogueData;
+            this.dialogueData.dialogues.ForEach(d => d.inflate());
+            populateNodes(this.dialogueData.dialogues);
+        }
+
+        public void clear()
+        {
+            clearNodes();
+            Managers.Node.dialogueData = new DialogueData();
         }
 
         /// <summary>
