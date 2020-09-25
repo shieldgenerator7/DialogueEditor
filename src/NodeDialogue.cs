@@ -64,7 +64,7 @@ namespace DialogueEditor.src
             }
             //Normal procedure
             sentText = sentText.Trim();
-            this.TitleText = sentText;
+            path.title = sentText;
         }
     }
 }
