@@ -91,9 +91,11 @@ namespace DialogueEditor.src
             this.Controls.Add(pictureBox);
             pictureBox.BackColor = System.Drawing.Color.LightGray;
             pictureBox.Location = new System.Drawing.Point(0,0);
+            pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox.BackgroundImageLayout = ImageLayout.Stretch;
             pictureBox.BackgroundImage = DialogueEditor.Properties.Resources.defaultQuoteImage;
             pictureBox.Size = new System.Drawing.Size(SIZE_PICTURE, SIZE_PICTURE);
+            pictureBox.DoubleClick += selectPicture;
 
             // TextBox properties
             textBox = new RichTextBox();
@@ -142,6 +144,19 @@ namespace DialogueEditor.src
                 sentText = sentText.Substring(1).Trim();
             }
             this.QuoteText = sentText;
+        }
+
+        private void selectPicture(object sender, EventArgs e)
+        {
+            //Open file dialog
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "PNG Files (*.png)|*.png|All files (*.*)|*.*";
+            ofd.Title = "Choose picture";
+            DialogResult dr = ofd.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+                pictureBox.Image = Image.FromFile(ofd.FileName);
+            }
         }
 
         public static implicit operator bool(NodeQuote node)
