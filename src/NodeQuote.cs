@@ -17,6 +17,7 @@ namespace DialogueEditor.src
 
         private RichTextBox textBox;
         private PictureBox pictureBox;
+        private static OpenFileDialog ofdPicture;
 
         public string QuoteText
         {
@@ -63,7 +64,7 @@ namespace DialogueEditor.src
                     textBox.BorderStyle = BorderStyle.Fixed3D;
                     //
                     textBox.Focus();
-                    textBox.SelectionStart = Text.Length;
+                    textBox.SelectionStart = textBox.Text.Length;
                     textBox.SelectionLength = 0;
                 }
                 else
@@ -80,6 +81,13 @@ namespace DialogueEditor.src
         {
             this.quote = quote;
 
+            if (ofdPicture == null)
+            {
+                ofdPicture = new OpenFileDialog();
+                ofdPicture.Filter = "PNG Files (*.png)|*.png|All files (*.*)|*.*";
+                ofdPicture.Title = "Choose picture";
+            }
+
             // Panel (self) properties
             AutoSize = true;
             AutoScroll = false;
@@ -89,6 +97,10 @@ namespace DialogueEditor.src
             // PictureBox properties
             pictureBox = new PictureBox();
             this.Controls.Add(pictureBox);
+            if (this.quote.imageFileName != null && this.quote.imageFileName.EndsWith(".png"))
+            {
+                pictureBox.Image = Image.FromFile(this.quote.imageFileName);
+            }
             pictureBox.BackColor = System.Drawing.Color.LightGray;
             pictureBox.Location = new System.Drawing.Point(0,0);
             pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
@@ -149,13 +161,11 @@ namespace DialogueEditor.src
         private void selectPicture(object sender, EventArgs e)
         {
             //Open file dialog
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "PNG Files (*.png)|*.png|All files (*.*)|*.*";
-            ofd.Title = "Choose picture";
-            DialogResult dr = ofd.ShowDialog();
+            DialogResult dr = ofdPicture.ShowDialog();
             if (dr == DialogResult.OK)
             {
-                pictureBox.Image = Image.FromFile(ofd.FileName);
+                pictureBox.Image = Image.FromFile(ofdPicture.FileName);
+                this.quote.imageFileName = ofdPicture.FileName;
             }
         }
 

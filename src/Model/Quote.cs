@@ -5,8 +5,9 @@ using System;
 public class Quote
 {
 
-    public string characterName;
-    public string text;
+    public string characterName = "";
+    public string text = "";
+    public string imageFileName = "";
 
     [NonSerialized]
     public DialoguePath path;
@@ -14,9 +15,10 @@ public class Quote
     [JsonIgnore]
     public int Index => path.quotes.IndexOf(this);
 
-    public Quote(string charName = "", string txt = "")
+    public Quote(string charName = "", string txt = "", string imageFileName = "")
     {
         this.characterName = charName;
         this.text = txt;
+        this.imageFileName = imageFileName;
     }
 }
