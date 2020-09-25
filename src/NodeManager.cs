@@ -46,7 +46,9 @@ namespace DialogueEditor.src
             }
             if (quote.Index >= 2)
             {
-                quote.characterName = quote.path.quotes[quote.Index - 2].characterName;
+                Quote prevQuote = quote.path.quotes[quote.Index - 2];
+                quote.characterName = prevQuote.characterName;
+                quote.imageFileName = prevQuote.imageFileName;
             }
             NodeQuote node = new NodeQuote(quote);
             container.Controls.Add(node);
