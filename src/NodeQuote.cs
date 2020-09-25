@@ -97,12 +97,9 @@ namespace DialogueEditor.src
             // PictureBox properties
             pictureBox = new PictureBox();
             this.Controls.Add(pictureBox);
-            if (this.quote.imageFileName != null && this.quote.imageFileName.EndsWith(".png"))
-            {
-                pictureBox.Image = Image.FromFile(this.quote.imageFileName);
-            }
+            refreshImage();
             pictureBox.BackColor = System.Drawing.Color.LightGray;
-            pictureBox.Location = new System.Drawing.Point(0,0);
+            pictureBox.Location = new System.Drawing.Point(0, 0);
             pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox.BackgroundImageLayout = ImageLayout.Stretch;
             pictureBox.BackgroundImage = DialogueEditor.Properties.Resources.defaultQuoteImage;
@@ -114,7 +111,7 @@ namespace DialogueEditor.src
             this.Controls.Add(textBox);
             textBox.AutoSize = true;
             textBox.Font = new Font("Calibri", 12);
-            textBox.Location = new System.Drawing.Point(SIZE_PICTURE+5, 0);
+            textBox.Location = new System.Drawing.Point(SIZE_PICTURE + 5, 0);
             textBox.MinimumSize = new Size(WIDTH_LABEL, SIZE_PICTURE);
             textBox.MaximumSize = new Size(WIDTH_LABEL, 0);
             textBox.Size = new Size(100, 96);
@@ -164,8 +161,20 @@ namespace DialogueEditor.src
             DialogResult dr = ofdPicture.ShowDialog();
             if (dr == DialogResult.OK)
             {
-                pictureBox.Image = Image.FromFile(ofdPicture.FileName);
                 this.quote.imageFileName = ofdPicture.FileName;
+                refreshImage();
+                Managers.Node.setDefaultImageFileName(
+                    quote.characterName,
+                    quote.imageFileName
+                    );
+            }
+        }
+
+        public void refreshImage()
+        {
+            if (this.quote.imageFileName != null && this.quote.imageFileName.EndsWith(".png"))
+            {
+                pictureBox.Image = Image.FromFile(this.quote.imageFileName);
             }
         }
 

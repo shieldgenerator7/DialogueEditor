@@ -141,5 +141,47 @@ namespace DialogueEditor.src
                 }
                 );
         }
+
+        public void setDefaultImageFileName(string character, string imageFileName)
+        {
+            if (imageFileName == null || imageFileName == "")
+            {
+                return;
+            }
+            dialogueData.dialogues.ForEach(
+                d =>
+                {
+                    d.quotes.ForEach(
+                        q =>
+                        {
+                            if (q.characterName == character)
+                            {
+                                if (q.imageFileName == null || q.imageFileName == "")
+                                {
+                                    q.imageFileName = imageFileName;
+                                }
+                            }
+                        }
+                        );
+                }
+                );
+            refreshNodeImages();
+        }
+
+        public void refreshNodeImages()
+        {
+            containers.ForEach(
+                container =>
+                {
+                    foreach (Control c in container.Controls)
+                    {
+                        if (c is NodeQuote)
+                        {
+                            ((NodeQuote)c).refreshImage();
+                        }
+                    }
+                }
+                );
+        }
     }
 }
