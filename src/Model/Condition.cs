@@ -3,7 +3,7 @@ using System;
 using System.Runtime.CompilerServices;
 
 [Serializable]
-public class Condition
+public class Condition : DialogueComponent
 {
     public string variableName = "var1";
     public TestType testType = TestType.EQUAL;
@@ -50,8 +50,6 @@ public class Condition
         }
     }
 
-    [NonSerialized]
-    public DialoguePath path;
 
     public Condition(string variableName = "var1", TestType testType = TestType.EQUAL, int testValue = 0)
     {

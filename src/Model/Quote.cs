@@ -2,7 +2,7 @@
 using System;
 
 [Serializable]
-public class Quote
+public class Quote : DialogueComponent
 {
 
     public string characterName = "";
@@ -12,9 +12,6 @@ public class Quote
     /// </summary>
     public string imageName = "";
     public string imageFileName = "";
-
-    [NonSerialized]
-    public DialoguePath path;
 
     [JsonIgnore]
     public int Index => path.quotes.IndexOf(this);

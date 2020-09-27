@@ -3,7 +3,7 @@ using System;
 using System.Runtime.CompilerServices;
 
 [Serializable]
-public class Action
+public class Action : DialogueComponent
 {
     public string variableName = "var1";
     public ActionType actionType = ActionType.ADD;
@@ -47,8 +47,6 @@ public class Action
         }
     }
 
-    [NonSerialized]
-    public DialoguePath path;
 
     public Action(string variableName = "var1", ActionType actionType = ActionType.ADD, int actionValue = 1)
     {
