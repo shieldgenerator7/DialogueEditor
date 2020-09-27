@@ -10,6 +10,7 @@ public class DialoguePath
     public string title = "Dialogue Title";
     public List<Condition> conditions = new List<Condition>();
     public List<Quote> quotes = new List<Quote>();
+    public List<Action> actions = new List<Action>();
 
     /// <summary>
     /// Restores temp variables after being read in
@@ -21,6 +22,9 @@ public class DialoguePath
             );
         quotes.ForEach(
             q => q.path = this
+            );
+        actions.ForEach(
+            a => a.path = this
             );
     }
 
