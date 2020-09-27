@@ -34,4 +34,20 @@ public class DialoguePath
     [JsonIgnore]
     public List<string> Characters
         => quotes.Select(q => q.characterName).Distinct().ToList();
+
+    public void remove(DialogueComponent dc)
+    {
+        if (dc is Condition)
+        {
+            conditions.Remove((Condition)dc);
+        }
+        else if (dc is Quote)
+        {
+            quotes.Remove((Quote)dc);
+        }
+        else if (dc is Action)
+        {
+            actions.Remove((Action)dc);
+        }
+    }
 }

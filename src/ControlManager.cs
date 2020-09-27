@@ -21,13 +21,26 @@ public class ControlManager
             {
                 return null;
             }
-            while (!(activeControl is NodeQuote)
+            while (!(activeControl is Node)
                 && !(activeControl is NodeDialogue)
                 && activeControl.Parent != null)
             {
                 activeControl = activeControl.Parent;
             }
             return activeControl;
+        }
+    }
+
+    public Node ActiveNode
+    {
+        get
+        {
+            Control activeControl = ActiveControl;
+            if (activeControl is Node)
+            {
+                return (Node)activeControl;
+            }
+            return null;
         }
     }
 
@@ -39,32 +52,6 @@ public class ControlManager
             if (activeControl is NodeQuote)
             {
                 return (NodeQuote)activeControl;
-            }
-            return null;
-        }
-    }
-
-    public NodeCondition ActiveNodeCondition
-    {
-        get
-        {
-            Control activeControl = ActiveControl;
-            if (activeControl is NodeCondition)
-            {
-                return (NodeCondition)activeControl;
-            }
-            return null;
-        }
-    }
-
-    public NodeAction ActiveNodeAction
-    {
-        get
-        {
-            Control activeControl = ActiveControl;
-            if (activeControl is NodeAction)
-            {
-                return (NodeAction)activeControl;
             }
             return null;
         }
@@ -104,12 +91,15 @@ public class ControlManager
                 NodeQuote node = Managers.Node.createNodeQuote(container.path);
                 node.Editing = true;
             }
-            NodeQuote activeNode = ActiveNodeQuote;
+            Node activeNode = ActiveNode;
             if (activeNode != null)
             {
+                int index = (activeNode is NodeQuote)
+                    ? ((NodeQuote)activeNode).quote.Index
+                    : -1;
                 NodeQuote node = Managers.Node.createNodeQuote(
-                    activeNode.quote.path,
-                    activeNode.quote.Index
+                    activeNode.data.path,
+                    index
                     );
                 node.Editing = true;
             }
@@ -131,11 +121,11 @@ public class ControlManager
             {
                 NodeCondition node = Managers.Node.createNodeCondition(container.path);
             }
-            NodeCondition activeNode = ActiveNodeCondition;
+            Node activeNode = ActiveNode;
             if (activeNode != null)
             {
-                NodeCondition node = Managers.Node.createNodeCondition(
-                    activeNode.condition.path
+                Node node = Managers.Node.createNodeCondition(
+                    activeNode.data.path
                     );
             }
         }
@@ -157,11 +147,11 @@ public class ControlManager
             {
                 NodeAction node = Managers.Node.createNodeAction(container.path);
             }
-            NodeAction activeNode = ActiveNodeAction;
+            Node activeNode = ActiveNode;
             if (activeNode != null)
             {
                 NodeAction node = Managers.Node.createNodeAction(
-                    activeNode.action.path
+                    activeNode.data.path
                     );
             }
         }
@@ -205,12 +195,21 @@ public class ControlManager
     /// <returns>true if deleted, false if not deleted</returns>
     public bool deletePressed()
     {
-        NodeQuote activeNode = ActiveNodeQuote;
+        Node activeNode = ActiveNode;
         if (activeNode != null)
         {
-            if (!activeNode.Editing)
+            bool canDelete = true;
+            if (activeNode is NodeQuote)
             {
-                activeNode.quote.path.quotes.Remove(activeNode.quote);
+                //if the user is editing the node,
+                if (((NodeQuote)activeNode).Editing){
+                    //don't delete it
+                    canDelete = false;
+                }
+            }
+            if (canDelete)
+            {
+                activeNode.data.path.remove(activeNode.data);
                 activeNode.Dispose();
                 return true;
             }

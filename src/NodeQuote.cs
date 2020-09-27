@@ -178,9 +178,6 @@ namespace DialogueEditor.src
             }
         }
 
-        public static implicit operator bool(NodeQuote node)
-            => node != null;
-
         public int CompareTo(NodeQuote gos)
             => this.quote.Index - gos.quote.Index;
 

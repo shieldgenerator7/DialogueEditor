@@ -82,7 +82,5 @@ namespace DialogueEditor.src
             this.condition.variableName = sentText;
         }
 
-        public static implicit operator bool(NodeCondition node)
-            => node != null;
     }
 }

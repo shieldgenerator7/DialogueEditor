@@ -15,5 +15,8 @@ namespace DialogueEditor.src
         {
             this.data = component;
         }
+
+        public static implicit operator bool(Node node)
+            => node != null;
     }
 }

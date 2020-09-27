@@ -62,7 +62,7 @@ public class DisplayManager
         //    );
     }
 
-    public void displayRectangles(Graphics graphics, NodeQuote selected, NodeQuote mousedOver, Vector mousePos, bool mouseDown)
+    public void displayRectangles(Graphics graphics, Node selected, Node mousedOver, Vector mousePos, bool mouseDown)
     {
         if (selected)
         {
@@ -73,27 +73,12 @@ public class DisplayManager
             drawRectangle(graphics, overPen, mousedOver);
         }
     }
-    private void drawRectangle(Graphics graphics, Pen pen, NodeQuote node)
+    private void drawRectangle(Graphics graphics, Pen pen, Node node)
     {
         //graphics.DrawRectangle(
         //    pen,
         //    convertToScreen(node.getRect())
         //    );
-    }
-
-    public void displayDescription(Graphics graphics, NodeQuote mousedOver, Vector mousePos)
-    {
-        mousePos = convertToScreen(mousePos);
-        //Object Description
-        if (mousedOver)
-        {
-            graphics.DrawString(mousedOver.quote.text,
-                font,
-                new SolidBrush(Color.Black),
-                mousePos.x - 5,
-                mousePos.y - 25
-                );
-        }
     }
 
     public Vector convertToScreen(Vector vWorld)
