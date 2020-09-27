@@ -19,7 +19,7 @@ public class Action
     }
 
     [JsonIgnore]
-    public string TestTypeString
+    public string ActionTypeString
     {
         get
         {

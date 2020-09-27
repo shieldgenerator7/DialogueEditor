@@ -64,7 +64,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1309, 40);
+            this.menuStrip1.Size = new System.Drawing.Size(1309, 42);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -168,11 +168,11 @@
             // 
             // actionToolStripMenuItem
             // 
-            this.actionToolStripMenuItem.Enabled = false;
             this.actionToolStripMenuItem.Name = "actionToolStripMenuItem";
             this.actionToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D3)));
             this.actionToolStripMenuItem.Size = new System.Drawing.Size(449, 44);
             this.actionToolStripMenuItem.Text = "&Action";
+            this.actionToolStripMenuItem.Click += new System.EventHandler(this.actionToolStripMenuItem_Click);
             // 
             // selectAllToolStripMenuItem
             // 
@@ -262,9 +262,9 @@
             this.pnlDialogue.AutoSize = true;
             this.pnlDialogue.BackColor = System.Drawing.Color.DarkGray;
             this.pnlDialogue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlDialogue.Location = new System.Drawing.Point(0, 40);
+            this.pnlDialogue.Location = new System.Drawing.Point(0, 42);
             this.pnlDialogue.Name = "pnlDialogue";
-            this.pnlDialogue.Size = new System.Drawing.Size(1309, 865);
+            this.pnlDialogue.Size = new System.Drawing.Size(1309, 863);
             this.pnlDialogue.TabIndex = 2;
             this.pnlDialogue.WrapContents = false;
             // 

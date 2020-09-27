@@ -57,6 +57,19 @@ public class ControlManager
         }
     }
 
+    public NodeAction ActiveNodeAction
+    {
+        get
+        {
+            Control activeControl = ActiveControl;
+            if (activeControl is NodeAction)
+            {
+                return (NodeAction)activeControl;
+            }
+            return null;
+        }
+    }
+
     public NodeDialogue ActivePanel
     {
         get
@@ -123,6 +136,32 @@ public class ControlManager
             {
                 NodeCondition node = Managers.Node.createNodeCondition(
                     activeNode.condition.path
+                    );
+            }
+        }
+        else
+        {
+            DialoguePath path = createDialoguePath();
+            Managers.Node.createNodeCondition(path);
+        }
+    }
+
+    public void createAction()
+    {
+        Control activeControl = ActiveControl;
+        //Create a new quote
+        if (activeControl != null)
+        {
+            NodeDialogue container = ActivePanel;
+            if (container != null)
+            {
+                NodeAction node = Managers.Node.createNodeAction(container.path);
+            }
+            NodeAction activeNode = ActiveNodeAction;
+            if (activeNode != null)
+            {
+                NodeAction node = Managers.Node.createNodeAction(
+                    activeNode.action.path
                     );
             }
         }

@@ -112,6 +112,27 @@ namespace DialogueEditor.src
             return node;
         }
 
+        public NodeAction createNodeAction(DialoguePath path = null, Action action = null)
+        {
+            //If no path,
+            if (path == null)
+            {
+                //create a path
+                path = createContainerNode().path;
+            }
+            NodeDialogue container = containers.First(cn => cn.path == path);
+            //Add a node to the path
+            if (action == null)
+            {
+                action = new Action();
+                action.path = path;
+                path.actions.Add(action);
+            }
+            NodeAction node = new NodeAction(action);
+            container.Controls.Add(node);
+            return node;
+        }
+
         public NodeDialogue createContainerNode(DialoguePath path = null)
         {
             if (path == null)
@@ -163,6 +184,9 @@ namespace DialogueEditor.src
                         );
                     d.quotes.ForEach(
                         q => createNodeQuote(d, q)
+                        );
+                    d.actions.ForEach(
+                        a => createNodeAction(d, a)
                         );
                 }
                 );

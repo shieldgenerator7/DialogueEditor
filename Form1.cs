@@ -129,5 +129,11 @@ namespace DialogueEditor
             Managers.Control.createCondition();
             refresh();
         }
+
+        private void actionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Managers.Control.createAction();
+            refresh();
+        }
     }
 }
