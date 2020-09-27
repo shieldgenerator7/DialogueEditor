@@ -210,8 +210,8 @@ public class ControlManager
         {
             if (!activeNode.Editing)
             {
+                activeNode.quote.path.quotes.Remove(activeNode.quote);
                 activeNode.Dispose();
-                activeNode.Parent.Controls.Remove(activeNode);
                 return true;
             }
         }
@@ -226,8 +226,8 @@ public class ControlManager
                 );
             if (dr == DialogResult.OK)
             {
+                Managers.Node.dialogueData.dialogues.Remove(activePanel.path);
                 Managers.Node.containers.Remove(activePanel);
-                activePanel.Parent.Controls.Remove(activePanel);
                 activePanel.Dispose();
                 return true;
             }
