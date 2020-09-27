@@ -119,21 +119,33 @@ namespace DialogueEditor
             //
             ofd.FileName = filename;
             //2020-09-22: copied from https://stackoverflow.com/a/13297964/2336212
-            using (StreamReader r = new StreamReader(ofd.OpenFile()))
+            try
             {
-                string json = r.ReadToEnd();
-                try
+                using (StreamReader r = new StreamReader(ofd.OpenFile()))
                 {
-                    //Open file from version 0.0.3 onward
-                    DialogueData dialogueData = JsonConvert.DeserializeObject<DialogueData>(json);
-                    Managers.Node.acceptInfoFromFile(dialogueData);
+                    string json = r.ReadToEnd();
+                    try
+                    {
+                        //Open file from version 0.0.3 onward
+                        DialogueData dialogueData = JsonConvert.DeserializeObject<DialogueData>(json);
+                        Managers.Node.acceptInfoFromFile(dialogueData);
+                    }
+                    catch (JsonSerializationException jse)
+                    {
+                        //Open file from version 0.0.2
+                        List<DialoguePath> dialogues = JsonConvert.DeserializeObject<List<DialoguePath>>(json);
+                        Managers.Node.acceptInfoFromFile(new DialogueData(dialogues));
+                    }
                 }
-                catch (JsonSerializationException jse)
-                {
-                    //Open file from version 0.0.2
-                    List<DialoguePath> dialogues = JsonConvert.DeserializeObject<List<DialoguePath>>(json);
-                    Managers.Node.acceptInfoFromFile(new DialogueData(dialogues));
-                }
+            }
+            catch(FileNotFoundException fnfe)
+            {
+                //don't do anything,
+                //except unset the default file name
+                defaultFileName = null;
+                //(tho it's possible you may want to keep it instead,
+                //im not sure which is more user-friendly)
+                return false;
             }
             return true;
         }
