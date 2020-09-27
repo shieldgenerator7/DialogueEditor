@@ -42,6 +42,7 @@ namespace DialogueEditor.src
             BackColor = Managers.Colors.platformColor;
             BorderStyle = BorderStyle.FixedSingle;
             WrapContents = false;
+            Click += (sender, e) => Managers.Control.select(this);
             //Title Box
             titleBox = new TextBox();
             titleBox.Size = new Size(200, 24);
@@ -53,6 +54,7 @@ namespace DialogueEditor.src
             Controls.Add(this.titleBox);
             TitleText = TitleText;
             titleBox.TextChanged += acceptText;
+            titleBox.Click += (sender, e) => Managers.Control.select(this);
         }
 
         protected virtual void acceptText(object sender, EventArgs e)

@@ -38,6 +38,7 @@ namespace DialogueEditor.src
             cmbVarName.Text = action.variableName;
             cmbVarName.TextChanged += acceptVariableName;
             cmbVarName.GotFocus += (sender, e) => cmbVarName.DataSource = Managers.Node.dialogueData.Variables;
+            cmbVarName.Click += (sender, e) => Managers.Control.select(this);
             // ComboBox properties
             comboBox = new ComboBox();
             this.Controls.Add(comboBox);
@@ -56,6 +57,7 @@ namespace DialogueEditor.src
             {
                 action.ActionTypeString = (string)comboBox.SelectedItem;
             };
+            comboBox.Click += (sender, e) => Managers.Control.select(this);
             // NumberBox properties
             numberBox = new NumericUpDown();
             this.Controls.Add(numberBox);
@@ -66,6 +68,7 @@ namespace DialogueEditor.src
             {
                 action.actionValue = (int)numberBox.Value;
             };
+            numberBox.Click += (sender, e) => Managers.Control.select(this);
         }
 
         protected void acceptVariableName(object sender, EventArgs e)

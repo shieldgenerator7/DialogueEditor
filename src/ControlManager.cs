@@ -3,72 +3,61 @@ using DialogueEditor.src;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 public class ControlManager
 {
-
+    private List<Control> selectedNodes = new List<Control>();
     public ControlManager()
     {
     }
 
-    public Control ActiveControl
+    /// <summary>
+    /// Selects the given NodeDialogue or Node subtype.
+    /// Appends if the SHIFT key is held down.
+    /// </summary>
+    /// <param name="control"></param>
+    public void select(Control control)
     {
-        get
+        //2020-09-27: copied from https://stackoverflow.com/a/973733/2336212
+        select(control, Control.ModifierKeys == Keys.Shift);
+    }
+
+    /// <summary>
+    /// Selects the given NodeDialogue or Node subtype
+    /// </summary>
+    /// <param name="control"></param>
+    /// <param name="append">true to add to list, false to overwrite it</param>
+    public void select(Control control, bool append)
+    {
+        if (control is NodeDialogue || control is Node)
         {
-            Control activeControl = Managers.Form.ActiveControl;
-            if (activeControl == null)
+            if (!append)
             {
-                return null;
+                selectedNodes.Clear();
             }
-            while (!(activeControl is Node)
-                && !(activeControl is NodeDialogue)
-                && activeControl.Parent != null)
+            if (!selectedNodes.Contains(control))
             {
-                activeControl = activeControl.Parent;
+                selectedNodes.Add(control);
             }
-            return activeControl;
         }
     }
 
-    public Node ActiveNode
+    public void deselect(Control control)
     {
-        get
-        {
-            Control activeControl = ActiveControl;
-            if (activeControl is Node)
-            {
-                return (Node)activeControl;
-            }
-            return null;
-        }
+        selectedNodes.Remove(control);
     }
 
-    public NodeQuote ActiveNodeQuote
-    {
-        get
-        {
-            Control activeControl = ActiveControl;
-            if (activeControl is NodeQuote)
-            {
-                return (NodeQuote)activeControl;
-            }
-            return null;
-        }
-    }
+    public List<Control> SelectedNodes => selectedNodes;
 
-    public NodeDialogue ActivePanel
-    {
-        get
-        {
-            Control activeControl = ActiveControl;
-            if (activeControl is NodeDialogue)
-            {
-                return (NodeDialogue)activeControl;
-            }
-            return null;
-        }
-    }
+    public Control ActiveControl => selectedNodes.FirstOrDefault();
+
+    public Node ActiveNode => (Node)selectedNodes.FirstOrDefault(c => c is Node);
+
+    public NodeQuote ActiveNodeQuote => (NodeQuote)selectedNodes.FirstOrDefault(c => c is NodeQuote);
+
+    public NodeDialogue ActivePanel => (NodeDialogue)selectedNodes.FirstOrDefault(c => c is NodeDialogue);
 
     public DialoguePath createDialoguePath()
     {

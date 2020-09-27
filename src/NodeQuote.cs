@@ -106,6 +106,7 @@ namespace DialogueEditor.src
             pictureBox.BackgroundImage = DialogueEditor.Properties.Resources.defaultQuoteImage;
             pictureBox.Size = new System.Drawing.Size(SIZE_PICTURE, SIZE_PICTURE);
             pictureBox.DoubleClick += selectPicture;
+            pictureBox.Click += (sender, e) => Managers.Control.select(this);
 
             // TextBox properties
             textBox = new RichTextBox();
@@ -122,6 +123,7 @@ namespace DialogueEditor.src
             textBox.ContentsResized += rtb_ContentsResized;
             textBox.TextChanged += acceptText;
             textBox.DoubleClick += (sender, e) => Editing = !Editing;
+            textBox.Click += (sender, e) => Managers.Control.select(this);
             //
             Editing = false;
         }
