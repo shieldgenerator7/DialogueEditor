@@ -103,9 +103,9 @@ namespace DialogueEditor.src
             //Add a node to the path
             if (condition == null)
             {
-                condition = new Condition();
+                condition = new Condition(dialogueData.Variables[0]);
                 condition.path = path;
-                    path.conditions.Add(condition);
+                path.conditions.Add(condition);
             }
             NodeCondition node = new NodeCondition(condition);
             container.Controls.Add(node);
@@ -124,7 +124,7 @@ namespace DialogueEditor.src
             //Add a node to the path
             if (action == null)
             {
-                action = new Action();
+                action = new Action(dialogueData.Variables[0]);
                 action.path = path;
                 path.actions.Add(action);
             }

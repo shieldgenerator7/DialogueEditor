@@ -36,6 +36,20 @@ public class DialoguePath
         => quotes.Select(q => q.characterName).Distinct().ToList();
 
     /// <summary>
+    /// Returns a list of the variables checked or modified in this dialogue path
+    /// </summary>
+    [JsonIgnore]
+    public List<string> Variables
+    {
+        get
+        {
+            List<string> vars = conditions.Select(c => c.variableName).ToList();
+            vars.AddRange(actions.Select(a => a.variableName).ToList());
+            return vars.Distinct().ToList();
+        }
+    }
+
+    /// <summary>
     /// Returns true if all the required characters are in this dialogue path.
     /// Allows for extra characters not mentioned
     /// </summary>
