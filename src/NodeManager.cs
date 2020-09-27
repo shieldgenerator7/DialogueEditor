@@ -158,6 +158,9 @@ namespace DialogueEditor.src
                 d =>
                 {
                     createContainerNode(d);
+                    d.conditions.ForEach(
+                        c => createNodeCondition(d, c)
+                        );
                     d.quotes.ForEach(
                         q => createNodeQuote(d, q)
                         );

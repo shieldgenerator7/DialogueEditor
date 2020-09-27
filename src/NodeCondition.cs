@@ -52,18 +52,20 @@ namespace DialogueEditor.src
                 "<="
             });
             comboBox.SelectedItem = condition.TestTypeString;
+            comboBox.SelectedIndexChanged += (sender, e) =>
+            {
+                condition.TestTypeString = (string)comboBox.SelectedItem;
+            };
             // NumberBox properties
             numberBox = new NumericUpDown();
             this.Controls.Add(numberBox);
             numberBox.Font = new Font("Calibri", 12);
             numberBox.MaximumSize = new Size(43, 0);
             numberBox.Value = condition.testValue;
-        }
-
-        //2020-09-21: copied from https://stackoverflow.com/a/16607756/2336212
-        private void rtb_ContentsResized(object sender, ContentsResizedEventArgs e)
-        {
-            ((RichTextBox)sender).Height = e.NewRectangle.Height + 5;
+            numberBox.ValueChanged += (sender, e) =>
+            {
+                condition.testValue = (int)numberBox.Value;
+            };
         }
 
         protected void acceptVariableName(object sender, EventArgs e)
