@@ -8,6 +8,7 @@ using System.Linq;
 public class DialoguePath
 {
     public string title = "Dialogue Title";
+    public List<Condition> conditions = new List<Condition>();
     public List<Quote> quotes = new List<Quote>();
 
     /// <summary>
@@ -15,6 +16,9 @@ public class DialoguePath
     /// </summary>
     public void inflate()
     {
+        conditions.ForEach(
+            c => c.path = this
+            );
         quotes.ForEach(
             q => q.path = this
             );
