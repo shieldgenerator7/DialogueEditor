@@ -81,85 +81,73 @@ public class ControlManager
 
     public void createQuote()
     {
-        Control activeControl = ActiveControl;
         //Create a new quote
-        if (activeControl != null)
+        NodeDialogue container = ActivePanel;
+        if (container != null)
         {
-            NodeDialogue container = ActivePanel;
-            if (container != null)
-            {
-                NodeQuote node = Managers.Node.createNodeQuote(container.path);
-                node.Editing = true;
-            }
-            Node activeNode = ActiveNode;
-            if (activeNode != null)
-            {
-                int index = (activeNode is NodeQuote)
-                    ? ((NodeQuote)activeNode).quote.Index
-                    : -1;
-                NodeQuote node = Managers.Node.createNodeQuote(
-                    activeNode.data.path,
-                    index
-                    );
-                node.Editing = true;
-            }
+            NodeQuote node = Managers.Node.createNodeQuote(container.path);
+            node.Editing = true;
+            return;
         }
-        else
+        Node activeNode = ActiveNode;
+        if (activeNode != null)
         {
-            createDialoguePath();
+            int index = (activeNode is NodeQuote)
+                ? ((NodeQuote)activeNode).quote.Index
+                : -1;
+            NodeQuote node = Managers.Node.createNodeQuote(
+                activeNode.data.path,
+                index
+                );
+            node.Editing = true;
+            return;
         }
+        //Else
+        createDialoguePath();
     }
 
     public void createCondition()
     {
-        Control activeControl = ActiveControl;
-        //Create a new quote
-        if (activeControl != null)
+        //Create a new condition
+        NodeDialogue container = ActivePanel;
+        if (container != null)
         {
-            NodeDialogue container = ActivePanel;
-            if (container != null)
-            {
-                NodeCondition node = Managers.Node.createNodeCondition(container.path);
-            }
-            Node activeNode = ActiveNode;
-            if (activeNode != null)
-            {
-                Node node = Managers.Node.createNodeCondition(
-                    activeNode.data.path
-                    );
-            }
+            NodeCondition node = Managers.Node.createNodeCondition(container.path);
+            return;
         }
-        else
+        Node activeNode = ActiveNode;
+        if (activeNode != null)
         {
-            DialoguePath path = createDialoguePath();
-            Managers.Node.createNodeCondition(path);
+            Node node = Managers.Node.createNodeCondition(
+                activeNode.data.path
+                );
+            return;
         }
+        //Else
+        DialoguePath path = createDialoguePath();
+        Managers.Node.createNodeCondition(path);
     }
 
     public void createAction()
     {
-        Control activeControl = ActiveControl;
-        //Create a new quote
-        if (activeControl != null)
+        //Create a new action
+        NodeDialogue container = ActivePanel;
+        if (container != null)
         {
-            NodeDialogue container = ActivePanel;
-            if (container != null)
-            {
-                NodeAction node = Managers.Node.createNodeAction(container.path);
-            }
-            Node activeNode = ActiveNode;
-            if (activeNode != null)
-            {
-                NodeAction node = Managers.Node.createNodeAction(
-                    activeNode.data.path
-                    );
-            }
+            NodeAction node = Managers.Node.createNodeAction(container.path);
+            return;
         }
-        else
+        Node activeNode = ActiveNode;
+        if (activeNode != null)
         {
-            DialoguePath path = createDialoguePath();
-            Managers.Node.createNodeCondition(path);
+            NodeAction node = Managers.Node.createNodeAction(
+                activeNode.data.path
+                );
+            return;
         }
+        //Else
+        DialoguePath path = createDialoguePath();
+        Managers.Node.createNodeAction(path);
     }
 
     public void enterPressed()
@@ -202,7 +190,8 @@ public class ControlManager
             if (activeNode is NodeQuote)
             {
                 //if the user is editing the node,
-                if (((NodeQuote)activeNode).Editing){
+                if (((NodeQuote)activeNode).Editing)
+                {
                     //don't delete it
                     canDelete = false;
                 }
