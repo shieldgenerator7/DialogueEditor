@@ -10,7 +10,24 @@ public class Quote : DialogueComponent
     /// <summary>
     /// The image filename without the folder path and without the file extension
     /// </summary>
-    public string imageName = "";
+    public string imageName
+    {
+        get
+        {
+            //set image name
+            string[] split = imageFileName.Split(new char[] { '\\', '/' });
+            string name = split[split.Length - 1];
+            int lastDotIndex = name.LastIndexOf('.');
+            if (lastDotIndex >= 0)
+            {
+                return name.Substring(0, lastDotIndex);
+            }
+            else
+            {
+                return name;
+            }
+        }
+    }
     public string imageFileName = "";
 
     [JsonIgnore]
@@ -21,17 +38,5 @@ public class Quote : DialogueComponent
         this.characterName = charName;
         this.text = txt;
         this.imageFileName = imageFileName;
-        //set image name
-        string[] split = imageFileName.Split(new char[] { '\\', '/' });
-        string name = split[split.Length - 1];
-        int lastDotIndex = name.LastIndexOf('.');
-        if (lastDotIndex >= 0)
-        {
-            this.imageName = name.Substring(0, lastDotIndex);
-        }
-        else
-        {
-            this.imageName = name;
-        }
     }
 }

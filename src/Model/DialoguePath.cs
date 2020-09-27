@@ -35,6 +35,28 @@ public class DialoguePath
     public List<string> Characters
         => quotes.Select(q => q.characterName).Distinct().ToList();
 
+    /// <summary>
+    /// Returns true if all the required characters are in this dialogue path.
+    /// Allows for extra characters not mentioned
+    /// </summary>
+    /// <param name="requiredCharacters"></param>
+    /// <returns></returns>
+    public bool allCharactersPresent(List<string> requiredCharacters)
+    {
+        List<string> chars = Characters;
+        foreach (string chr in requiredCharacters)
+        {
+            //If one required character is not in this dialogue path,
+            if (!chars.Contains(chr))
+            {
+                //Then not all are present
+                return false;
+            }
+        }
+        //All characters present
+        return true;
+    }
+
     public void remove(DialogueComponent dc)
     {
         if (dc is Condition)
