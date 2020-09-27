@@ -35,10 +35,12 @@ public class ControlManager
         {
             if (!append)
             {
+                selectedNodes.ForEach(c => c.BackColor = Managers.Colors.unselectColor);
                 selectedNodes.Clear();
             }
             if (!selectedNodes.Contains(control))
             {
+                control.BackColor = Managers.Colors.selectColor;
                 selectedNodes.Add(control);
             }
         }
@@ -46,10 +48,14 @@ public class ControlManager
 
     public void deselect(Control control)
     {
+        control.BackColor = Managers.Colors.unselectColor;
         selectedNodes.Remove(control);
     }
 
-    public List<Control> SelectedNodes => selectedNodes;
+    public void processSelectedNodes(Action<Control> action)
+    {
+        selectedNodes.ForEach(c => action(c));
+    }
 
     public Control ActiveControl => selectedNodes.FirstOrDefault();
 

@@ -35,7 +35,7 @@ namespace DialogueEditor
                     Managers.File.newFile();
                 }
             }
-            catch(UnauthorizedAccessException uae)
+            catch (UnauthorizedAccessException uae)
             {
                 Managers.File.newFile();
             }

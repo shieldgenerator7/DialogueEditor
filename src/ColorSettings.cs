@@ -16,5 +16,8 @@ namespace DialogueEditor.src
         public Color labelForeColor = Color.FromArgb(240, 240, 200);
         public Color textBackColor = Color.FromArgb(240, 240, 200);
         public Color textForeColor = Color.FromArgb(53, 70, 127);
+        //
+        public Color selectColor = Color.FromArgb(131, 239, 76);
+        public Color unselectColor => platformColor;
     }
 }
