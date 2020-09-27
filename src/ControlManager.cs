@@ -31,7 +31,7 @@ public class ControlManager
         }
     }
 
-    public NodeQuote ActiveNode
+    public NodeQuote ActiveNodeQuote
     {
         get
         {
@@ -39,6 +39,19 @@ public class ControlManager
             if (activeControl is NodeQuote)
             {
                 return (NodeQuote)activeControl;
+            }
+            return null;
+        }
+    }
+
+    public NodeCondition ActiveNodeCondition
+    {
+        get
+        {
+            Control activeControl = ActiveControl;
+            if (activeControl is NodeCondition)
+            {
+                return (NodeCondition)activeControl;
             }
             return null;
         }
@@ -57,12 +70,13 @@ public class ControlManager
         }
     }
 
-    public void createDialoguePath()
+    public DialoguePath createDialoguePath()
     {
         //Create a new quote with no path,
         //which will auto-create a new path with a new quote
-        NodeQuote node = Managers.Node.createNode();
+        NodeQuote node = Managers.Node.createNodeQuote();
         node.Editing = true;
+        return node.quote.path;
     }
 
     public void createQuote()
@@ -74,13 +88,13 @@ public class ControlManager
             NodeDialogue container = ActivePanel;
             if (container != null)
             {
-                NodeQuote node = Managers.Node.createNode(container.path);
+                NodeQuote node = Managers.Node.createNodeQuote(container.path);
                 node.Editing = true;
             }
-            NodeQuote activeNode = ActiveNode;
+            NodeQuote activeNode = ActiveNodeQuote;
             if (activeNode != null)
             {
-                NodeQuote node = Managers.Node.createNode(
+                NodeQuote node = Managers.Node.createNodeQuote(
                     activeNode.quote.path,
                     activeNode.quote.Index
                     );
@@ -93,9 +107,35 @@ public class ControlManager
         }
     }
 
+    public void createCondition()
+    {
+        Control activeControl = ActiveControl;
+        //Create a new quote
+        if (activeControl != null)
+        {
+            NodeDialogue container = ActivePanel;
+            if (container != null)
+            {
+                NodeCondition node = Managers.Node.createNodeCondition(container.path);
+            }
+            NodeCondition activeNode = ActiveNodeCondition;
+            if (activeNode != null)
+            {
+                NodeCondition node = Managers.Node.createNodeCondition(
+                    activeNode.condition.path
+                    );
+            }
+        }
+        else
+        {
+            DialoguePath path = createDialoguePath();
+            Managers.Node.createNodeCondition(path);
+        }
+    }
+
     public void enterPressed()
     {
-        NodeQuote activeNode = ActiveNode;
+        NodeQuote activeNode = ActiveNodeQuote;
         if (activeNode != null)
         {
             activeNode.Editing = false;
@@ -104,7 +144,7 @@ public class ControlManager
             if (activeNode.quote.Index == path.quotes.Count - 1)
             {
                 //Add new node at the end
-                NodeQuote newNode = Managers.Node.createNode(activeNode.quote.path);
+                NodeQuote newNode = Managers.Node.createNodeQuote(activeNode.quote.path);
                 newNode.Editing = true;
             }
         }
@@ -112,7 +152,7 @@ public class ControlManager
 
     public void escapePressed()
     {
-        NodeQuote activeNode = ActiveNode;
+        NodeQuote activeNode = ActiveNodeQuote;
         if (activeNode != null)
         {
             //Stop editing it
@@ -126,7 +166,7 @@ public class ControlManager
     /// <returns>true if deleted, false if not deleted</returns>
     public bool deletePressed()
     {
-        NodeQuote activeNode = ActiveNode;
+        NodeQuote activeNode = ActiveNodeQuote;
         if (activeNode != null)
         {
             if (!activeNode.Editing)
@@ -159,7 +199,7 @@ public class ControlManager
     public void receiveInfoDump(DialoguePath path, string[] textArray)
     {
         NodeQuote lastNode = Managers.Node.createNodes(path, textArray);
-        NodeQuote activeNode = ActiveNode;
+        NodeQuote activeNode = ActiveNodeQuote;
         if (activeNode != null)
         {
             activeNode.Editing = false;

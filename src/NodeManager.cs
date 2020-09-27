@@ -24,7 +24,7 @@ namespace DialogueEditor.src
         /// <param name="path"></param>
         /// <param name="index"></param>
         /// <returns></returns>
-        public NodeQuote createNode(DialoguePath path = null, int index = -1)
+        public NodeQuote createNodeQuote(DialoguePath path = null, int index = -1)
         {
             //If no path,
             if (path == null)
@@ -61,7 +61,7 @@ namespace DialogueEditor.src
         /// <param name="path"></param>
         /// <param name="quote"></param>
         /// <returns></returns>
-        public NodeQuote createNode(DialoguePath path, Quote quote)
+        public NodeQuote createNodeQuote(DialoguePath path, Quote quote)
         {
             NodeQuote node = new NodeQuote(quote);
             NodeDialogue container = containers.First(cn => cn.path == path);
@@ -84,11 +84,32 @@ namespace DialogueEditor.src
             NodeQuote lastNode = null;
             foreach (string text in textArray)
             {
-                NodeQuote node = createNode(path);
+                NodeQuote node = createNodeQuote(path);
                 node.Text = text;
                 lastNode = node;
             }
             return lastNode;
+        }
+
+        public NodeCondition createNodeCondition(DialoguePath path = null, Condition condition = null)
+        {
+            //If no path,
+            if (path == null)
+            {
+                //create a path
+                path = createContainerNode().path;
+            }
+            NodeDialogue container = containers.First(cn => cn.path == path);
+            //Add a node to the path
+            if (condition == null)
+            {
+                condition = new Condition();
+                condition.path = path;
+                    path.conditions.Add(condition);
+            }
+            NodeCondition node = new NodeCondition(condition);
+            container.Controls.Add(node);
+            return node;
         }
 
         public NodeDialogue createContainerNode(DialoguePath path = null)
@@ -138,7 +159,7 @@ namespace DialogueEditor.src
                 {
                     createContainerNode(d);
                     d.quotes.ForEach(
-                        q => createNode(d, q)
+                        q => createNodeQuote(d, q)
                         );
                 }
                 );

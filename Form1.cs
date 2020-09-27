@@ -124,5 +124,10 @@ namespace DialogueEditor
             Managers.File.newFile();
         }
 
+        private void conditionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Managers.Control.createCondition();
+            refresh();
+        }
     }
 }

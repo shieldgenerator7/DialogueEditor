@@ -127,15 +127,15 @@
             this.moveToTopToolStripMenuItem,
             this.moveToBottomToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(75, 36);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(75, 38);
             this.editToolStripMenuItem.Text = "&Edit";
             // 
             // addNewToolStripMenuItem
             // 
             this.addNewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.dialoguePathToolStripMenuItem,
-            this.quoteToolStripMenuItem,
             this.conditionToolStripMenuItem,
+            this.quoteToolStripMenuItem,
             this.actionToolStripMenuItem});
             this.addNewToolStripMenuItem.Name = "addNewToolStripMenuItem";
             this.addNewToolStripMenuItem.Size = new System.Drawing.Size(455, 44);
@@ -153,22 +153,24 @@
             // quoteToolStripMenuItem
             // 
             this.quoteToolStripMenuItem.Name = "quoteToolStripMenuItem";
-            this.quoteToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.I)));
+            this.quoteToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D2)));
             this.quoteToolStripMenuItem.Size = new System.Drawing.Size(449, 44);
             this.quoteToolStripMenuItem.Text = "&Quote";
             this.quoteToolStripMenuItem.Click += new System.EventHandler(this.quoteToolStripMenuItem_Click);
             // 
             // conditionToolStripMenuItem
             // 
-            this.conditionToolStripMenuItem.Enabled = false;
             this.conditionToolStripMenuItem.Name = "conditionToolStripMenuItem";
+            this.conditionToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D1)));
             this.conditionToolStripMenuItem.Size = new System.Drawing.Size(449, 44);
             this.conditionToolStripMenuItem.Text = "&Condition";
+            this.conditionToolStripMenuItem.Click += new System.EventHandler(this.conditionToolStripMenuItem_Click);
             // 
             // actionToolStripMenuItem
             // 
             this.actionToolStripMenuItem.Enabled = false;
             this.actionToolStripMenuItem.Name = "actionToolStripMenuItem";
+            this.actionToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D3)));
             this.actionToolStripMenuItem.Size = new System.Drawing.Size(449, 44);
             this.actionToolStripMenuItem.Text = "&Action";
             // 
