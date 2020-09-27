@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -174,7 +175,14 @@ namespace DialogueEditor.src
         {
             if (this.quote.imageFileName != null && this.quote.imageFileName.EndsWith(".png"))
             {
-                pictureBox.Image = Image.FromFile(this.quote.imageFileName);
+                try
+                {
+                    pictureBox.Image = Image.FromFile(this.quote.imageFileName);
+                }
+                catch(FileNotFoundException fnfe)
+                {
+                    //do nothing
+                }
             }
         }
 
