@@ -18,10 +18,6 @@ public class Managers
     public static ControlManager Control
         => instance.controlManager;
 
-    private DisplayManager displayManager;
-    public static DisplayManager Display
-        => instance.displayManager;
-
     private FileManager fileManager;
     public static FileManager File
         => instance.fileManager;
@@ -47,7 +43,6 @@ public class Managers
         this.mainForm = mf;
         this.nodeManager = new NodeManager();
         this.controlManager = new ControlManager();
-        this.displayManager = new DisplayManager();
         this.fileManager = new FileManager();
         this.colorSettings = new ColorSettings();
     }
