@@ -15,7 +15,7 @@ namespace DialogueEditor.src
 
         public readonly Condition condition;
 
-        private TextBox textBox;
+        private ComboBox cmbVarName;
         private ComboBox comboBox;
         private NumericUpDown numberBox;
 
@@ -31,12 +31,13 @@ namespace DialogueEditor.src
             Size = new System.Drawing.Size(280, 80);
 
             // TextBox properties
-            textBox = new TextBox();
-            this.Controls.Add(textBox);
-            textBox.Font = new Font("Calibri", 12);
-            textBox.MinimumSize = new System.Drawing.Size(150, 0);
-            textBox.Text = condition.variableName;
-            textBox.TextChanged += acceptVariableName;
+            cmbVarName = new ComboBox();
+            this.Controls.Add(cmbVarName);
+            cmbVarName.Font = new Font("Calibri", 12);
+            cmbVarName.MinimumSize = new System.Drawing.Size(150, 0);
+            cmbVarName.Text = condition.variableName;
+            cmbVarName.TextChanged += acceptVariableName;
+            cmbVarName.GotFocus += (sender, e) => cmbVarName.DataSource = Managers.Node.dialogueData.Variables;
             // ComboBox properties
             comboBox = new ComboBox();
             this.Controls.Add(comboBox);
@@ -70,14 +71,14 @@ namespace DialogueEditor.src
 
         protected void acceptVariableName(object sender, EventArgs e)
         {
-            string sentText = textBox.Text;
+            string sentText = cmbVarName.Text;
             //2020-09-26: copied from https://stackoverflow.com/a/7316298/2336212
             string pureText = new String(sentText.Where(
                 c => Char.IsLetter(c) || Char.IsNumber(c) || c == '_'
                 ).ToArray());
-            if (pureText != textBox.Text)
+            if (pureText != cmbVarName.Text)
             {
-                textBox.Text = pureText;
+                cmbVarName.Text = pureText;
             }
             this.condition.variableName = sentText;
         }
