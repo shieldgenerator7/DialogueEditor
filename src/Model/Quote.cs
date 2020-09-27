@@ -10,6 +10,7 @@ public class Quote : DialogueComponent
     /// <summary>
     /// The image filename without the folder path and without the file extension
     /// </summary>
+    [JsonIgnore]
     public string imageName
     {
         get
