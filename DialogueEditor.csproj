@@ -95,6 +95,9 @@
     <Compile Include="src\Model\DialoguePath.cs" />
     <Compile Include="src\DisplayManager.cs" />
     <Compile Include="src\Managers.cs" />
+    <Compile Include="src\Node.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="src\NodeAction.cs">
       <SubType>Component</SubType>
     </Compile>

@@ -8,19 +8,19 @@ using System.Windows.Forms;
 
 namespace DialogueEditor.src
 {
-    public class NodeCondition : FlowLayoutPanel
+    public class NodeCondition : Node
     {
         public const int SIZE_PICTURE = 43;
         public const int WIDTH_LABEL = 200;
 
-        public Condition condition;
+        public readonly Condition condition;
 
         private TextBox textBox;
         private ComboBox comboBox;
         private NumericUpDown numberBox;
 
 
-        public NodeCondition(Condition condition) : base()
+        public NodeCondition(Condition condition) : base(condition)
         {
             this.condition = condition;
 

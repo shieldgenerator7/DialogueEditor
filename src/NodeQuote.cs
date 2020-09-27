@@ -8,12 +8,12 @@ using System.Windows.Forms;
 
 namespace DialogueEditor.src
 {
-    public class NodeQuote : Panel
+    public class NodeQuote : Node
     {
         public const int SIZE_PICTURE = 43;
         public const int WIDTH_LABEL = 200;
 
-        public Quote quote;
+        public readonly Quote quote;
 
         private RichTextBox textBox;
         private PictureBox pictureBox;
@@ -77,7 +77,7 @@ namespace DialogueEditor.src
             }
         }
 
-        public NodeQuote(Quote quote) : base()
+        public NodeQuote(Quote quote) : base(quote)
         {
             this.quote = quote;
 
@@ -114,7 +114,7 @@ namespace DialogueEditor.src
             textBox.Location = new System.Drawing.Point(SIZE_PICTURE + 5, 0);
             textBox.MinimumSize = new Size(WIDTH_LABEL, SIZE_PICTURE);
             textBox.MaximumSize = new Size(WIDTH_LABEL, 0);
-            textBox.Size = new Size(100, 96);
+            textBox.Size = new Size(WIDTH_LABEL, 96);
             textBox.ScrollBars = RichTextBoxScrollBars.None;
             textBox.Text = QuoteText;
             //Event Listeners

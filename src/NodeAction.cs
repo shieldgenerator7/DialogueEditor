@@ -8,19 +8,19 @@ using System.Windows.Forms;
 
 namespace DialogueEditor.src
 {
-    public class NodeAction : FlowLayoutPanel
+    public class NodeAction : Node
     {
         public const int SIZE_PICTURE = 43;
         public const int WIDTH_LABEL = 200;
 
-        public Action action;
+        public readonly Action action;
 
         private TextBox textBox;
         private ComboBox comboBox;
         private NumericUpDown numberBox;
 
 
-        public NodeAction(Action action) : base()
+        public NodeAction(Action action) : base(action)
         {
             this.action = action;
 
