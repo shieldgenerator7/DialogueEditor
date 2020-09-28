@@ -50,21 +50,28 @@ public class ControlManager
     {
         control.BackColor = Managers.Colors.unselectColor;
         selectedNodes.Remove(control);
+        if (control is NodeQuote)
+        {
+            ((NodeQuote)control).Editing = false;
+        }
+    }
+
+    /// <summary>
+    /// Deselect everything
+    /// </summary>
+    public void deselectAll()
+    {
+        for (int i = selectedNodes.Count - 1; i >= 0; i--)
+        {
+            deselect(selectedNodes[i]);
+        }
     }
 
     public void processSelectedNodes(Action<Control> action)
     {
         selectedNodes.ForEach(c => action(c));
     }
-
-    public Control ActiveControl => selectedNodes.FirstOrDefault();
-
-    public Node ActiveNode => (Node)selectedNodes.FirstOrDefault(c => c is Node);
-
-    public NodeQuote ActiveNodeQuote => (NodeQuote)selectedNodes.FirstOrDefault(c => c is NodeQuote);
-
-    public NodeDialogue ActivePanel => (NodeDialogue)selectedNodes.FirstOrDefault(c => c is NodeDialogue);
-
+        
     public DialoguePath createDialoguePath()
     {
         //Create a new quote with no path,
@@ -76,78 +83,81 @@ public class ControlManager
 
     public void createQuote()
     {
-        //Create a new quote
-        NodeDialogue container = ActivePanel;
-        if (container != null)
+        List<Control> prevSelected = new List<Control>(selectedNodes);
+        deselectAll();
+        prevSelected.ForEach(
+            c =>
+            {
+                DialoguePath path = (c is NodeDialogue)
+                    ? path = ((NodeDialogue)c).path
+                    : path = ((Node)c).data.path;
+                int index = (c is NodeQuote)
+                    ? ((NodeQuote)c).quote.Index
+                    : -1;
+                NodeQuote node = Managers.Node.createNodeQuote(path, index);
+                node.Editing = true;
+                select(node, true);
+            }
+            );
+        if (prevSelected.Count == 0)
         {
-            NodeQuote node = Managers.Node.createNodeQuote(container.path);
-            node.Editing = true;
-            return;
+            //If nothing is selected, make a new dialogue path
+            //(which will auto-create a new quote too)
+            createDialoguePath();
         }
-        Node activeNode = ActiveNode;
-        if (activeNode != null)
-        {
-            int index = (activeNode is NodeQuote)
-                ? ((NodeQuote)activeNode).quote.Index
-                : -1;
-            NodeQuote node = Managers.Node.createNodeQuote(
-                activeNode.data.path,
-                index
-                );
-            node.Editing = true;
-            return;
-        }
-        //Else
-        createDialoguePath();
     }
 
     public void createCondition()
     {
-        //Create a new condition
-        NodeDialogue container = ActivePanel;
-        if (container != null)
+        List<Control> prevSelected = new List<Control>(selectedNodes);
+        deselectAll();
+        prevSelected.ForEach(
+            c =>
+            {
+                DialoguePath path = (c is NodeDialogue)
+                    ? path = ((NodeDialogue)c).path
+                    : path = ((Node)c).data.path;
+                NodeCondition node = Managers.Node.createNodeCondition(path);
+                select(node, true);
+            }
+            );
+        if (prevSelected.Count == 0)
         {
-            NodeCondition node = Managers.Node.createNodeCondition(container.path);
-            return;
+            //If nothing is selected, make a new dialogue path
+            //(which will auto-create a new quote too)
+            DialoguePath path = createDialoguePath();
+            Managers.Node.createNodeCondition(path);
         }
-        Node activeNode = ActiveNode;
-        if (activeNode != null)
-        {
-            Node node = Managers.Node.createNodeCondition(
-                activeNode.data.path
-                );
-            return;
-        }
-        //Else
-        DialoguePath path = createDialoguePath();
-        Managers.Node.createNodeCondition(path);
     }
 
     public void createAction()
     {
-        //Create a new action
-        NodeDialogue container = ActivePanel;
-        if (container != null)
+        List<Control> prevSelected = new List<Control>(selectedNodes);
+        deselectAll();
+        prevSelected.ForEach(
+            c =>
+            {
+                DialoguePath path = (c is NodeDialogue)
+                    ? path = ((NodeDialogue)c).path
+                    : path = ((Node)c).data.path;
+                NodeAction node = Managers.Node.createNodeAction(path);
+                select(node, true);
+            }
+            );
+        if (prevSelected.Count == 0)
         {
-            NodeAction node = Managers.Node.createNodeAction(container.path);
-            return;
+            //If nothing is selected, make a new dialogue path
+            //(which will auto-create a new quote too)
+            DialoguePath path = createDialoguePath();
+            Managers.Node.createNodeAction(path);
         }
-        Node activeNode = ActiveNode;
-        if (activeNode != null)
-        {
-            NodeAction node = Managers.Node.createNodeAction(
-                activeNode.data.path
-                );
-            return;
-        }
-        //Else
-        DialoguePath path = createDialoguePath();
-        Managers.Node.createNodeAction(path);
     }
 
     public void enterPressed()
     {
-        NodeQuote activeNode = ActiveNodeQuote;
+        NodeQuote activeNode = (NodeQuote)selectedNodes.FirstOrDefault(
+            c => c is NodeQuote
+            );
         if (activeNode != null)
         {
             activeNode.Editing = false;
@@ -156,20 +166,16 @@ public class ControlManager
             if (activeNode.quote.Index == path.quotes.Count - 1)
             {
                 //Add new node at the end
-                NodeQuote newNode = Managers.Node.createNodeQuote(activeNode.quote.path);
+                NodeQuote newNode = Managers.Node.createNodeQuote(path);
                 newNode.Editing = true;
+                select(newNode);
             }
         }
     }
 
     public void escapePressed()
     {
-        NodeQuote activeNode = ActiveNodeQuote;
-        if (activeNode != null)
-        {
-            //Stop editing it
-            activeNode.Editing = false;
-        }
+        deselectAll();
     }
 
     /// <summary>
@@ -178,40 +184,33 @@ public class ControlManager
     /// <returns>true if deleted, false if not deleted</returns>
     public bool deletePressed()
     {
-        Node activeNode = ActiveNode;
-        if (activeNode != null)
+
+        //Don't delete anything if a selected node is being edited
+        if (!selectedNodes.Any(c => c is NodeQuote && ((NodeQuote)c).Editing))
         {
-            bool canDelete = true;
-            if (activeNode is NodeQuote)
+            bool canDeleteAll = true;
+            List<Control> dialogues = selectedNodes.FindAll(c => c is NodeDialogue);
+            if (dialogues.Count > 0)
             {
-                //if the user is editing the node,
-                if (((NodeQuote)activeNode).Editing)
+                string titles = "";
+                dialogues.ForEach(
+                    d => titles += "\"" + ((NodeDialogue)d).path.title + "\", "
+                    );
+                titles = titles.Substring(0, titles.Length - 2);
+                DialogResult dr = MessageBox.Show(
+                    "Are you sure you want to delete these dialogue paths?\n" + titles,
+                    "Delete?",
+                    MessageBoxButtons.OKCancel
+                    );
+                if (dr != DialogResult.OK)
                 {
-                    //don't delete it
-                    canDelete = false;
+                    canDeleteAll = false;
                 }
             }
-            if (canDelete)
+            if (canDeleteAll)
             {
-                activeNode.data.path.remove(activeNode.data);
-                activeNode.Dispose();
-                return true;
-            }
-        }
-        NodeDialogue activePanel = ActivePanel;
-        if (activePanel != null)
-        {
-            DialogResult dr = MessageBox.Show(
-                "Are you sure you want to delete dialogue path \""
-                + activePanel.path.title + "\"?",
-                "Delete?",
-                MessageBoxButtons.OKCancel
-                );
-            if (dr == DialogResult.OK)
-            {
-                Managers.Node.dialogueData.dialogues.Remove(activePanel.path);
-                Managers.Node.containers.Remove(activePanel);
-                activePanel.Dispose();
+                selectedNodes.ForEach(c => Managers.Node.delete(c));
+                selectedNodes.Clear();
                 return true;
             }
         }
@@ -221,12 +220,8 @@ public class ControlManager
     public void receiveInfoDump(DialoguePath path, string[] textArray)
     {
         NodeQuote lastNode = Managers.Node.createNodes(path, textArray);
-        NodeQuote activeNode = ActiveNodeQuote;
-        if (activeNode != null)
-        {
-            activeNode.Editing = false;
-        }
         lastNode.Editing = true;
+        select(lastNode);
     }
 }
 

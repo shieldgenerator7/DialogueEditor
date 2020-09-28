@@ -170,6 +170,27 @@ namespace DialogueEditor.src
         }
 
         /// <summary>
+        /// Delete the given NodeDialogue or Node
+        /// </summary>
+        /// <param name="c"></param>
+        public void delete(Control c)
+        {
+            if (c is Node)
+            {
+                Node node = (Node)c;
+                node.data.path.remove(node.data);
+                node.Dispose();
+            }
+            else if (c is NodeDialogue)
+            {
+                NodeDialogue container = (NodeDialogue)c;
+                dialogueData.dialogues.Remove(container.path);
+                containers.Remove(container);
+                container.Dispose();
+            }
+        }
+
+        /// <summary>
         /// Creates nodes for the dialogue paths and quotes in the list
         /// </summary>
         /// <param name="dialogues"></param>
