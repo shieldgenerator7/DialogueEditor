@@ -38,7 +38,12 @@ namespace DialogueEditor.src
             cmbVarName.MinimumSize = new System.Drawing.Size(150, 0);
             cmbVarName.Text = condition.variableName;
             cmbVarName.TextChanged += acceptVariableName;
-            cmbVarName.GotFocus += (sender, e) => cmbVarName.DataSource = Managers.Node.dialogueData.Variables;
+            cmbVarName.GotFocus += (sender, e) => {
+                cmbVarName.TextChanged -= acceptVariableName;
+                cmbVarName.DataSource = Managers.Node.dialogueData.Variables;
+                cmbVarName.SelectedItem = condition.variableName;
+                cmbVarName.TextChanged += acceptVariableName;
+            };
             cmbVarName.Click += (sender, e) => Managers.Control.select(this);
             // ComboBox properties
             comboBox = new ComboBox();
