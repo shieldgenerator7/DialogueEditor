@@ -149,5 +149,11 @@ namespace DialogueEditor
             pnlDialogue.HorizontalScroll.Value = savedScrollPosition.x;
             pnlDialogue.VerticalScroll.Value = savedScrollPosition.y;
         }
+
+        private void importToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Managers.File.openFileWithDialog(true);
+            refresh();
+        }
     }
 }

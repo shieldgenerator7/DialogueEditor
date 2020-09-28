@@ -59,7 +59,7 @@ namespace DialogueEditor
             }
         }
 
-        public void openFileWithDialog()
+        public void openFileWithDialog(bool append = false)
         {
             if (defaultFileName != null && defaultFileName != "")
             {
@@ -72,7 +72,7 @@ namespace DialogueEditor
                 {
                     defaultFileName = ofd.FileName;
                 }
-                openFile(ofd.FileName);
+                openFile(ofd.FileName, append);
             }
         }
 
@@ -104,7 +104,7 @@ namespace DialogueEditor
             }
         }
 
-        public bool openFile(string filename = null)
+        public bool openFile(string filename = null, bool append = false)
         {
             if (filename == null || filename == "")
             {
@@ -128,17 +128,17 @@ namespace DialogueEditor
                     {
                         //Open file from version 0.0.3 onward
                         DialogueData dialogueData = JsonConvert.DeserializeObject<DialogueData>(json);
-                        Managers.Node.acceptInfoFromFile(dialogueData);
+                        Managers.Node.acceptInfoFromFile(dialogueData, append);
                     }
                     catch (JsonSerializationException jse)
                     {
                         //Open file from version 0.0.2
                         List<DialoguePath> dialogues = JsonConvert.DeserializeObject<List<DialoguePath>>(json);
-                        Managers.Node.acceptInfoFromFile(new DialogueData(dialogues));
+                        Managers.Node.acceptInfoFromFile(new DialogueData(dialogues), append);
                     }
                 }
             }
-            catch(FileNotFoundException fnfe)
+            catch (FileNotFoundException fnfe)
             {
                 //don't do anything,
                 //except unset the default file name

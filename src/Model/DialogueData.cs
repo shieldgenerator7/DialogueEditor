@@ -58,4 +58,9 @@ public class DialogueData
             return vars.Distinct().ToList();
         }
     }
+
+    public void append(DialogueData data)
+    {
+        this.dialogues.AddRange(data.dialogues);
+    }
 }

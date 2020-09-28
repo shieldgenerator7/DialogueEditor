@@ -146,12 +146,25 @@ namespace DialogueEditor.src
             return container;
         }
 
-        public void acceptInfoFromFile(DialogueData dialogueData)
+        public void acceptInfoFromFile(DialogueData dialogueData, bool append = false)
         {
+            Managers.Form.saveScroll();
+            dialoguePanel.SuspendLayout();
+            //
             clearNodes();
-            this.dialogueData = dialogueData;
+            if (append)
+            {
+                this.dialogueData.append(dialogueData);
+            }
+            else
+            {
+                this.dialogueData = dialogueData;
+            }
             this.dialogueData.dialogues.ForEach(d => d.inflate());
             populateNodes(this.dialogueData.dialogues);
+            //
+            dialoguePanel.ResumeLayout();
+            Managers.Form.restoreScroll();
         }
 
         public void clear()
