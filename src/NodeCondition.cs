@@ -19,6 +19,7 @@ namespace DialogueEditor.src
         private ComboBox comboBox;
         private NumericUpDown numberBox;
 
+        public override int OrderCode => 1;
 
         public NodeCondition(Condition condition) : base(condition)
         {
@@ -85,6 +86,9 @@ namespace DialogueEditor.src
             }
             this.condition.variableName = sentText;
         }
+
+        public override int CompareTo(Node n)
+           => this.condition.variableName.CompareTo(((NodeCondition)n).condition.variableName);
 
     }
 }

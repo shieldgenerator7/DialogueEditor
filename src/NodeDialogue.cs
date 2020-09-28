@@ -51,7 +51,7 @@ namespace DialogueEditor.src
             titleBox.BorderStyle = BorderStyle.None;
             titleBox.Name = "titleBox";
             titleBox.Text = TitleText;
-            Controls.Add(this.titleBox);
+            this.Controls.Add(this.titleBox);
             TitleText = TitleText;
             titleBox.TextChanged += acceptText;
             titleBox.Click += (sender, e) => Managers.Control.select(this);
@@ -67,6 +67,48 @@ namespace DialogueEditor.src
             //Normal procedure
             sentText = sentText.Trim();
             path.title = sentText;
+        }
+
+        public void AddNode(Node n)
+        {
+            this.SuspendLayout();
+            this.Controls.Add(n);
+            sortList();
+            this.ResumeLayout();
+        }
+
+        private void sortList()
+        {
+            Control[] controlArray = new Control[this.Controls.Count];
+            this.Controls.CopyTo(controlArray, 0);
+            Array.Sort(
+                controlArray,
+                (c1, c2) =>
+                {
+                    //Put the non-Node controls first
+                    if (!(c1 is Node))
+                    {
+                        return -1;
+                    }
+                    if (!(c2 is Node))
+                    {
+                        return 1;
+                    }
+                    //Sort the Node subtypes
+                    Node n1 = (Node)c1;
+                    Node n2 = (Node)c2;
+                    //If they're different types,
+                    if (n1.OrderCode != n2.OrderCode)
+                    {
+                        //Group them by type
+                        return n1.OrderCode - n2.OrderCode;
+                    }
+                    //Sort them within a group
+                    return n1.CompareTo(n2);
+                }
+                );
+            this.Controls.Clear();
+            this.Controls.AddRange(controlArray);
         }
     }
 }

@@ -78,6 +78,9 @@ namespace DialogueEditor.src
             }
         }
 
+        public override int OrderCode => 2;
+        public string SortString => "" + quote.Index;
+
         public NodeQuote(Quote quote) : base(quote)
         {
             this.quote = quote;
@@ -181,15 +184,15 @@ namespace DialogueEditor.src
                 {
                     pictureBox.Image = Image.FromFile(this.quote.imageFileName);
                 }
-                catch(FileNotFoundException fnfe)
+                catch (FileNotFoundException fnfe)
                 {
                     //do nothing
                 }
             }
         }
 
-        public int CompareTo(NodeQuote gos)
-            => this.quote.Index - gos.quote.Index;
+        public override int CompareTo(Node n)
+            => this.quote.Index - ((NodeQuote)n).quote.Index;
 
         public static bool operator <(NodeQuote a, NodeQuote b)
             => a.quote.Index < b.quote.Index;

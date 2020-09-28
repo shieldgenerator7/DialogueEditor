@@ -51,7 +51,7 @@ namespace DialogueEditor.src
                 quote.imageFileName = prevQuote.imageFileName;
             }
             NodeQuote node = new NodeQuote(quote);
-            container.Controls.Add(node);
+            container.AddNode(node);
             return node;
         }
 
@@ -65,7 +65,7 @@ namespace DialogueEditor.src
         {
             NodeQuote node = new NodeQuote(quote);
             NodeDialogue container = containers.First(cn => cn.path == path);
-            container.Controls.Add(node);
+            container.AddNode(node);
             return node;
         }
 
@@ -108,7 +108,7 @@ namespace DialogueEditor.src
                 path.conditions.Add(condition);
             }
             NodeCondition node = new NodeCondition(condition);
-            container.Controls.Add(node);
+            container.AddNode(node);
             return node;
         }
 
@@ -129,7 +129,7 @@ namespace DialogueEditor.src
                 path.actions.Add(action);
             }
             NodeAction node = new NodeAction(action);
-            container.Controls.Add(node);
+            container.AddNode(node);
             return node;
         }
 
