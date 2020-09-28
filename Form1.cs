@@ -64,9 +64,11 @@ namespace DialogueEditor
             }
             else if (keyData == Keys.Delete)
             {
+                saveScroll();
                 if (Managers.Control.deletePressed())
                 {
                     refresh();
+                    restoreScroll();
                     return true;
                 }
                 else
@@ -134,6 +136,18 @@ namespace DialogueEditor
         {
             Managers.Control.createAction();
             refresh();
+        }
+
+        Vector savedScrollPosition = Vector.zero;
+        public void saveScroll()
+        {
+            savedScrollPosition.x = pnlDialogue.HorizontalScroll.Value;
+            savedScrollPosition.y = pnlDialogue.VerticalScroll.Value;
+        }
+        public void restoreScroll()
+        {
+            pnlDialogue.HorizontalScroll.Value = savedScrollPosition.x;
+            pnlDialogue.VerticalScroll.Value = savedScrollPosition.y;
         }
     }
 }
