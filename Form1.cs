@@ -112,7 +112,11 @@ namespace DialogueEditor
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Managers.File.saveFileWithDialog();
+            bool savedFile = Managers.File.saveFile();
+            if (!savedFile)
+            {
+                Managers.File.saveFileWithDialog();
+            }
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -154,6 +158,11 @@ namespace DialogueEditor
         {
             Managers.File.openFileWithDialog(true);
             refresh();
+        }
+
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Managers.File.saveFileWithDialog();
         }
     }
 }
