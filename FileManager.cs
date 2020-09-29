@@ -82,7 +82,7 @@ namespace DialogueEditor
             Managers.Control.createQuote();
         }
 
-        public void saveFile(string filename = null)
+        public bool saveFile(string filename = null)
         {
             if (filename == null || filename == "")
             {
@@ -92,7 +92,7 @@ namespace DialogueEditor
             if (filename == null || filename == "")
             {
                 //don't do anything
-                return;
+                return false;
             }
             sfd.FileName = filename;
             //2020-09-22: copied from https://stackoverflow.com/a/16921677/2336212
@@ -102,6 +102,7 @@ namespace DialogueEditor
 
                 file.Write(jsonString);
             }
+            return true;
         }
 
         public bool openFile(string filename = null, bool append = false)
