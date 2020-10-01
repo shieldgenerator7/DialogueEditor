@@ -107,12 +107,12 @@ namespace DialogueEditor.src
                 Condition template = null;
                 if (containers.Count > 0)
                 {
-                    NodeDialogue templateContainer = containers
-                       .Where(c => c.path.conditions.Count > 0)
-                       .Last();
-                    if (templateContainer != null)
+                    List<NodeDialogue> templateContainers = containers
+                       .Where(c => c.path.conditions.Count > 0).ToList();
+                    if (templateContainers.Count > 0)
                     {
-                        template = templateContainer.path.conditions[0];
+                        template = templateContainers.Last()
+                            .path.conditions[0];
                     }
                 }
                 //Create condition
