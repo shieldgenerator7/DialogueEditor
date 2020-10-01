@@ -78,6 +78,7 @@ public class ControlManager
         //which will auto-create a new path with a new quote
         NodeQuote node = Managers.Node.createNodeQuote();
         node.Editing = true;
+        select(node);
         return node.quote.path;
     }
 
