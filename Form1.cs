@@ -207,11 +207,35 @@ namespace DialogueEditor
         }
         private void updateFilters()
         {
+            if (txtCharacterFilters.Text.Contains("(All)"))
+            {
+                Managers.Node.filterCharacters(new List<string>());
+                return;
+            }
             pnlDialogue.SuspendLayout();
             Managers.Node.filterCharacters(
                 new List<string>(txtCharacterFilters.Text.Split(','))
                 );
             pnlDialogue.ResumeLayout();
+        }
+
+        private void cmbCharacters_SelectedValueChanged(object sender, EventArgs e)
+        {
+            txtCharacterName.Text = (string)cmbCharacters.SelectedItem;
+        }
+
+        private void btnUpdateCharacterName_Click(object sender, EventArgs e)
+        {
+            string oldName = (string)cmbCharacters.SelectedItem;
+            string newName = txtCharacterName.Text;
+            if (oldName != newName)
+            {
+                Managers.Node.dialogueData.updateCharacterName(oldName, newName);
+                updateCharacterList();
+                cmbCharacters.SelectedItem = newName;
+                txtCharacterFilters.Text = txtCharacterFilters.Text.Replace(oldName, newName);
+                updateFilters();
+            }
         }
     }
 }

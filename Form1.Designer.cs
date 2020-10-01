@@ -61,12 +61,12 @@
             this.cmbCharacters = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txtCharacterName = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.tabVariables = new System.Windows.Forms.TabPage();
+            this.btnUpdateCharacterName = new System.Windows.Forms.Button();
             this.grpCharacterFilters = new System.Windows.Forms.GroupBox();
-            this.btnAddCharacterFilter = new System.Windows.Forms.Button();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnAddCharacterFilter = new System.Windows.Forms.Button();
             this.txtCharacterFilters = new System.Windows.Forms.RichTextBox();
+            this.tabVariables = new System.Windows.Forms.TabPage();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spltMain)).BeginInit();
             this.spltMain.Panel1.SuspendLayout();
@@ -349,7 +349,7 @@
             this.flowLayoutPanel1.Controls.Add(this.cmbCharacters);
             this.flowLayoutPanel1.Controls.Add(this.label2);
             this.flowLayoutPanel1.Controls.Add(this.txtCharacterName);
-            this.flowLayoutPanel1.Controls.Add(this.button1);
+            this.flowLayoutPanel1.Controls.Add(this.btnUpdateCharacterName);
             this.flowLayoutPanel1.Controls.Add(this.grpCharacterFilters);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
@@ -375,6 +375,7 @@
             this.cmbCharacters.Name = "cmbCharacters";
             this.cmbCharacters.Size = new System.Drawing.Size(200, 33);
             this.cmbCharacters.TabIndex = 0;
+            this.cmbCharacters.SelectedValueChanged += new System.EventHandler(this.cmbCharacters_SelectedValueChanged);
             this.cmbCharacters.Enter += new System.EventHandler(this.cmbCharacters_Enter);
             // 
             // label2
@@ -393,24 +394,15 @@
             this.txtCharacterName.Size = new System.Drawing.Size(200, 31);
             this.txtCharacterName.TabIndex = 3;
             // 
-            // button1
+            // btnUpdateCharacterName
             // 
-            this.button1.Location = new System.Drawing.Point(3, 129);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(106, 34);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Update";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // tabVariables
-            // 
-            this.tabVariables.Location = new System.Drawing.Point(8, 39);
-            this.tabVariables.Name = "tabVariables";
-            this.tabVariables.Padding = new System.Windows.Forms.Padding(3);
-            this.tabVariables.Size = new System.Drawing.Size(236, 818);
-            this.tabVariables.TabIndex = 1;
-            this.tabVariables.Text = "Variables";
-            this.tabVariables.UseVisualStyleBackColor = true;
+            this.btnUpdateCharacterName.Location = new System.Drawing.Point(3, 129);
+            this.btnUpdateCharacterName.Name = "btnUpdateCharacterName";
+            this.btnUpdateCharacterName.Size = new System.Drawing.Size(106, 34);
+            this.btnUpdateCharacterName.TabIndex = 4;
+            this.btnUpdateCharacterName.Text = "Update";
+            this.btnUpdateCharacterName.UseVisualStyleBackColor = true;
+            this.btnUpdateCharacterName.Click += new System.EventHandler(this.btnUpdateCharacterName_Click);
             // 
             // grpCharacterFilters
             // 
@@ -424,17 +416,6 @@
             this.grpCharacterFilters.TabStop = false;
             this.grpCharacterFilters.Text = "Filters";
             // 
-            // btnAddCharacterFilter
-            // 
-            this.btnAddCharacterFilter.AutoSize = true;
-            this.btnAddCharacterFilter.Location = new System.Drawing.Point(3, 3);
-            this.btnAddCharacterFilter.Name = "btnAddCharacterFilter";
-            this.btnAddCharacterFilter.Size = new System.Drawing.Size(114, 35);
-            this.btnAddCharacterFilter.TabIndex = 0;
-            this.btnAddCharacterFilter.Text = "Add Filter";
-            this.btnAddCharacterFilter.UseVisualStyleBackColor = true;
-            this.btnAddCharacterFilter.Click += new System.EventHandler(this.btnAddCharacterFilter_Click);
-            // 
             // flowLayoutPanel2
             // 
             this.flowLayoutPanel2.AutoSize = true;
@@ -447,14 +428,35 @@
             this.flowLayoutPanel2.Size = new System.Drawing.Size(206, 143);
             this.flowLayoutPanel2.TabIndex = 0;
             // 
+            // btnAddCharacterFilter
+            // 
+            this.btnAddCharacterFilter.AutoSize = true;
+            this.btnAddCharacterFilter.Location = new System.Drawing.Point(3, 3);
+            this.btnAddCharacterFilter.Name = "btnAddCharacterFilter";
+            this.btnAddCharacterFilter.Size = new System.Drawing.Size(114, 35);
+            this.btnAddCharacterFilter.TabIndex = 0;
+            this.btnAddCharacterFilter.Text = "Add Filter";
+            this.btnAddCharacterFilter.UseVisualStyleBackColor = true;
+            this.btnAddCharacterFilter.Click += new System.EventHandler(this.btnAddCharacterFilter_Click);
+            // 
             // txtCharacterFilters
             // 
             this.txtCharacterFilters.Location = new System.Drawing.Point(3, 44);
-            this.txtCharacterFilters.MinimumSize = new System.Drawing.Size(200, 0);
+            this.txtCharacterFilters.MinimumSize = new System.Drawing.Size(200, 4);
             this.txtCharacterFilters.Name = "txtCharacterFilters";
             this.txtCharacterFilters.Size = new System.Drawing.Size(200, 96);
             this.txtCharacterFilters.TabIndex = 1;
             this.txtCharacterFilters.Text = "";
+            // 
+            // tabVariables
+            // 
+            this.tabVariables.Location = new System.Drawing.Point(8, 39);
+            this.tabVariables.Name = "tabVariables";
+            this.tabVariables.Padding = new System.Windows.Forms.Padding(3);
+            this.tabVariables.Size = new System.Drawing.Size(236, 818);
+            this.tabVariables.TabIndex = 1;
+            this.tabVariables.Text = "Variables";
+            this.tabVariables.UseVisualStyleBackColor = true;
             // 
             // frmMain
             // 
@@ -523,7 +525,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtCharacterName;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnUpdateCharacterName;
         private System.Windows.Forms.GroupBox grpCharacterFilters;
         private System.Windows.Forms.Button btnAddCharacterFilter;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;

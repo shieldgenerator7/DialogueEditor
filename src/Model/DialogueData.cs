@@ -63,4 +63,14 @@ public class DialogueData
     {
         this.dialogues.AddRange(data.dialogues);
     }
+
+    public void updateCharacterName(string oldName, string newName)
+    {
+        dialogues.ForEach(
+            d=>
+            {
+                d.quotes.Where(q => q.characterName == oldName).ToList()
+                    .ForEach(q => q.characterName = newName);
+            });
+    }
 }
