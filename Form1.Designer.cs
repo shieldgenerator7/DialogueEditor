@@ -393,6 +393,7 @@
             this.txtCharacterName.Name = "txtCharacterName";
             this.txtCharacterName.Size = new System.Drawing.Size(200, 31);
             this.txtCharacterName.TabIndex = 3;
+            this.txtCharacterName.TextChanged += new System.EventHandler(this.txtCharacterName_TextChanged);
             // 
             // btnUpdateCharacterName
             // 

@@ -215,9 +215,33 @@ namespace DialogueEditor
             pnlDialogue.ResumeLayout();
         }
 
+        private void checkEnableCharacterControls()
+        {
+            string character = (string)cmbCharacters.SelectedItem;
+            if (character == null || character == "" || character == "(All)")
+            {
+                if (txtCharacterName.Text != "")
+                {
+                    txtCharacterName.Text = "";
+                }
+                txtCharacterName.Enabled = false;
+                btnUpdateCharacterName.Enabled = false;
+            }
+            else
+            {
+                txtCharacterName.Enabled = true;
+                btnUpdateCharacterName.Enabled = (character != txtCharacterName.Text);
+            }
+            btnAddCharacterFilter.Enabled = (
+                character != txtCharacterFilters.Text
+                && (character != "(All)" || txtCharacterFilters.Text != "")
+                );
+        }
+
         private void cmbCharacters_SelectedValueChanged(object sender, EventArgs e)
         {
             txtCharacterName.Text = (string)cmbCharacters.SelectedItem;
+            checkEnableCharacterControls();
         }
 
         private void btnUpdateCharacterName_Click(object sender, EventArgs e)
@@ -232,6 +256,12 @@ namespace DialogueEditor
                 txtCharacterFilters.Text = txtCharacterFilters.Text.Replace(oldName, newName);
                 updateFilters();
             }
+            checkEnableCharacterControls();
+        }
+
+        private void txtCharacterName_TextChanged(object sender, EventArgs e)
+        {
+            checkEnableCharacterControls();
         }
     }
 }
