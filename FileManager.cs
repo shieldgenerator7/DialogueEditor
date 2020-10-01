@@ -68,6 +68,9 @@ namespace DialogueEditor
             DialogResult dr = ofd.ShowDialog();
             if (dr == DialogResult.OK)
             {
+                //Save current file first
+                saveFile();
+                //Open next file
                 if (ofd.FileName != null && ofd.FileName.ToLower().EndsWith(".json"))
                 {
                     defaultFileName = ofd.FileName;
