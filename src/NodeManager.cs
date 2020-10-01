@@ -103,7 +103,31 @@ namespace DialogueEditor.src
             //Add a node to the path
             if (condition == null)
             {
-                condition = new Condition(dialogueData.Variables[0]);
+                //Find template
+                Condition template = null;
+                if (containers.Count > 0)
+                {
+                    NodeDialogue templateContainer = containers
+                       .Where(c => c.path.conditions.Count > 0)
+                       .Last();
+                    if (templateContainer != null)
+                    {
+                        template = templateContainer.path.conditions[0];
+                    }
+                }
+                //Create condition
+                if (template != null)
+                {
+                    condition = new Condition(
+                        template.variableName, 
+                        template.testType,
+                        template.testValue + 1
+                        );
+                }
+                else
+                {
+                    condition = new Condition(dialogueData.Variables.Last());
+                }
                 condition.path = path;
                 path.conditions.Add(condition);
             }
@@ -124,7 +148,14 @@ namespace DialogueEditor.src
             //Add a node to the path
             if (action == null)
             {
-                action = new Action(dialogueData.Variables[0]);
+                //Set default variable name 
+                string defaultVarName = dialogueData.Variables.Last();
+                if (path.conditions.Count > 0)
+                {
+                    defaultVarName = path.conditions[0].variableName;
+                }
+                //Create new action
+                action = new Action(defaultVarName);
                 action.path = path;
                 path.actions.Add(action);
             }
