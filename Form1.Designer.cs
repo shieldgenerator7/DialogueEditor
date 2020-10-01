@@ -411,7 +411,7 @@
             this.grpCharacterFilters.Location = new System.Drawing.Point(3, 169);
             this.grpCharacterFilters.MinimumSize = new System.Drawing.Size(200, 0);
             this.grpCharacterFilters.Name = "grpCharacterFilters";
-            this.grpCharacterFilters.Size = new System.Drawing.Size(212, 173);
+            this.grpCharacterFilters.Size = new System.Drawing.Size(212, 108);
             this.grpCharacterFilters.TabIndex = 5;
             this.grpCharacterFilters.TabStop = false;
             this.grpCharacterFilters.Text = "Filters";
@@ -425,7 +425,7 @@
             this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 27);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(206, 143);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(206, 78);
             this.flowLayoutPanel2.TabIndex = 0;
             // 
             // btnAddCharacterFilter
@@ -435,16 +435,18 @@
             this.btnAddCharacterFilter.Name = "btnAddCharacterFilter";
             this.btnAddCharacterFilter.Size = new System.Drawing.Size(114, 35);
             this.btnAddCharacterFilter.TabIndex = 0;
-            this.btnAddCharacterFilter.Text = "Add Filter";
+            this.btnAddCharacterFilter.Text = "Filter";
             this.btnAddCharacterFilter.UseVisualStyleBackColor = true;
             this.btnAddCharacterFilter.Click += new System.EventHandler(this.btnAddCharacterFilter_Click);
             // 
             // txtCharacterFilters
             // 
+            this.txtCharacterFilters.Enabled = false;
             this.txtCharacterFilters.Location = new System.Drawing.Point(3, 44);
             this.txtCharacterFilters.MinimumSize = new System.Drawing.Size(200, 4);
+            this.txtCharacterFilters.Multiline = false;
             this.txtCharacterFilters.Name = "txtCharacterFilters";
-            this.txtCharacterFilters.Size = new System.Drawing.Size(200, 96);
+            this.txtCharacterFilters.Size = new System.Drawing.Size(200, 31);
             this.txtCharacterFilters.TabIndex = 1;
             this.txtCharacterFilters.Text = "";
             // 

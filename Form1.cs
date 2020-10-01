@@ -172,18 +172,13 @@ namespace DialogueEditor
 
         private void btnAddCharacterFilter_Click(object sender, EventArgs e)
         {
-            string filters = txtCharacterFilters.Text + "," + (string)cmbCharacters.SelectedItem;
-            //Trim whitespace and commas
+            string filters = (string)cmbCharacters.SelectedItem;
+            //Trim whitespace
             filters = filters.Trim();
-            if (filters.StartsWith(","))
+            if (filters == "(All)")
             {
-                filters = filters.Substring(1);
+                filters = "";
             }
-            if (filters.EndsWith(","))
-            {
-                filters = filters.Substring(0, filters.Length - 1);
-            }
-            filters = filters.Trim();
             //Update the textbox
             txtCharacterFilters.Text = filters;
             //Add the filters
@@ -207,7 +202,8 @@ namespace DialogueEditor
         }
         private void updateFilters()
         {
-            if (txtCharacterFilters.Text.Contains("(All)"))
+            if (txtCharacterFilters.Text == ""
+                || txtCharacterFilters.Text.Contains("(All)"))
             {
                 Managers.Node.filterCharacters(new List<string>());
                 return;
