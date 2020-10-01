@@ -39,6 +39,8 @@ namespace DialogueEditor
             {
                 Managers.File.newFile();
             }
+            updateCharacterList();
+            checkEnableCharacterControls();
         }
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
