@@ -80,6 +80,7 @@ namespace DialogueEditor
         {
             Managers.Node.clear();
             Managers.Control.createQuote();
+            defaultFileName = null;
         }
 
         public bool saveFile(string filename = null)
