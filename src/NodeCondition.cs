@@ -40,7 +40,9 @@ namespace DialogueEditor.src
             cmbVarName.TextChanged += acceptVariableName;
             cmbVarName.GotFocus += (sender, e) => {
                 cmbVarName.TextChanged -= acceptVariableName;
-                cmbVarName.DataSource = Managers.Node.dialogueData.Variables;
+                List<string> vars = Managers.Node.dialogueData.Variables;
+                vars.Sort();
+                cmbVarName.DataSource = vars;
                 cmbVarName.SelectedItem = condition.variableName;
                 cmbVarName.TextChanged += acceptVariableName;
             };
