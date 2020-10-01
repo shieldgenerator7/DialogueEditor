@@ -167,9 +167,7 @@ namespace DialogueEditor
 
         private void cmbCharacters_Enter(object sender, EventArgs e)
         {
-            string character = (string)cmbCharacters.SelectedItem;
-            cmbCharacters.DataSource = Managers.Node.dialogueData.Characters;
-            cmbCharacters.SelectedItem = character;
+            updateCharacterList();
         }
 
         private void btnAddCharacterFilter_Click(object sender, EventArgs e)
@@ -190,6 +188,22 @@ namespace DialogueEditor
             txtCharacterFilters.Text = filters;
             //Add the filters
             updateFilters();
+        }
+        private void updateCharacterList()
+        {
+            string character = (string)cmbCharacters.SelectedItem;
+            List<string> chars = Managers.Node.dialogueData.Characters;
+            chars.Sort();
+            chars.Insert(0, "(All)");
+            cmbCharacters.DataSource = chars;
+            if (character != null && cmbCharacters.Items.Contains(character))
+            {
+                cmbCharacters.SelectedItem = character;
+            }
+            else
+            {
+                cmbCharacters.SelectedIndex = 0;
+            }
         }
         private void updateFilters()
         {
