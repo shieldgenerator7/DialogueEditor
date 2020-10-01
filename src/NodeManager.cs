@@ -226,6 +226,15 @@ namespace DialogueEditor.src
                 );
         }
 
+        public void filterCharacters(List<string> characters)
+        {
+            clearNodes();
+            List<DialoguePath> filteredPaths = dialogueData.dialogues.Where(
+                d => d.allCharactersPresent(characters)
+                ).ToList();
+            populateNodes(filteredPaths);
+        }
+
         public void setDefaultImageFileName(string character, string imageFileName)
         {
             if (imageFileName == null || imageFileName == "")

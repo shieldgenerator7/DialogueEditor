@@ -53,7 +53,30 @@
             this.moveToBottomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlDialogue = new System.Windows.Forms.FlowLayoutPanel();
+            this.spltMain = new System.Windows.Forms.SplitContainer();
+            this.tabInfo = new System.Windows.Forms.TabControl();
+            this.tabCharacters = new System.Windows.Forms.TabPage();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cmbCharacters = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtCharacterName = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.tabVariables = new System.Windows.Forms.TabPage();
+            this.grpCharacterFilters = new System.Windows.Forms.GroupBox();
+            this.btnAddCharacterFilter = new System.Windows.Forms.Button();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.txtCharacterFilters = new System.Windows.Forms.RichTextBox();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.spltMain)).BeginInit();
+            this.spltMain.Panel1.SuspendLayout();
+            this.spltMain.Panel2.SuspendLayout();
+            this.spltMain.SuspendLayout();
+            this.tabInfo.SuspendLayout();
+            this.tabCharacters.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
+            this.grpCharacterFilters.SuspendLayout();
+            this.flowLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -273,19 +296,172 @@
             this.pnlDialogue.AutoSize = true;
             this.pnlDialogue.BackColor = System.Drawing.Color.DarkGray;
             this.pnlDialogue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlDialogue.Location = new System.Drawing.Point(0, 42);
+            this.pnlDialogue.Location = new System.Drawing.Point(0, 0);
             this.pnlDialogue.Name = "pnlDialogue";
-            this.pnlDialogue.Size = new System.Drawing.Size(1309, 863);
+            this.pnlDialogue.Size = new System.Drawing.Size(1053, 865);
             this.pnlDialogue.TabIndex = 2;
             this.pnlDialogue.WrapContents = false;
             // 
+            // spltMain
+            // 
+            this.spltMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.spltMain.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+            this.spltMain.Location = new System.Drawing.Point(0, 40);
+            this.spltMain.Name = "spltMain";
+            // 
+            // spltMain.Panel1
+            // 
+            this.spltMain.Panel1.Controls.Add(this.pnlDialogue);
+            // 
+            // spltMain.Panel2
+            // 
+            this.spltMain.Panel2.Controls.Add(this.tabInfo);
+            this.spltMain.Size = new System.Drawing.Size(1309, 865);
+            this.spltMain.SplitterDistance = 1053;
+            this.spltMain.TabIndex = 3;
+            // 
+            // tabInfo
+            // 
+            this.tabInfo.Controls.Add(this.tabCharacters);
+            this.tabInfo.Controls.Add(this.tabVariables);
+            this.tabInfo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabInfo.Location = new System.Drawing.Point(0, 0);
+            this.tabInfo.Name = "tabInfo";
+            this.tabInfo.SelectedIndex = 0;
+            this.tabInfo.Size = new System.Drawing.Size(252, 865);
+            this.tabInfo.TabIndex = 0;
+            // 
+            // tabCharacters
+            // 
+            this.tabCharacters.Controls.Add(this.flowLayoutPanel1);
+            this.tabCharacters.Location = new System.Drawing.Point(8, 39);
+            this.tabCharacters.Name = "tabCharacters";
+            this.tabCharacters.Padding = new System.Windows.Forms.Padding(3);
+            this.tabCharacters.Size = new System.Drawing.Size(236, 818);
+            this.tabCharacters.TabIndex = 0;
+            this.tabCharacters.Text = "Characters";
+            this.tabCharacters.UseVisualStyleBackColor = true;
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.AutoScroll = true;
+            this.flowLayoutPanel1.Controls.Add(this.label1);
+            this.flowLayoutPanel1.Controls.Add(this.cmbCharacters);
+            this.flowLayoutPanel1.Controls.Add(this.label2);
+            this.flowLayoutPanel1.Controls.Add(this.txtCharacterName);
+            this.flowLayoutPanel1.Controls.Add(this.button1);
+            this.flowLayoutPanel1.Controls.Add(this.grpCharacterFilters);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 3);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(230, 812);
+            this.flowLayoutPanel1.TabIndex = 1;
+            this.flowLayoutPanel1.WrapContents = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(117, 25);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Characters";
+            // 
+            // cmbCharacters
+            // 
+            this.cmbCharacters.FormattingEnabled = true;
+            this.cmbCharacters.Location = new System.Drawing.Point(3, 28);
+            this.cmbCharacters.Name = "cmbCharacters";
+            this.cmbCharacters.Size = new System.Drawing.Size(200, 33);
+            this.cmbCharacters.TabIndex = 0;
+            this.cmbCharacters.Enter += new System.EventHandler(this.cmbCharacters_Enter);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(3, 64);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(168, 25);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Character Name";
+            // 
+            // txtCharacterName
+            // 
+            this.txtCharacterName.Location = new System.Drawing.Point(3, 92);
+            this.txtCharacterName.Name = "txtCharacterName";
+            this.txtCharacterName.Size = new System.Drawing.Size(200, 31);
+            this.txtCharacterName.TabIndex = 3;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(3, 129);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(106, 34);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "Update";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // tabVariables
+            // 
+            this.tabVariables.Location = new System.Drawing.Point(8, 39);
+            this.tabVariables.Name = "tabVariables";
+            this.tabVariables.Padding = new System.Windows.Forms.Padding(3);
+            this.tabVariables.Size = new System.Drawing.Size(236, 818);
+            this.tabVariables.TabIndex = 1;
+            this.tabVariables.Text = "Variables";
+            this.tabVariables.UseVisualStyleBackColor = true;
+            // 
+            // grpCharacterFilters
+            // 
+            this.grpCharacterFilters.AutoSize = true;
+            this.grpCharacterFilters.Controls.Add(this.flowLayoutPanel2);
+            this.grpCharacterFilters.Location = new System.Drawing.Point(3, 169);
+            this.grpCharacterFilters.MinimumSize = new System.Drawing.Size(200, 0);
+            this.grpCharacterFilters.Name = "grpCharacterFilters";
+            this.grpCharacterFilters.Size = new System.Drawing.Size(212, 173);
+            this.grpCharacterFilters.TabIndex = 5;
+            this.grpCharacterFilters.TabStop = false;
+            this.grpCharacterFilters.Text = "Filters";
+            // 
+            // btnAddCharacterFilter
+            // 
+            this.btnAddCharacterFilter.AutoSize = true;
+            this.btnAddCharacterFilter.Location = new System.Drawing.Point(3, 3);
+            this.btnAddCharacterFilter.Name = "btnAddCharacterFilter";
+            this.btnAddCharacterFilter.Size = new System.Drawing.Size(114, 35);
+            this.btnAddCharacterFilter.TabIndex = 0;
+            this.btnAddCharacterFilter.Text = "Add Filter";
+            this.btnAddCharacterFilter.UseVisualStyleBackColor = true;
+            this.btnAddCharacterFilter.Click += new System.EventHandler(this.btnAddCharacterFilter_Click);
+            // 
+            // flowLayoutPanel2
+            // 
+            this.flowLayoutPanel2.AutoSize = true;
+            this.flowLayoutPanel2.Controls.Add(this.btnAddCharacterFilter);
+            this.flowLayoutPanel2.Controls.Add(this.txtCharacterFilters);
+            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 27);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(206, 143);
+            this.flowLayoutPanel2.TabIndex = 0;
+            // 
+            // txtCharacterFilters
+            // 
+            this.txtCharacterFilters.Location = new System.Drawing.Point(3, 44);
+            this.txtCharacterFilters.MinimumSize = new System.Drawing.Size(200, 0);
+            this.txtCharacterFilters.Name = "txtCharacterFilters";
+            this.txtCharacterFilters.Size = new System.Drawing.Size(200, 96);
+            this.txtCharacterFilters.TabIndex = 1;
+            this.txtCharacterFilters.Text = "";
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1309, 905);
-            this.Controls.Add(this.pnlDialogue);
+            this.Controls.Add(this.spltMain);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmMain";
@@ -294,6 +470,19 @@
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.spltMain.Panel1.ResumeLayout(false);
+            this.spltMain.Panel1.PerformLayout();
+            this.spltMain.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.spltMain)).EndInit();
+            this.spltMain.ResumeLayout(false);
+            this.tabInfo.ResumeLayout(false);
+            this.tabCharacters.ResumeLayout(false);
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel1.PerformLayout();
+            this.grpCharacterFilters.ResumeLayout(false);
+            this.grpCharacterFilters.PerformLayout();
+            this.flowLayoutPanel2.ResumeLayout(false);
+            this.flowLayoutPanel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -325,6 +514,20 @@
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.FlowLayoutPanel pnlDialogue;
         private System.Windows.Forms.ToolStripMenuItem importToolStripMenuItem;
+        private System.Windows.Forms.SplitContainer spltMain;
+        private System.Windows.Forms.TabControl tabInfo;
+        private System.Windows.Forms.TabPage tabCharacters;
+        private System.Windows.Forms.TabPage tabVariables;
+        private System.Windows.Forms.ComboBox cmbCharacters;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtCharacterName;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.GroupBox grpCharacterFilters;
+        private System.Windows.Forms.Button btnAddCharacterFilter;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.RichTextBox txtCharacterFilters;
     }
 }
 

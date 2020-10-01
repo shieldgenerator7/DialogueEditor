@@ -164,5 +164,40 @@ namespace DialogueEditor
         {
             Managers.File.saveFileWithDialog();
         }
+
+        private void cmbCharacters_Enter(object sender, EventArgs e)
+        {
+            string character = (string)cmbCharacters.SelectedItem;
+            cmbCharacters.DataSource = Managers.Node.dialogueData.Characters;
+            cmbCharacters.SelectedItem = character;
+        }
+
+        private void btnAddCharacterFilter_Click(object sender, EventArgs e)
+        {
+            string filters = txtCharacterFilters.Text + "," + (string)cmbCharacters.SelectedItem;
+            //Trim whitespace and commas
+            filters = filters.Trim();
+            if (filters.StartsWith(","))
+            {
+                filters = filters.Substring(1);
+            }
+            if (filters.EndsWith(","))
+            {
+                filters = filters.Substring(0, filters.Length - 1);
+            }
+            filters = filters.Trim();
+            //Update the textbox
+            txtCharacterFilters.Text = filters;
+            //Add the filters
+            updateFilters();
+        }
+        private void updateFilters()
+        {
+            pnlDialogue.SuspendLayout();
+            Managers.Node.filterCharacters(
+                new List<string>(txtCharacterFilters.Text.Split(','))
+                );
+            pnlDialogue.ResumeLayout();
+        }
     }
 }
