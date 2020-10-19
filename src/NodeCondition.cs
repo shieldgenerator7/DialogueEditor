@@ -13,7 +13,7 @@ namespace DialogueEditor.src
         public const int SIZE_PICTURE = 43;
         public const int WIDTH_LABEL = 200;
 
-        public readonly Condition condition;
+        public Condition condition { get; private set; }
 
         private ComboBox cmbVarName;
         private ComboBox comboBox;
@@ -23,7 +23,6 @@ namespace DialogueEditor.src
 
         public NodeCondition(Condition condition) : base(condition)
         {
-            this.condition = condition;
 
             // Panel (self) properties
             AutoSize = true;
@@ -36,7 +35,6 @@ namespace DialogueEditor.src
             this.Controls.Add(cmbVarName);
             cmbVarName.Font = new Font("Calibri", 12);
             cmbVarName.MinimumSize = new System.Drawing.Size(150, 0);
-            cmbVarName.Text = condition.variableName;
             cmbVarName.TextChanged += acceptVariableName;
             cmbVarName.GotFocus += (sender, e) => {
                 cmbVarName.TextChanged -= acceptVariableName;
@@ -61,7 +59,6 @@ namespace DialogueEditor.src
                 "<",
                 "<="
             });
-            comboBox.SelectedItem = condition.TestTypeString;
             comboBox.SelectedIndexChanged += (sender, e) =>
             {
                 condition.TestTypeString = (string)comboBox.SelectedItem;
@@ -78,6 +75,14 @@ namespace DialogueEditor.src
                 condition.testValue = (int)numberBox.Value;
             };
             numberBox.Click += (sender, e) => Managers.Control.select(this);
+        }
+
+        public void init(Condition condition)
+        {
+            base.initBase(condition);
+            this.condition = condition;
+            cmbVarName.Text = condition.variableName;
+            comboBox.SelectedItem = condition.TestTypeString;
         }
 
         protected void acceptVariableName(object sender, EventArgs e)

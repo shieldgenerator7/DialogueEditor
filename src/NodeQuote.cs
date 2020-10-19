@@ -14,7 +14,7 @@ namespace DialogueEditor.src
         public const int SIZE_PICTURE = 43;
         public const int WIDTH_LABEL = 200;
 
-        public readonly Quote quote;
+        public Quote quote { get; private set; }
 
         private RichTextBox textBox;
         private PictureBox pictureBox;
@@ -83,7 +83,6 @@ namespace DialogueEditor.src
 
         public NodeQuote(Quote quote) : base(quote)
         {
-            this.quote = quote;
 
             if (ofdPicture == null)
             {
@@ -101,7 +100,6 @@ namespace DialogueEditor.src
             // PictureBox properties
             pictureBox = new PictureBox();
             this.Controls.Add(pictureBox);
-            refreshImage();
             pictureBox.BackColor = System.Drawing.Color.LightGray;
             pictureBox.Location = new System.Drawing.Point(0, 0);
             pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
@@ -121,7 +119,6 @@ namespace DialogueEditor.src
             textBox.MaximumSize = new Size(WIDTH_LABEL, 0);
             textBox.Size = new Size(WIDTH_LABEL, 96);
             textBox.ScrollBars = RichTextBoxScrollBars.None;
-            textBox.Text = QuoteText;
             //Event Listeners
             textBox.ContentsResized += rtb_ContentsResized;
             textBox.TextChanged += acceptText;
@@ -129,6 +126,14 @@ namespace DialogueEditor.src
             textBox.Click += (sender, e) => Managers.Control.select(this);
             //
             Editing = false;
+        }
+
+        public void init(Quote quote)
+        {
+            base.initBase(quote);
+            this.quote = quote;
+            textBox.Text = QuoteText;
+            refreshImage();
         }
 
         //2020-09-21: copied from https://stackoverflow.com/a/16607756/2336212

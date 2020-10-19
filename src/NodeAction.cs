@@ -13,7 +13,7 @@ namespace DialogueEditor.src
         public const int SIZE_PICTURE = 43;
         public const int WIDTH_LABEL = 200;
 
-        public readonly Action action;
+        public Action action { get; private set; }
 
         private ComboBox cmbVarName;
         private ComboBox comboBox;
@@ -23,8 +23,6 @@ namespace DialogueEditor.src
 
         public NodeAction(Action action) : base(action)
         {
-            this.action = action;
-
             // Panel (self) properties
             AutoSize = true;
             AutoScroll = false;
@@ -60,7 +58,6 @@ namespace DialogueEditor.src
                 "*=",
                 "/="
             });
-            comboBox.SelectedItem = action.ActionTypeString;
             comboBox.SelectedIndexChanged += (sender, e) =>
             {
                 action.ActionTypeString = (string)comboBox.SelectedItem;
@@ -71,12 +68,19 @@ namespace DialogueEditor.src
             this.Controls.Add(numberBox);
             numberBox.Font = new Font("Calibri", 12);
             numberBox.MaximumSize = new Size(43, 0);
-            numberBox.Value = action.actionValue;
             numberBox.ValueChanged += (sender, e) =>
             {
                 action.actionValue = (int)numberBox.Value;
             };
             numberBox.Click += (sender, e) => Managers.Control.select(this);
+        }
+
+        public void init(Action action)
+        {
+            base.initBase(action);
+            this.action = action;
+            comboBox.SelectedItem = action.ActionTypeString;
+            numberBox.Value = action.actionValue;
         }
 
         protected void acceptVariableName(object sender, EventArgs e)

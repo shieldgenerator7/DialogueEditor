@@ -9,7 +9,7 @@ namespace DialogueEditor.src
 {
     public abstract class Node : FlowLayoutPanel
     {
-        public readonly DialogueComponent data;
+        public DialogueComponent data { get; private set; }
 
         /// <summary>
         /// Used to determine which types should be sorted before other types
@@ -20,6 +20,11 @@ namespace DialogueEditor.src
         {
             this.data = component;
             Click += (sender, e) => Managers.Control.select(this);
+        }
+
+        public void initBase(DialogueComponent component)
+        {
+            this.data = component;
         }
 
         public abstract int CompareTo(Node n);

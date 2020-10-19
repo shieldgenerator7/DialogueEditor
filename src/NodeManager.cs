@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,6 +17,12 @@ namespace DialogueEditor.src
         public DialogueData dialogueData { get; private set; } = new DialogueData();
         public Panel dialoguePanel;
         public List<NodeDialogue> containers = new List<NodeDialogue>();
+
+        //Pools
+        private Pool<NodeDialogue> poolDialogues = new Pool<NodeDialogue>();
+        private Pool<NodeCondition> poolConditions = new Pool<NodeCondition>();
+        private Pool<NodeQuote> poolQuotes = new Pool<NodeQuote>();
+        private Pool<NodeAction> poolActions = new Pool<NodeAction>();
 
         /// <summary>
         /// Creates a UI Node and a Quote,
@@ -50,7 +57,8 @@ namespace DialogueEditor.src
                 quote.characterName = prevQuote.characterName;
                 quote.imageFileName = prevQuote.imageFileName;
             }
-            NodeQuote node = new NodeQuote(quote);
+            NodeQuote node = poolQuotes.checkoutItem(() => new NodeQuote(quote));
+            node.init(quote);
             container.AddNode(node);
             return node;
         }
@@ -63,7 +71,8 @@ namespace DialogueEditor.src
         /// <returns></returns>
         public NodeQuote createNodeQuote(DialoguePath path, Quote quote)
         {
-            NodeQuote node = new NodeQuote(quote);
+            NodeQuote node = poolQuotes.checkoutItem(() => new NodeQuote(quote));
+            node.init(quote);
             NodeDialogue container = containers.First(cn => cn.path == path);
             container.AddNode(node);
             return node;
@@ -119,7 +128,7 @@ namespace DialogueEditor.src
                 if (template != null)
                 {
                     condition = new Condition(
-                        template.variableName, 
+                        template.variableName,
                         template.testType,
                         template.testValue + 1
                         );
@@ -131,7 +140,10 @@ namespace DialogueEditor.src
                 condition.path = path;
                 path.conditions.Add(condition);
             }
-            NodeCondition node = new NodeCondition(condition);
+            NodeCondition node = poolConditions.checkoutItem(
+                () => new NodeCondition(condition)
+                );
+            node.init(condition);
             container.AddNode(node);
             return node;
         }
@@ -159,7 +171,10 @@ namespace DialogueEditor.src
                 action.path = path;
                 path.actions.Add(action);
             }
-            NodeAction node = new NodeAction(action);
+            NodeAction node = poolActions.checkoutItem(
+                () => new NodeAction(action)
+                );
+            node.init(action);
             container.AddNode(node);
             return node;
         }
@@ -171,11 +186,16 @@ namespace DialogueEditor.src
                 path = new DialoguePath();
                 dialogueData.dialogues.Add(path);
             }
-            NodeDialogue container = new NodeDialogue(path);
+            NodeDialogue container = poolDialogues.checkoutItem(
+                () => new NodeDialogue(path)
+                );
+            container.init(path);
             containers.Add(container);
             dialoguePanel.Controls.Add(container);
             return container;
         }
+
+
 
         public void acceptInfoFromFile(DialogueData dialogueData, bool append = false)
         {
@@ -209,7 +229,31 @@ namespace DialogueEditor.src
         /// </summary>
         public void clearNodes()
         {
-            containers.ForEach(cn => cn.Dispose());
+            containers.ForEach(cn => { 
+                for (int i = cn.Controls.Count-1; i >= 0; i--)
+                {
+                    Control c = cn.Controls[i];
+                    if (c is Node)
+                    {
+                        Node node = (Node)c;
+                        node.Parent.Controls.Remove(node);
+                        if (c is NodeCondition)
+                        {
+                            poolConditions.returnItem((NodeCondition)node);
+                        }
+                        else if (c is NodeQuote)
+                        {
+                            poolQuotes.returnItem((NodeQuote)node);
+                        }
+                        else if (c is NodeAction)
+                        {
+                            poolActions.returnItem((NodeAction)node);
+                        }
+                    }
+                }
+                cn.Parent.Controls.Remove(cn);
+                poolDialogues.returnItem(cn);
+            });
             containers.Clear();
         }
 
@@ -223,14 +267,27 @@ namespace DialogueEditor.src
             {
                 Node node = (Node)c;
                 node.data.path.remove(node.data);
-                node.Dispose();
+                node.Parent.Controls.Remove(node);
+                if (c is NodeCondition)
+                {
+                    poolConditions.returnItem((NodeCondition)node);
+                }
+                else if (c is NodeQuote)
+                {
+                    poolQuotes.returnItem((NodeQuote)node);
+                }
+                else if (c is NodeAction)
+                {
+                    poolActions.returnItem((NodeAction)node);
+                }
             }
             else if (c is NodeDialogue)
             {
                 NodeDialogue container = (NodeDialogue)c;
                 dialogueData.dialogues.Remove(container.path);
                 containers.Remove(container);
-                container.Dispose();
+                container.Parent.Controls.Remove(container);
+                poolDialogues.returnItem(container);
             }
         }
 
