@@ -119,7 +119,7 @@ namespace DialogueEditor.src
                 if (template != null)
                 {
                     condition = new Condition(
-                        template.variableName, 
+                        template.variableName,
                         template.testType,
                         template.testValue + 1
                         );
@@ -259,11 +259,22 @@ namespace DialogueEditor.src
 
         public void filterCharacters(List<string> characters)
         {
-            clearNodes();
             List<DialoguePath> filteredPaths = dialogueData.dialogues.Where(
                 d => d.allCharactersPresent(characters)
                 ).ToList();
-            populateNodes(filteredPaths);
+            containers.ForEach(
+                cn =>
+                {
+                    if (filteredPaths.Contains(cn.path))
+                    {
+                        cn.Show();
+                    }
+                    else
+                    {
+                        cn.Hide();
+                    }
+                }
+                );
         }
 
         public void setDefaultImageFileName(string character, string imageFileName)
