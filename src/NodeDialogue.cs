@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace DialogueEditor.src
 {
-    public class NodeDialogue : FlowLayoutPanel
+    public class NodeDialogue : Node
     {
         public readonly DialoguePath path;
 

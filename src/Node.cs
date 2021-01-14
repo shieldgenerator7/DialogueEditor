@@ -7,20 +7,28 @@ using System.Windows.Forms;
 
 namespace DialogueEditor.src
 {
-    public abstract class Node : FlowLayoutPanel
+    public abstract class Node
     {
-        public readonly DialogueComponent data;
+        private Vector size;
+        public Vector Size => size;
+
+        public Vector position;
 
         /// <summary>
         /// Used to determine which types should be sorted before other types
         /// </summary>
-        public abstract int OrderCode{get;}
+        public abstract int OrderCode { get; }
 
-        public Node(DialogueComponent component) : base()
+        public Node() : base()
         {
-            this.data = component;
             Click += (sender, e) => Managers.Control.select(this);
         }
+
+        public bool isOnScreen(Vector mapPos, Vector screenSize)
+            => position.x + size.x >= mapPos.x
+                && mapPos.x + screenSize.x >= position.x
+                && position.y + size.y >= mapPos.y
+                && mapPos.y + screenSize.y >= position.y;
 
         public abstract int CompareTo(Node n);
 
