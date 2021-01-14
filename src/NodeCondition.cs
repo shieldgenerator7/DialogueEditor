@@ -11,6 +11,7 @@ namespace DialogueEditor.src
     public class NodeCondition : Node
     {
         public readonly Condition condition;
+        public override DialogueComponent data => condition;
 
         public override int OrderCode => 1;
 

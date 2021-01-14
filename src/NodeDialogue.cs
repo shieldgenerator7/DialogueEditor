@@ -7,6 +7,7 @@ namespace DialogueEditor.src
     public class NodeDialogue : Node
     {
         public readonly DialoguePath path;
+        public override DialogueComponent data => throw new NotImplementedException();
 
         private List<Node> nodes = new List<Node>();
         public List<Node> Nodes => nodes;

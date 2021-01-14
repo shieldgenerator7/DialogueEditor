@@ -12,6 +12,7 @@ namespace DialogueEditor.src
     public class NodeQuote : Node
     {
         public readonly Quote quote;
+        public override DialogueComponent data => quote;
 
         private static OpenFileDialog ofdPicture;
         private Image image;

@@ -15,6 +15,8 @@ namespace DialogueEditor.src
 
         public Vector position;
 
+        public abstract DialogueComponent data { get; }
+
         /// <summary>
         /// Used to determine which types should be sorted before other types
         /// </summary>

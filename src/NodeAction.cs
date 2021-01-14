@@ -12,6 +12,7 @@ namespace DialogueEditor.src
     {
 
         public readonly Action action;
+        public override DialogueComponent data => action;
 
         public override int OrderCode => 3;
 
