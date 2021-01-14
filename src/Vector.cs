@@ -17,12 +17,7 @@ public struct Vector
     public Vector(Size size) : this(size.Width, size.Height) { }
 
     public float Magnitude
-    {
-        get
-        {
-            return (float)Math.Sqrt((x * x) + (y * y));
-        }
-    }
+        => (float)Math.Sqrt((x * x) + (y * y));
 
     public static readonly Vector zero = new Vector(0, 0);
 
@@ -36,9 +31,7 @@ public struct Vector
 
 
     public override string ToString()
-    {
-        return "(" + x + ", " + y + ")";
-    }
+        => "(" + x + ", " + y + ")";
 
     public static Vector operator -(Vector a)
         => new Vector(-a.x, -a.y);
@@ -61,25 +54,15 @@ public struct Vector
     public static bool operator >(Vector a, Vector b)
         => a.Magnitude > b.Magnitude;
 
+    public override bool Equals(object obj)
+        => obj is Vector && this == (Vector)obj;
+
+    public override int GetHashCode()
+        => base.GetHashCode();
+
     public static bool operator ==(Vector a, Vector b)
-    {
-        bool aNull = ReferenceEquals(a, null);
-        bool bNull = ReferenceEquals(b, null);
-        if (aNull || bNull)
-        {
-            return aNull == bNull;
-        }
-        return a.x == b.x && a.y == b.y;
-    }
+        => a.x == b.x && a.y == b.y;
 
     public static bool operator !=(Vector a, Vector b)
-    {
-        bool aNull = ReferenceEquals(a, null);
-        bool bNull = ReferenceEquals(b, null);
-        if (aNull || bNull)
-        {
-            return aNull != bNull;
-        }
-        return a.x != b.x || a.y != b.y;
-    }
+        => a.x != b.x || a.y != b.y;
 }
