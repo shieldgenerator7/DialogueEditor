@@ -81,6 +81,7 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
@@ -301,6 +302,7 @@
             this.pnlDialogue.Size = new System.Drawing.Size(1053, 865);
             this.pnlDialogue.TabIndex = 2;
             this.pnlDialogue.WrapContents = false;
+            this.pnlDialogue.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlDialogue_Paint);
             // 
             // spltMain
             // 

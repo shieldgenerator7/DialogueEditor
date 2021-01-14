@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,6 +30,8 @@ namespace DialogueEditor.src
                 && mapPos.x + screenSize.x >= position.x
                 && position.y + size.y >= mapPos.y
                 && mapPos.y + screenSize.y >= position.y;
+
+        public abstract void paint(Graphics g);
 
         public abstract int CompareTo(Node n);
 

@@ -265,5 +265,10 @@ namespace DialogueEditor
         {
             checkEnableCharacterControls();
         }
+
+        private void pnlDialogue_Paint(object sender, PaintEventArgs e)
+        {
+            Managers.Display.paint(e.Graphics);
+        }
     }
 }
