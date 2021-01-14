@@ -15,6 +15,7 @@ public struct Vector
     public Vector(Vector vector) : this(vector.x, vector.y) { }
     public Vector(Point point) : this(point.X, point.Y) { }
     public Vector(Size size) : this(size.Width, size.Height) { }
+    public Vector(SizeF size) : this((int)size.Width, (int)size.Height) { }
 
     public float Magnitude
         => (float)Math.Sqrt((x * x) + (y * y));
@@ -32,6 +33,9 @@ public struct Vector
 
     public override string ToString()
         => "(" + x + ", " + y + ")";
+
+    public static implicit operator PointF(Vector a)
+        => new PointF(a.x, a.y);
 
     public static Vector operator -(Vector a)
         => new Vector(-a.x, -a.y);

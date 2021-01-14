@@ -268,7 +268,7 @@ namespace DialogueEditor
 
         private void pnlDialogue_Paint(object sender, PaintEventArgs e)
         {
-            Managers.Display.paint(e.Graphics);
+            Managers.Display.paint(e.Graphics, (Panel)sender);
         }
     }
 }

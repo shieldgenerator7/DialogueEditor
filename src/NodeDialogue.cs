@@ -9,6 +9,7 @@ namespace DialogueEditor.src
         public readonly DialoguePath path;
 
         private List<Node> nodes = new List<Node>();
+        public List<Node> Nodes => nodes;
 
         public string TitleText
         {

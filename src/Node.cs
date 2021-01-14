@@ -10,8 +10,8 @@ namespace DialogueEditor.src
 {
     public abstract class Node
     {
-        private Vector size;
-        public Vector Size => size;
+        protected Vector size;
+        public Vector Size { get => size; set => size = value; }
 
         public Vector position;
 
