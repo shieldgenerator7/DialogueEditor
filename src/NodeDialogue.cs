@@ -25,10 +25,6 @@ namespace DialogueEditor.src
             this.path = path;
         }
         public override int OrderCode => 0;
-        public override void paint(Graphics g)
-        {
-            throw new NotImplementedException();
-        }
         public override int CompareTo(Node n)
         {
             throw new NotImplementedException();

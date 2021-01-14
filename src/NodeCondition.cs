@@ -22,9 +22,5 @@ namespace DialogueEditor.src
 
         public override int CompareTo(Node n)
            => this.condition.variableName.CompareTo(((NodeCondition)n).condition.variableName);
-        public override void paint(Graphics g)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

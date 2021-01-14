@@ -103,10 +103,6 @@ namespace DialogueEditor.src
                 }
             }
         }
-        public override void paint(Graphics g)
-        {
-            throw new NotImplementedException();
-        }
 
         public override int CompareTo(Node n)
             => this.quote.Index - ((NodeQuote)n).quote.Index;

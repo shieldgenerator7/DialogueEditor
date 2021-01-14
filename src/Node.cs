@@ -24,14 +24,6 @@ namespace DialogueEditor.src
         {
         }
 
-        public bool isOnScreen(Vector mapPos, Vector screenSize)
-            => position.x + size.x >= mapPos.x
-                && mapPos.x + screenSize.x >= position.x
-                && position.y + size.y >= mapPos.y
-                && mapPos.y + screenSize.y >= position.y;
-
-        public abstract void paint(Graphics g);
-
         public abstract int CompareTo(Node n);
 
         public static implicit operator bool(Node node)
