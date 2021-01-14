@@ -22,7 +22,6 @@ namespace DialogueEditor.src
 
         public Node() : base()
         {
-            Click += (sender, e) => Managers.Control.select(this);
         }
 
         public bool isOnScreen(Vector mapPos, Vector screenSize)
