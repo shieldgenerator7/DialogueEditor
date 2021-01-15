@@ -15,7 +15,7 @@ namespace DialogueEditor.src
         public override DialogueComponent data => quote;
 
         private static OpenFileDialog ofdPicture;
-        private Image image;
+        public Image image { get; private set; }
 
         public string QuoteText
         {

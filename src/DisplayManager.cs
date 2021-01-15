@@ -13,11 +13,14 @@ public class DisplayManager
     /// </summary>
     Vector cursor = new Vector(10, 10);
 
-    Font font = new Font("Ariel", 15);
+    const int fontSize = 15;
+    Font font = new Font("Ariel", fontSize);
     StringFormat stringFormat;
     Brush textBrush = new SolidBrush(Color.Black);
 
     Brush backBrush = new SolidBrush(Color.LightGray);
+
+    const int portraitSize = 50;
 
     Graphics g;
 
@@ -93,6 +96,14 @@ public class DisplayManager
         nq.position = cursor;
         string text = nq.QuoteText;
         drawString(text, nq.position);
+        if (nq.image == null)
+        {
+            nq.refreshImage();
+        }
+        if (nq.image != null)
+        {
+            g.DrawImage(nq.image, nq.position.x, nq.position.y, portraitSize, portraitSize);
+        }
         cursor.y += nq.size.y;
     }
 
