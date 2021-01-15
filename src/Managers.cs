@@ -26,6 +26,10 @@ public class Managers
     public static DisplayManager Display
         => instance.displayManager;
 
+    private LayoutManager layoutManager;
+    public static LayoutManager Layout
+        => instance.layoutManager;
+
     private ColorSettings colorSettings;
     public static ColorSettings Colors
         => instance.colorSettings;
@@ -53,6 +57,7 @@ public class Managers
         this.controlManager = new ControlManager();
         this.fileManager = new FileManager();
         this.displayManager = new DisplayManager();
+        this.layoutManager = new LayoutManager();
         this.colorSettings = new ColorSettings();
         this.images = new ImageBank();
     }
