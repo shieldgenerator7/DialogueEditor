@@ -30,6 +30,10 @@ public class Managers
     public static ColorSettings Colors
         => instance.colorSettings;
 
+    private ImageBank images;
+    public static ImageBank Images
+        => instance.images;
+
     public static frmMain Form
         => instance.mainForm;
 
@@ -50,6 +54,7 @@ public class Managers
         this.fileManager = new FileManager();
         this.displayManager = new DisplayManager();
         this.colorSettings = new ColorSettings();
+        this.images = new ImageBank();
     }
 
     public static bool Initialized => instance != null;

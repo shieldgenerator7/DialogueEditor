@@ -96,7 +96,7 @@ namespace DialogueEditor.src
             {
                 try
                 {
-                    image = Image.FromFile(this.quote.imageFileName);
+                    image = Managers.Images.getImage(this.quote.imageFileName);
                 }
                 catch (FileNotFoundException fnfe)
                 {

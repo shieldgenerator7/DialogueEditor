@@ -89,6 +89,7 @@
     <Compile Include="src\ColorSettings.cs" />
     <Compile Include="src\ControlManager.cs" />
     <Compile Include="src\DisplayManager.cs" />
+    <Compile Include="src\ImageBank.cs" />
     <Compile Include="src\Model\Action.cs" />
     <Compile Include="src\Model\Condition.cs" />
     <Compile Include="src\Model\DialogueComponent.cs" />
