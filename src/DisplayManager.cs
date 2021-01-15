@@ -17,6 +17,8 @@ public class DisplayManager
     StringFormat stringFormat;
     Brush textBrush = new SolidBrush(Color.Black);
 
+    Brush backBrush = new SolidBrush(Color.LightGray);
+
     Graphics g;
 
 
@@ -40,9 +42,9 @@ public class DisplayManager
         this.g = null;
     }
     public bool nodeOnScreen(Node n, Vector mapPos, Vector screenSize)
-        => n.position.x + n.Size.x >= mapPos.x
+        => n.position.x + n.size.x >= mapPos.x
         && mapPos.x + screenSize.x >= n.position.x
-        && n.position.y + n.Size.y >= mapPos.y
+        && n.position.y + n.size.y >= mapPos.y
         && mapPos.y + screenSize.y >= n.position.y;
 
     #region Node-Specific Methods
@@ -68,7 +70,21 @@ public class DisplayManager
     private void paintNode(NodeDialogue nd)
     {
         nd.position = cursor;
+        nd.size = Vector.zero;
+        //Set size
+        nd.Nodes.ForEach(n =>
+        {
+            sizeNode(n);
+            nd.size.x = Math.Max(nd.size.x, n.size.x);
+            nd.size.y += n.size.y + 2;
+        });
+        nd.size.x += 4;
+        nd.position.x -= 2;
+        //Draw back
+        g.FillRectangle(backBrush, nd.position.x, nd.position.y, nd.size.x, nd.size.y);
+        //Draw nodes
         nd.Nodes.ForEach(n => paintNode(n));
+        //Update cursor
         cursor.x += MAX_WIDTH + 10;
         cursor.y = 10;
     }
@@ -76,9 +92,21 @@ public class DisplayManager
     {
         nq.position = cursor;
         string text = nq.QuoteText;
-        nq.Size = measureString(text);
         drawString(text, nq.position);
-        cursor.y += nq.Size.y;
+        cursor.y += nq.size.y;
+    }
+
+    private void sizeNode(Node n)
+    {
+        if (n is NodeQuote)
+        {
+            sizeNode((NodeQuote)n);
+        }
+    }
+    private void sizeNode(NodeQuote nq)
+    {
+        string text = nq.QuoteText;
+        nq.size = measureString(text);
     }
     #endregion
 

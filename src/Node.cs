@@ -10,9 +10,7 @@ namespace DialogueEditor.src
 {
     public abstract class Node
     {
-        protected Vector size;
-        public Vector Size { get => size; set => size = value; }
-
+        public Vector size;
         public Vector position;
 
         public abstract DialoguePath Path { get; }
