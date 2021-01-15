@@ -79,7 +79,7 @@ public class ControlManager
         NodeQuote node = Managers.Node.createNodeQuote();
         node.Editing = true;
         select(node);
-        return node.quote.path;
+        return node.data.path;
     }
 
     public void createQuote()
@@ -87,13 +87,11 @@ public class ControlManager
         List<Node> prevSelected = new List<Node>(selectedNodes);
         deselectAll();
         prevSelected.ForEach(
-            c =>
+            n =>
             {
-                DialoguePath path = (c is NodeDialogue)
-                    ? path = ((NodeDialogue)c).path
-                    : path = c.data.path;
-                int index = (c is NodeQuote)
-                    ? ((NodeQuote)c).quote.Index
+                DialoguePath path = n.Path;
+                int index = (n is NodeQuote)
+                    ? ((NodeQuote)n).quote.Index
                     : -1;
                 NodeQuote node = Managers.Node.createNodeQuote(path, index);
                 node.Editing = true;
@@ -113,11 +111,9 @@ public class ControlManager
         List<Node> prevSelected = new List<Node>(selectedNodes);
         deselectAll();
         prevSelected.ForEach(
-            c =>
+            n =>
             {
-                DialoguePath path = (c is NodeDialogue)
-                    ? path = ((NodeDialogue)c).path
-                    : path = ((Node)c).data.path;
+                DialoguePath path = n.Path;
                 NodeCondition node = Managers.Node.createNodeCondition(path);
                 select(node, true);
             }
@@ -136,11 +132,9 @@ public class ControlManager
         List<Node> prevSelected = new List<Node>(selectedNodes);
         deselectAll();
         prevSelected.ForEach(
-            c =>
+            n =>
             {
-                DialoguePath path = (c is NodeDialogue)
-                    ? path = ((NodeDialogue)c).path
-                    : path = ((Node)c).data.path;
+                DialoguePath path = n.Path;
                 NodeAction node = Managers.Node.createNodeAction(path);
                 select(node, true);
             }

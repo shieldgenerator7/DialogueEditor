@@ -214,19 +214,19 @@ namespace DialogueEditor.src
         /// <summary>
         /// Delete the given NodeDialogue or Node
         /// </summary>
-        /// <param name="c"></param>
-        public void delete(Node c)
+        /// <param name="n"></param>
+        public void delete(Node n)
         {
             //2021-01-14: TODO
-            if (c is Node)
+            if (n is NodeComponent)
             {
-                Node node = (Node)c;
+                NodeComponent node = (NodeComponent)n;
                 node.data.path.remove(node.data);
                 //node.Dispose();
             }
-            else if (c is NodeDialogue)
+            else if (n is NodeDialogue)
             {
-                NodeDialogue container = (NodeDialogue)c;
+                NodeDialogue container = (NodeDialogue)n;
                 dialogueData.dialogues.Remove(container.path);
                 containers.Remove(container);
                 //container.Dispose();
