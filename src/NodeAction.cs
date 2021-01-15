@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace DialogueEditor.src
 {
-    public class NodeAction : Node
+    public class NodeAction : NodeComponent
     {
 
         public readonly Action action;

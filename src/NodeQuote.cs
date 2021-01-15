@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace DialogueEditor.src
 {
-    public class NodeQuote : Node
+    public class NodeQuote : NodeComponent
     {
         public readonly Quote quote;
         public override DialogueComponent data => quote;

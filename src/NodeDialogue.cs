@@ -7,10 +7,10 @@ namespace DialogueEditor.src
     public class NodeDialogue : Node
     {
         public readonly DialoguePath path;
-        public override DialogueComponent data => throw new NotImplementedException();
+        public override DialoguePath Path => path;
 
-        private List<Node> nodes = new List<Node>();
-        public List<Node> Nodes => nodes;
+        private List<NodeComponent> nodes = new List<NodeComponent>();
+        public List<NodeComponent> Nodes => nodes;
 
         public string TitleText
         {
@@ -26,14 +26,9 @@ namespace DialogueEditor.src
             //Instance variables
             this.path = path;
         }
-        public override int OrderCode => 0;
-        public override int CompareTo(Node n)
-        {
-            throw new NotImplementedException();
-        }
 
 
-        public void AddNode(Node n)
+        public void AddNode(NodeComponent n)
         {
             nodes.Add(n);
             sortList();

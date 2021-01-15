@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace DialogueEditor.src
 {
-    public class NodeCondition : Node
+    public class NodeCondition : NodeComponent
     {
         public readonly Condition condition;
         public override DialogueComponent data => condition;

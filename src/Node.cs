@@ -15,18 +15,11 @@ namespace DialogueEditor.src
 
         public Vector position;
 
-        public abstract DialogueComponent data { get; }
-
-        /// <summary>
-        /// Used to determine which types should be sorted before other types
-        /// </summary>
-        public abstract int OrderCode { get; }
+        public abstract DialoguePath Path { get; }
 
         public Node() : base()
         {
         }
-
-        public abstract int CompareTo(Node n);
 
         public static implicit operator bool(Node node)
             => node != null;

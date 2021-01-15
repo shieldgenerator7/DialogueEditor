@@ -101,6 +101,7 @@
     <Compile Include="src\NodeAction.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="src\NodeComponent.cs" />
     <Compile Include="src\NodeCondition.cs">
       <SubType>Component</SubType>
     </Compile>
