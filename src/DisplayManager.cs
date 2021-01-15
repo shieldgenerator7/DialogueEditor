@@ -91,14 +91,17 @@ public class DisplayManager
         //Draw nodes
         nd.Nodes.ForEach(n => paintNode(n));
         //Update cursor
-        cursor.x += MAX_WIDTH + BUFFER_WIDTH * 2;
+        cursor.x += nd.size.x;
         cursor.y = BUFFER_WIDTH;
     }
     private void paintNode(NodeQuote nq)
     {
         nq.position = cursor;
         string text = nq.QuoteText;
-        drawString(text, nq.position);
+        Vector textPosition = nq.position + Vector.right * (portraitSize + BUFFER_WIDTH);
+        int imageWidth = portraitSize + BUFFER_WIDTH;
+        int textWidth = MAX_WIDTH - imageWidth;
+        drawString(text, textPosition, textWidth);
         if (nq.image == null)
         {
             nq.refreshImage();
@@ -120,11 +123,11 @@ public class DisplayManager
     private void sizeNode(NodeQuote nq)
     {
         string text = nq.QuoteText;
-        nq.size = measureString(text);
-        if (nq.image != null)
-        {
-            nq.size.y = Math.Max(nq.size.y, portraitSize);
-        }
+        int imageWidth = portraitSize + BUFFER_WIDTH;
+        int textWidth = MAX_WIDTH - imageWidth;
+        nq.size = measureString(text, textWidth);
+        nq.size.x += imageWidth;
+        nq.size.y = Math.Max(nq.size.y, portraitSize);
     }
     #endregion
 
@@ -134,9 +137,9 @@ public class DisplayManager
         return new Vector(g.MeasureString(text, font, maxWidth, stringFormat));
     }
 
-    public void drawString(string text, Vector position)
+    public void drawString(string text, Vector position, int maxWidth = MAX_WIDTH)
     {
-        RectangleF rectf = new RectangleF(position.x, position.y, MAX_WIDTH, 200);
+        RectangleF rectf = new RectangleF(position.x, position.y, maxWidth, 2000);
         g.DrawString(text, font, textBrush, rectf, stringFormat);
     }
     #endregion
