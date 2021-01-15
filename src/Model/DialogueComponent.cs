@@ -1,12 +1,8 @@
 ﻿
 using System;
 
-public class DialogueComponent
+public abstract class DialogueComponent
 {
-	[NonSerialized]
-	public DialoguePath path;
-
-	public DialogueComponent()
-	{
-	}
+    [NonSerialized]
+    public DialoguePath path;
 }
