@@ -7,11 +7,12 @@ using System.Linq;
 public class DisplayManager
 {
     const int MAX_WIDTH = 250;
+    const int BUFFER_WIDTH = 10;
 
     /// <summary>
     /// Where the next Node will be placed
     /// </summary>
-    Vector cursor = new Vector(10, 10);
+    Vector cursor = new Vector(BUFFER_WIDTH, BUFFER_WIDTH);
 
     const int fontSize = 15;
     Font font = new Font("Ariel", fontSize);
@@ -38,7 +39,7 @@ public class DisplayManager
         this.g = g;
         Vector mapPos = Vector.zero;
         Vector panelSize = new Vector(panel.Size);
-        cursor = new Vector(10, 10);
+        cursor = new Vector(BUFFER_WIDTH, BUFFER_WIDTH);
         Managers.Node.containers
             .FindAll(n => nodeOnScreen(n, mapPos, panelSize))
             .ForEach(n => paintNode(n));
@@ -73,23 +74,25 @@ public class DisplayManager
     private void paintNode(NodeDialogue nd)
     {
         nd.position = cursor;
+        cursor.x += BUFFER_WIDTH;
+        cursor.y += BUFFER_WIDTH;
         nd.size = Vector.zero;
         //Set size
         nd.Nodes.ForEach(n =>
         {
             sizeNode(n);
             nd.size.x = Math.Max(nd.size.x, n.size.x);
-            nd.size.y += n.size.y + 2;
+            nd.size.y += n.size.y + BUFFER_WIDTH;
         });
-        nd.size.x += 4;
-        nd.position.x -= 2;
+        nd.size.x += BUFFER_WIDTH * 2;
+        nd.size.y -= BUFFER_WIDTH;
         //Draw back
         g.FillRectangle(backBrush, nd.position.x, nd.position.y, nd.size.x, nd.size.y);
         //Draw nodes
         nd.Nodes.ForEach(n => paintNode(n));
         //Update cursor
-        cursor.x += MAX_WIDTH + 10;
-        cursor.y = 10;
+        cursor.x += MAX_WIDTH + BUFFER_WIDTH * 2;
+        cursor.y = BUFFER_WIDTH;
     }
     private void paintNode(NodeQuote nq)
     {
@@ -104,7 +107,7 @@ public class DisplayManager
         {
             g.DrawImage(nq.image, nq.position.x, nq.position.y, portraitSize, portraitSize);
         }
-        cursor.y += nq.size.y;
+        cursor.y += nq.size.y + BUFFER_WIDTH;
     }
 
     private void sizeNode(Node n)
@@ -118,6 +121,10 @@ public class DisplayManager
     {
         string text = nq.QuoteText;
         nq.size = measureString(text);
+        if (nq.image != null)
+        {
+            nq.size.y = Math.Max(nq.size.y, portraitSize);
+        }
     }
     #endregion
 
