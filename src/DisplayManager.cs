@@ -6,7 +6,12 @@ using System.Linq;
 
 public class DisplayManager
 {
-    const int MAX_WIDTH = 200;
+    const int MAX_WIDTH = 250;
+
+    /// <summary>
+    /// Where the next Node will be placed
+    /// </summary>
+    Vector cursor = new Vector(10, 10);
 
     Font font = new Font("Ariel", 15);
     StringFormat stringFormat;
@@ -28,6 +33,7 @@ public class DisplayManager
         this.g = g;
         Vector mapPos = Vector.zero;
         Vector panelSize = new Vector(panel.Size);
+        cursor = new Vector(10, 10);
         Managers.Node.containers
             .FindAll(n => nodeOnScreen(n, mapPos, panelSize))
             .ForEach(n => paintNode(n));
@@ -61,13 +67,18 @@ public class DisplayManager
     }
     private void paintNode(NodeDialogue nd)
     {
+        nd.position = cursor;
         nd.Nodes.ForEach(n => paintNode(n));
+        cursor.x += MAX_WIDTH + 10;
+        cursor.y = 10;
     }
     private void paintNode(NodeQuote nq)
     {
+        nq.position = cursor;
         string text = nq.QuoteText;
         nq.Size = measureString(text);
         drawString(text, nq.position);
+        cursor.y += nq.Size.y;
     }
     #endregion
 
@@ -79,7 +90,8 @@ public class DisplayManager
 
     public void drawString(string text, Vector position)
     {
-        g.DrawString(text, font, textBrush, position, stringFormat);
+        RectangleF rectf = new RectangleF(position.x, position.y, MAX_WIDTH, 200);
+        g.DrawString(text, font, textBrush, rectf, stringFormat);
     }
     #endregion
 }
