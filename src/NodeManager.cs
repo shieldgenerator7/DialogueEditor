@@ -85,7 +85,7 @@ namespace DialogueEditor.src
             foreach (string text in textArray)
             {
                 NodeQuote node = createNodeQuote(path);
-                node.Text = text;
+                node.QuoteText = text;
                 lastNode = node;
             }
             return lastNode;
@@ -173,7 +173,6 @@ namespace DialogueEditor.src
             }
             NodeDialogue container = new NodeDialogue(path);
             containers.Add(container);
-            dialoguePanel.Controls.Add(container);
             return container;
         }
 
@@ -209,7 +208,6 @@ namespace DialogueEditor.src
         /// </summary>
         public void clearNodes()
         {
-            containers.ForEach(cn => cn.Dispose());
             containers.Clear();
         }
 
@@ -217,20 +215,21 @@ namespace DialogueEditor.src
         /// Delete the given NodeDialogue or Node
         /// </summary>
         /// <param name="c"></param>
-        public void delete(Control c)
+        public void delete(Node c)
         {
+            //2021-01-14: TODO
             if (c is Node)
             {
                 Node node = (Node)c;
                 node.data.path.remove(node.data);
-                node.Dispose();
+                //node.Dispose();
             }
             else if (c is NodeDialogue)
             {
                 NodeDialogue container = (NodeDialogue)c;
                 dialogueData.dialogues.Remove(container.path);
                 containers.Remove(container);
-                container.Dispose();
+                //container.Dispose();
             }
         }
 
@@ -265,13 +264,14 @@ namespace DialogueEditor.src
             containers.ForEach(
                 cn =>
                 {
+                    //2021-01-14: TODO
                     if (filteredPaths.Contains(cn.path))
                     {
-                        cn.Show();
+                        //cn.Show();
                     }
                     else
                     {
-                        cn.Hide();
+                        //cn.Hide();
                     }
                 }
                 );
@@ -308,11 +308,11 @@ namespace DialogueEditor.src
             containers.ForEach(
                 container =>
                 {
-                    foreach (Control c in container.Controls)
+                    foreach (Node n in container.Nodes)
                     {
-                        if (c is NodeQuote)
+                        if (n is NodeQuote)
                         {
-                            ((NodeQuote)c).refreshImage();
+                            ((NodeQuote)n).refreshImage();
                         }
                     }
                 }

@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 public class ControlManager
 {
-    private List<Control> selectedNodes = new List<Control>();
+    private List<Node> selectedNodes = new List<Node>();
     public ControlManager()
     {
     }
@@ -17,42 +17,42 @@ public class ControlManager
     /// Selects the given NodeDialogue or Node subtype.
     /// Appends if the SHIFT key is held down.
     /// </summary>
-    /// <param name="control"></param>
-    public void select(Control control)
+    /// <param name="node"></param>
+    public void select(Node node)
     {
         //2020-09-27: copied from https://stackoverflow.com/a/973733/2336212
-        select(control, Control.ModifierKeys == Keys.Shift);
+        select(node, Control.ModifierKeys == Keys.Shift);
     }
 
     /// <summary>
     /// Selects the given NodeDialogue or Node subtype
     /// </summary>
-    /// <param name="control"></param>
+    /// <param name="node"></param>
     /// <param name="append">true to add to list, false to overwrite it</param>
-    public void select(Control control, bool append)
+    public void select(Node node, bool append)
     {
-        if (control is NodeDialogue || control is Node)
+        if (node is NodeDialogue || node is Node)
         {
             if (!append)
             {
-                selectedNodes.ForEach(c => c.BackColor = Managers.Colors.unselectColor);
+                //selectedNodes.ForEach(c => c.BackColor = Managers.Colors.unselectColor);
                 selectedNodes.Clear();
             }
-            if (!selectedNodes.Contains(control))
+            if (!selectedNodes.Contains(node))
             {
-                control.BackColor = Managers.Colors.selectColor;
-                selectedNodes.Add(control);
+                //node.BackColor = Managers.Colors.selectColor;
+                selectedNodes.Add(node);
             }
         }
     }
 
-    public void deselect(Control control)
+    public void deselect(Node node)
     {
-        control.BackColor = Managers.Colors.unselectColor;
-        selectedNodes.Remove(control);
-        if (control is NodeQuote)
+        //node.BackColor = Managers.Colors.unselectColor;
+        selectedNodes.Remove(node);
+        if (node is NodeQuote)
         {
-            ((NodeQuote)control).Editing = false;
+            ((NodeQuote)node).Editing = false;
         }
     }
 
@@ -67,9 +67,9 @@ public class ControlManager
         }
     }
 
-    public void processSelectedNodes(Action<Control> action)
+    public void processSelectedNodes(Action<Node> action)
     {
-        selectedNodes.ForEach(c => action(c));
+        selectedNodes.ForEach(n => action(n));
     }
         
     public DialoguePath createDialoguePath()
@@ -84,14 +84,14 @@ public class ControlManager
 
     public void createQuote()
     {
-        List<Control> prevSelected = new List<Control>(selectedNodes);
+        List<Node> prevSelected = new List<Node>(selectedNodes);
         deselectAll();
         prevSelected.ForEach(
             c =>
             {
                 DialoguePath path = (c is NodeDialogue)
                     ? path = ((NodeDialogue)c).path
-                    : path = ((Node)c).data.path;
+                    : path = c.data.path;
                 int index = (c is NodeQuote)
                     ? ((NodeQuote)c).quote.Index
                     : -1;
@@ -110,7 +110,7 @@ public class ControlManager
 
     public void createCondition()
     {
-        List<Control> prevSelected = new List<Control>(selectedNodes);
+        List<Node> prevSelected = new List<Node>(selectedNodes);
         deselectAll();
         prevSelected.ForEach(
             c =>
@@ -133,7 +133,7 @@ public class ControlManager
 
     public void createAction()
     {
-        List<Control> prevSelected = new List<Control>(selectedNodes);
+        List<Node> prevSelected = new List<Node>(selectedNodes);
         deselectAll();
         prevSelected.ForEach(
             c =>
@@ -190,7 +190,7 @@ public class ControlManager
         if (!selectedNodes.Any(c => c is NodeQuote && ((NodeQuote)c).Editing))
         {
             bool canDeleteAll = true;
-            List<Control> dialogues = selectedNodes.FindAll(c => c is NodeDialogue);
+            List<Node> dialogues = selectedNodes.FindAll(n => n is NodeDialogue);
             if (dialogues.Count > 0)
             {
                 string titles = "";
@@ -210,7 +210,7 @@ public class ControlManager
             }
             if (canDeleteAll)
             {
-                selectedNodes.ForEach(c => Managers.Node.delete(c));
+                selectedNodes.ForEach(n => Managers.Node.delete(n));
                 selectedNodes.Clear();
                 return true;
             }
