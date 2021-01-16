@@ -48,7 +48,7 @@ public class LayoutManager
             nd.size.y += n.size.y + DisplayManager.BUFFER_WIDTH;
         });
         nd.size.x += DisplayManager.BUFFER_WIDTH * 2;
-        nd.size.y -= DisplayManager.BUFFER_WIDTH;
+        nd.size.y += DisplayManager.BUFFER_WIDTH;
         //Update cursor
         cursor.x += nd.size.x;
         cursor.y = DisplayManager.BUFFER_WIDTH;
