@@ -53,15 +53,26 @@ public class DisplayManager
     }
     public void scroll(int dirX, int dirY)
     {
-        mapPos.x += dirX * (MAX_WIDTH + BUFFER_WIDTH * 3);
+        int width = MAX_WIDTH + BUFFER_WIDTH * 3;
+        mapPos.x += dirX * width;
         if (mapPos.x < 0)
         {
             mapPos.x = 0;
+        }
+        int maxPosX = (Managers.Node.containers.Count - 1) * width;
+        if (mapPos.x > maxPosX)
+        {
+            mapPos.x = maxPosX;
         }
         mapPos.y += dirY * (50);
         if (mapPos.y < 0)
         {
             mapPos.y = 0;
+        }
+        int maxPosY = Managers.Node.containers.Max(c => c.size.y) - 50;
+        if (mapPos.y > maxPosY)
+        {
+            mapPos.y = maxPosY;
         }
     }
 
