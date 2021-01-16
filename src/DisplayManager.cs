@@ -47,7 +47,10 @@ public class DisplayManager
         && n.position.y + n.size.y >= mapPos.y
         && mapPos.y + screenSize.y >= n.position.y;
 
+    public void unscroll()
     {
+        mapPos = Vector.zero;
+    }
     public void scroll(int dirX, int dirY)
     {
         mapPos.x += dirX * (MAX_WIDTH + BUFFER_WIDTH * 3);

@@ -235,11 +235,11 @@ namespace DialogueEditor
                 Managers.Node.filterCharacters(new List<string>());
                 return;
             }
-            pnlDialogue.SuspendLayout();
             Managers.Node.filterCharacters(
                 new List<string>(txtCharacterFilters.Text.Split(','))
                 );
-            pnlDialogue.ResumeLayout();
+            Managers.Display.unscroll();
+            pnlDialogue.Invalidate();
         }
 
         private void checkEnableCharacterControls()
