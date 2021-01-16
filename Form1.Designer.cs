@@ -52,7 +52,7 @@
             this.moveToTopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.moveToBottomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pnlDialogue = new System.Windows.Forms.FlowLayoutPanel();
+            this.pnlDialogue = new DisplayPanel();
             this.spltMain = new System.Windows.Forms.SplitContainer();
             this.tabInfo = new System.Windows.Forms.TabControl();
             this.tabCharacters = new System.Windows.Forms.TabPage();
@@ -124,7 +124,7 @@
             // importToolStripMenuItem
             // 
             this.importToolStripMenuItem.Name = "importToolStripMenuItem";
-            this.importToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            this.importToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
             | System.Windows.Forms.Keys.O)));
             this.importToolStripMenuItem.Size = new System.Drawing.Size(377, 44);
             this.importToolStripMenuItem.Text = "&Import";
@@ -141,7 +141,7 @@
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            this.saveAsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
             | System.Windows.Forms.Keys.S)));
             this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(377, 44);
             this.saveAsToolStripMenuItem.Text = "Save &As";
@@ -179,7 +179,7 @@
             // dialoguePathToolStripMenuItem
             // 
             this.dialoguePathToolStripMenuItem.Name = "dialoguePathToolStripMenuItem";
-            this.dialoguePathToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            this.dialoguePathToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
             | System.Windows.Forms.Keys.N)));
             this.dialoguePathToolStripMenuItem.Size = new System.Drawing.Size(449, 44);
             this.dialoguePathToolStripMenuItem.Text = "&Dialogue Path";

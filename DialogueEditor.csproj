@@ -89,6 +89,9 @@
     <Compile Include="src\ColorSettings.cs" />
     <Compile Include="src\ControlManager.cs" />
     <Compile Include="src\DisplayManager.cs" />
+    <Compile Include="src\DisplayPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="src\ImageBank.cs" />
     <Compile Include="src\LayoutManager.cs" />
     <Compile Include="src\Model\Action.cs" />
