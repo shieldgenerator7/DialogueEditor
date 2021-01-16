@@ -115,6 +115,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="src\Model\Quote.cs" />
+    <Compile Include="src\TextDisplayable.cs" />
     <Compile Include="src\Utility.cs" />
     <Compile Include="src\Vector.cs" />
     <EmbeddedResource Include="Form1.resx">

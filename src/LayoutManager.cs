@@ -50,11 +50,10 @@ public class LayoutManager
         nq.position = cursor;
         string text = nq.QuoteText;
         int imageWidth = DisplayManager.portraitSize + DisplayManager.BUFFER_WIDTH;
-        nq.textPosition = nq.position + Vector.right * (imageWidth);
-        nq.textWidth = DisplayManager.MAX_WIDTH - imageWidth;
-        nq.size = Managers.Display.measureString(text, nq.textWidth);
-        nq.size.x += imageWidth;
-        nq.size.y = Math.Max(nq.size.y, DisplayManager.portraitSize);
+        nq.textBox.position = nq.position + Vector.right * (imageWidth);
+        nq.textBox.size = Managers.Display.measureString(text, nq.textBox.maxWidth);
+        nq.size.x = DisplayManager.MAX_WIDTH;
+        nq.size.y = Math.Max(nq.textBox.size.y, DisplayManager.portraitSize);
         cursor.y += nq.size.y + DisplayManager.BUFFER_WIDTH;
     }
 }

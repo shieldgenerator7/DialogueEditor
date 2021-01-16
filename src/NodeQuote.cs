@@ -61,8 +61,7 @@ namespace DialogueEditor.src
         public override int OrderCode => 2;
         public string SortString => "" + quote.Index;
 
-        public Vector textPosition;
-        public int textWidth;
+        public TextDisplayable textBox;
 
         public NodeQuote(Quote quote) : base()
         {
@@ -76,6 +75,9 @@ namespace DialogueEditor.src
             }
             //
             Editing = false;
+            //
+            int imageWidth = DisplayManager.portraitSize + DisplayManager.BUFFER_WIDTH;
+            this.textBox = new TextDisplayable(QuoteText, DisplayManager.MAX_WIDTH - imageWidth);
         }
 
         private void selectPicture(object sender, EventArgs e)

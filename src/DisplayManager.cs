@@ -76,7 +76,7 @@ public class DisplayManager
     private void paintNode(NodeQuote nq)
     {
         string text = nq.QuoteText;
-        drawString(text, nq.textPosition, nq.textWidth);
+        drawString(text, nq.textBox.position, nq.textBox.maxWidth);
         if (nq.image == null)
         {
             nq.refreshImage();
