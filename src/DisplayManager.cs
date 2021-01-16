@@ -9,7 +9,7 @@ public class DisplayManager
     public const int MAX_WIDTH = 250;
     public const int BUFFER_WIDTH = 10;
 
-    const int fontSize = 15;
+    const int fontSize = 12;
     Font font = new Font("Ariel", fontSize);
     StringFormat stringFormat;
     Brush textBrush = new SolidBrush(Color.Black);
