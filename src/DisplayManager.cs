@@ -61,10 +61,10 @@ public class DisplayManager
         {
             paintNode((NodeCondition)n);
         }
-        //else if (n is NodeAction)
-        //{
-        //    paintNode((NodeAction)n);
-        //}
+        else if (n is NodeAction)
+        {
+            paintNode((NodeAction)n);
+        }
     }
     private void paintNode(NodeDialogue nd)
     {
@@ -90,6 +90,12 @@ public class DisplayManager
         drawString(nc.txtVariableName);
         drawString(nc.txtTestType);
         drawString(nc.txtTestValue);
+    }
+    private void paintNode(NodeAction na)
+    {
+        drawString(na.txtVariableName);
+        drawString(na.txtActionType);
+        drawString(na.txtActionValue);
     }
     #endregion
 
