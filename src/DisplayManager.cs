@@ -20,6 +20,8 @@ public class DisplayManager
 
     Graphics g;
 
+    Vector mapPos = Vector.zero;
+
 
     public DisplayManager()
     {
@@ -33,7 +35,6 @@ public class DisplayManager
     {
         this.g = g;
         Managers.Layout.layoutNodes();
-        Vector mapPos = Vector.zero;
         Vector panelSize = new Vector(panel.Size);
         Managers.Node.containers
             .FindAll(n => nodeOnScreen(n, mapPos, panelSize))
@@ -45,6 +46,15 @@ public class DisplayManager
         && mapPos.x + screenSize.x >= n.position.x
         && n.position.y + n.size.y >= mapPos.y
         && mapPos.y + screenSize.y >= n.position.y;
+
+    public void scroll(int direction)
+    {
+        mapPos.x += direction * (MAX_WIDTH + BUFFER_WIDTH * 3);
+        if (mapPos.x < 0)
+        {
+            mapPos.x = 0;
+        }
+    }
 
     #region Node-Specific Methods
     private void paintNode(Node n)
@@ -69,7 +79,13 @@ public class DisplayManager
     private void paintNode(NodeDialogue nd)
     {
         //Draw back
-        g.FillRectangle(backBrush, nd.position.x, nd.position.y, nd.size.x, nd.size.y);
+        g.FillRectangle(
+            backBrush,
+            nd.position.x - mapPos.x,
+            nd.position.y - mapPos.y,
+            nd.size.x,
+            nd.size.y
+            );
         //Draw nodes
         nd.Nodes.ForEach(n => paintNode(n));
     }
@@ -82,7 +98,13 @@ public class DisplayManager
         }
         if (nq.image != null)
         {
-            g.DrawImage(nq.image, nq.position.x, nq.position.y, portraitSize, portraitSize);
+            g.DrawImage(
+                nq.image,
+                nq.position.x - mapPos.x,
+                nq.position.y - mapPos.y,
+                portraitSize,
+                portraitSize
+                );
         }
     }
     private void paintNode(NodeCondition nc)
@@ -115,7 +137,12 @@ public class DisplayManager
     }
     public void drawString(string text, Vector position, int maxWidth = MAX_WIDTH)
     {
-        RectangleF rectf = new RectangleF(position.x, position.y, maxWidth, 2000);
+        RectangleF rectf = new RectangleF(
+            position.x - mapPos.x,
+            position.y - mapPos.y,
+            maxWidth,
+            2000
+            );
         g.DrawString(text, font, textBrush, rectf, stringFormat);
     }
     #endregion

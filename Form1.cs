@@ -23,6 +23,7 @@ namespace DialogueEditor
         void refresh()
         {
             this.Invalidate();
+            this.pnlDialogue.Invalidate();
         }
 
         private void frmMain_Load(object sender, EventArgs e)
@@ -77,6 +78,18 @@ namespace DialogueEditor
                 {
                     return false;
                 }
+            }
+            else if (keyData == Keys.Left)
+            {
+                Managers.Display.scroll(-1);
+                refresh();
+                return true;
+            }
+            else if (keyData == Keys.Right)
+            {
+                Managers.Display.scroll(1);
+                refresh();
+                return true;
             }
             else
             {
