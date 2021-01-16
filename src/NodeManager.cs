@@ -261,20 +261,9 @@ namespace DialogueEditor.src
             List<DialoguePath> filteredPaths = dialogueData.dialogues.Where(
                 d => d.allCharactersPresent(characters)
                 ).ToList();
-            containers.ForEach(
-                cn =>
-                {
-                    //2021-01-14: TODO
-                    if (filteredPaths.Contains(cn.path))
-                    {
-                        //cn.Show();
-                    }
-                    else
-                    {
-                        //cn.Hide();
-                    }
-                }
-                );
+            containers.Clear();
+            populateNodes(filteredPaths);
+            dialoguePanel.Invalidate();
         }
 
         public void setDefaultImageFileName(string character, string imageFileName)
