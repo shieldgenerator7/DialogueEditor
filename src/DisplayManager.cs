@@ -57,10 +57,10 @@ public class DisplayManager
         {
             paintNode((NodeQuote)n);
         }
-        //else if (n is NodeCondition)
-        //{
-        //    paintNode((NodeCondition)n);
-        //}
+        else if (n is NodeCondition)
+        {
+            paintNode((NodeCondition)n);
+        }
         //else if (n is NodeAction)
         //{
         //    paintNode((NodeAction)n);
@@ -84,6 +84,12 @@ public class DisplayManager
         {
             g.DrawImage(nq.image, nq.position.x, nq.position.y, portraitSize, portraitSize);
         }
+    }
+    private void paintNode(NodeCondition nc)
+    {
+        drawString(nc.txtVariableName);
+        drawString(nc.txtTestType);
+        drawString(nc.txtTestValue);
     }
     #endregion
 

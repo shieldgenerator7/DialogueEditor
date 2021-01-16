@@ -25,6 +25,10 @@ public class LayoutManager
         {
             layoutNode((NodeQuote)n);
         }
+        else if (n is NodeCondition)
+        {
+            layoutNode((NodeCondition)n);
+        }
     }
     private void layoutNode(NodeDialogue nd)
     {
@@ -54,5 +58,26 @@ public class LayoutManager
         nq.size.x = DisplayManager.MAX_WIDTH;
         nq.size.y = Math.Max(nq.textBox.size.y, DisplayManager.portraitSize);
         cursor.y += nq.size.y + DisplayManager.BUFFER_WIDTH;
+    }
+    private void layoutNode(NodeCondition nc)
+    {
+        nc.position = cursor;
+        int buffer = DisplayManager.BUFFER_WIDTH / 5;
+        nc.txtVariableName.position = nc.position;
+        nc.txtVariableName.size = Managers.Display.measureString(nc.txtVariableName);
+        nc.txtTestType.position = nc.txtVariableName.position
+            + Vector.right * (nc.txtVariableName.size.x + buffer);
+        nc.txtTestType.size = Managers.Display.measureString(nc.txtTestType);
+        nc.txtTestValue.position = nc.txtTestType.position
+            + Vector.right * (nc.txtTestType.size.x + buffer);
+        nc.txtTestValue.size = Managers.Display.measureString(nc.txtTestValue);
+        nc.size.x = DisplayManager.MAX_WIDTH;
+        nc.size.y = Math.Max(
+            nc.txtVariableName.size.y,
+            Math.Max(
+                nc.txtTestType.size.y,
+                nc.txtTestValue.size.y
+            ));
+        cursor.y += nc.size.y + DisplayManager.BUFFER_WIDTH;
     }
 }

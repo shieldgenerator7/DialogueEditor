@@ -15,9 +15,26 @@ namespace DialogueEditor.src
 
         public override int OrderCode => 1;
 
+        public TextDisplayable txtVariableName;
+        public TextDisplayable txtTestType;
+        public TextDisplayable txtTestValue;
+
         public NodeCondition(Condition condition) : base()
         {
             this.condition = condition;
+
+            txtVariableName = new TextDisplayable(
+                condition.variableName,
+                3 * DisplayManager.MAX_WIDTH / 5
+                );
+            txtTestType = new TextDisplayable(
+                condition.TestTypeString,
+                DisplayManager.MAX_WIDTH / 5 - DisplayManager.BUFFER_WIDTH
+                );
+            txtTestValue = new TextDisplayable(
+                "" + condition.testValue,
+                DisplayManager.MAX_WIDTH / 5 - DisplayManager.BUFFER_WIDTH
+                );
         }
 
 
