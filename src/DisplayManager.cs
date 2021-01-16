@@ -47,12 +47,18 @@ public class DisplayManager
         && n.position.y + n.size.y >= mapPos.y
         && mapPos.y + screenSize.y >= n.position.y;
 
-    public void scroll(int direction)
     {
-        mapPos.x += direction * (MAX_WIDTH + BUFFER_WIDTH * 3);
+    public void scroll(int dirX, int dirY)
+    {
+        mapPos.x += dirX * (MAX_WIDTH + BUFFER_WIDTH * 3);
         if (mapPos.x < 0)
         {
             mapPos.x = 0;
+        }
+        mapPos.y += dirY * (50);
+        if (mapPos.y < 0)
+        {
+            mapPos.y = 0;
         }
     }
 
