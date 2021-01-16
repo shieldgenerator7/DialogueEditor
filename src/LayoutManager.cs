@@ -48,10 +48,9 @@ public class LayoutManager
     private void layoutNode(NodeQuote nq)
     {
         nq.position = cursor;
-        string text = nq.QuoteText;
         int imageWidth = DisplayManager.portraitSize + DisplayManager.BUFFER_WIDTH;
         nq.textBox.position = nq.position + Vector.right * (imageWidth);
-        nq.textBox.size = Managers.Display.measureString(text, nq.textBox.maxWidth);
+        nq.textBox.size = Managers.Display.measureString(nq.textBox);
         nq.size.x = DisplayManager.MAX_WIDTH;
         nq.size.y = Math.Max(nq.textBox.size.y, DisplayManager.portraitSize);
         cursor.y += nq.size.y + DisplayManager.BUFFER_WIDTH;

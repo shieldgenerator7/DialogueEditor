@@ -75,8 +75,7 @@ public class DisplayManager
     }
     private void paintNode(NodeQuote nq)
     {
-        string text = nq.QuoteText;
-        drawString(text, nq.textBox.position, nq.textBox.maxWidth);
+        drawString(nq.textBox);
         if (nq.image == null)
         {
             nq.refreshImage();
@@ -89,11 +88,19 @@ public class DisplayManager
     #endregion
 
     #region Graphics Wrapper Methods
+    public Vector measureString(TextDisplayable txt)
+    {
+        return measureString(txt.text, txt.maxWidth);
+    }
     public Vector measureString(string text, int maxWidth = MAX_WIDTH)
     {
         return new Vector(g.MeasureString(text, font, maxWidth, stringFormat));
     }
 
+    public void drawString(TextDisplayable txt)
+    {
+        drawString(txt.text, txt.position, txt.maxWidth);
+    }
     public void drawString(string text, Vector position, int maxWidth = MAX_WIDTH)
     {
         RectangleF rectf = new RectangleF(position.x, position.y, maxWidth, 2000);
