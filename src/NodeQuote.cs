@@ -61,6 +61,9 @@ namespace DialogueEditor.src
         public override int OrderCode => 2;
         public string SortString => "" + quote.Index;
 
+        public Vector textPosition;
+        public int textWidth;
+
         public NodeQuote(Quote quote) : base()
         {
             this.quote = quote;

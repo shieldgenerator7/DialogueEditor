@@ -76,10 +76,7 @@ public class DisplayManager
     private void paintNode(NodeQuote nq)
     {
         string text = nq.QuoteText;
-        Vector textPosition = nq.position + Vector.right * (portraitSize + BUFFER_WIDTH);
-        int imageWidth = portraitSize + BUFFER_WIDTH;
-        int textWidth = MAX_WIDTH - imageWidth;
-        drawString(text, textPosition, textWidth);
+        drawString(text, nq.textPosition, nq.textWidth);
         if (nq.image == null)
         {
             nq.refreshImage();
