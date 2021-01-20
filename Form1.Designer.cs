@@ -53,6 +53,7 @@
             this.moveToBottomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlDialogue = new DisplayPanel();
+            this.txtEdit = new System.Windows.Forms.TextBox();
             this.spltMain = new System.Windows.Forms.SplitContainer();
             this.tabInfo = new System.Windows.Forms.TabControl();
             this.tabCharacters = new System.Windows.Forms.TabPage();
@@ -68,6 +69,7 @@
             this.txtCharacterFilters = new System.Windows.Forms.RichTextBox();
             this.tabVariables = new System.Windows.Forms.TabPage();
             this.menuStrip1.SuspendLayout();
+            this.pnlDialogue.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spltMain)).BeginInit();
             this.spltMain.Panel1.SuspendLayout();
             this.spltMain.Panel2.SuspendLayout();
@@ -81,7 +83,6 @@
             // 
             // menuStrip1
             // 
-            this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
@@ -124,7 +125,7 @@
             // importToolStripMenuItem
             // 
             this.importToolStripMenuItem.Name = "importToolStripMenuItem";
-            this.importToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
+            this.importToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.O)));
             this.importToolStripMenuItem.Size = new System.Drawing.Size(377, 44);
             this.importToolStripMenuItem.Text = "&Import";
@@ -141,7 +142,7 @@
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
+            this.saveAsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.S)));
             this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(377, 44);
             this.saveAsToolStripMenuItem.Text = "Save &As";
@@ -179,7 +180,7 @@
             // dialoguePathToolStripMenuItem
             // 
             this.dialoguePathToolStripMenuItem.Name = "dialoguePathToolStripMenuItem";
-            this.dialoguePathToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
+            this.dialoguePathToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.N)));
             this.dialoguePathToolStripMenuItem.Size = new System.Drawing.Size(449, 44);
             this.dialoguePathToolStripMenuItem.Text = "&Dialogue Path";
@@ -296,13 +297,25 @@
             this.pnlDialogue.AutoScroll = true;
             this.pnlDialogue.AutoSize = true;
             this.pnlDialogue.BackColor = System.Drawing.Color.DarkGray;
+            this.pnlDialogue.Controls.Add(this.txtEdit);
             this.pnlDialogue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlDialogue.Location = new System.Drawing.Point(0, 0);
             this.pnlDialogue.Name = "pnlDialogue";
             this.pnlDialogue.Size = new System.Drawing.Size(1053, 865);
             this.pnlDialogue.TabIndex = 2;
-            this.pnlDialogue.WrapContents = false;
             this.pnlDialogue.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlDialogue_Paint);
+            // 
+            // txtEdit
+            // 
+            this.txtEdit.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.txtEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.txtEdit.Location = new System.Drawing.Point(518, 83);
+            this.txtEdit.Multiline = true;
+            this.txtEdit.Name = "txtEdit";
+            this.txtEdit.Size = new System.Drawing.Size(204, 393);
+            this.txtEdit.TabIndex = 1;
+            this.txtEdit.Text = "Jubilee: Hello there! I\'m Jubilee! What\'s your name? You\'re a new person! I\'ve ne" +
+    "ver met you before! What\'s your name? What\'s your name?";
             // 
             // spltMain
             // 
@@ -477,6 +490,8 @@
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.pnlDialogue.ResumeLayout(false);
+            this.pnlDialogue.PerformLayout();
             this.spltMain.Panel1.ResumeLayout(false);
             this.spltMain.Panel1.PerformLayout();
             this.spltMain.Panel2.ResumeLayout(false);
@@ -519,7 +534,6 @@
         private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pasteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
-        private System.Windows.Forms.FlowLayoutPanel pnlDialogue;
         private System.Windows.Forms.ToolStripMenuItem importToolStripMenuItem;
         private System.Windows.Forms.SplitContainer spltMain;
         private System.Windows.Forms.TabControl tabInfo;
@@ -535,6 +549,8 @@
         private System.Windows.Forms.Button btnAddCharacterFilter;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.RichTextBox txtCharacterFilters;
+        private DisplayPanel pnlDialogue;
+        private System.Windows.Forms.TextBox txtEdit;
     }
 }
 
