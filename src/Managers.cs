@@ -18,6 +18,10 @@ public class Managers
     public static ControlManager Control
         => instance.controlManager;
 
+    private SelectionManager selectionManager;
+    public static SelectionManager Select
+        => instance.selectionManager;
+
     private FileManager fileManager;
     public static FileManager File
         => instance.fileManager;
@@ -55,6 +59,7 @@ public class Managers
         this.mainForm = mf;
         this.nodeManager = new NodeManager();
         this.controlManager = new ControlManager();
+        this.selectionManager = new SelectionManager();
         this.fileManager = new FileManager();
         this.displayManager = new DisplayManager();
         this.layoutManager = new LayoutManager();
