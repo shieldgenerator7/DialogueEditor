@@ -295,5 +295,10 @@ namespace DialogueEditor
         {
             Managers.Display.paint(e.Graphics, (Panel)sender);
         }
+
+        private void pnlDialogue_DoubleClick(object sender, EventArgs e)
+        {
+            //Managers.Control.
+        }
     }
 }
