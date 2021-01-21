@@ -39,8 +39,8 @@ public class ControlManager
             n =>
             {
                 DialoguePath path = n.Path;
-                int index = (n is NodeQuote)
-                    ? ((NodeQuote)n).quote.Index
+                int index = (n is NodeQuote quote)
+                    ? quote.quote.Index
                     : -1;
                 NodeQuote node = Managers.Node.createNodeQuote(path, index);
                 Managers.Select.select(node, true);

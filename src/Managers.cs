@@ -8,37 +8,37 @@ public class Managers
 {
     private static Managers instance;
 
-    private frmMain mainForm;
+    private readonly frmMain mainForm;
 
-    private NodeManager nodeManager;
+    private readonly NodeManager nodeManager;
     public static NodeManager Node
         => instance.nodeManager;
 
-    private ControlManager controlManager;
+    private readonly ControlManager controlManager;
     public static ControlManager Control
         => instance.controlManager;
 
-    private SelectionManager selectionManager;
+    private readonly SelectionManager selectionManager;
     public static SelectionManager Select
         => instance.selectionManager;
 
-    private FileManager fileManager;
+    private readonly FileManager fileManager;
     public static FileManager File
         => instance.fileManager;
 
-    private DisplayManager displayManager;
+    private readonly DisplayManager displayManager;
     public static DisplayManager Display
         => instance.displayManager;
 
-    private LayoutManager layoutManager;
+    private readonly LayoutManager layoutManager;
     public static LayoutManager Layout
         => instance.layoutManager;
 
-    private ColorSettings colorSettings;
+    private readonly ColorSettings colorSettings;
     public static ColorSettings Colors
         => instance.colorSettings;
 
-    private ImageBank images;
+    private readonly ImageBank images;
     public static ImageBank Images
         => instance.images;
 

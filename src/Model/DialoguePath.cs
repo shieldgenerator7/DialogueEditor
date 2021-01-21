@@ -73,17 +73,17 @@ public class DialoguePath
 
     public void remove(DialogueComponent dc)
     {
-        if (dc is Condition)
+        if (dc is Condition condition)
         {
-            conditions.Remove((Condition)dc);
+            conditions.Remove(condition);
         }
-        else if (dc is Quote)
+        else if (dc is Quote quote)
         {
-            quotes.Remove((Quote)dc);
+            quotes.Remove(quote);
         }
-        else if (dc is Action)
+        else if (dc is Action action)
         {
-            actions.Remove((Action)dc);
+            actions.Remove(action);
         }
     }
 }

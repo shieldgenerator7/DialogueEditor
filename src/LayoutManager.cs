@@ -17,21 +17,21 @@ public class LayoutManager
 
     private void layoutNode(Node n)
     {
-        if (n is NodeDialogue)
+        if (n is NodeDialogue dialogue)
         {
-            layoutNode((NodeDialogue)n);
+            layoutNode(dialogue);
         }
-        if (n is NodeQuote)
+        if (n is NodeQuote quote)
         {
-            layoutNode((NodeQuote)n);
+            layoutNode(quote);
         }
-        else if (n is NodeCondition)
+        else if (n is NodeCondition condition)
         {
-            layoutNode((NodeCondition)n);
+            layoutNode(condition);
         }
-        else if (n is NodeAction)
+        else if (n is NodeAction action)
         {
-            layoutNode((NodeAction)n);
+            layoutNode(action);
         }
     }
     private void layoutNode(NodeDialogue nd)

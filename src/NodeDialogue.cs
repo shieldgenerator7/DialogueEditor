@@ -9,7 +9,7 @@ namespace DialogueEditor.src
         public readonly DialoguePath path;
         public override DialoguePath Path => path;
 
-        private List<NodeComponent> nodes = new List<NodeComponent>();
+        private readonly List<NodeComponent> nodes = new List<NodeComponent>();
         public List<NodeComponent> Nodes => nodes;
 
         public string TitleText

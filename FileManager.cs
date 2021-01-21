@@ -15,8 +15,8 @@ namespace DialogueEditor
 
         public string defaultFileName = null;
 
-        private SaveFileDialog sfd;
-        private OpenFileDialog ofd;
+        private readonly SaveFileDialog sfd;
+        private readonly OpenFileDialog ofd;
 
         public FileManager()
         {

@@ -10,11 +10,10 @@ public class DisplayManager
     public const int BUFFER_WIDTH = 10;
 
     const int fontSize = 12;
-    Font font = new Font("Ariel", fontSize);
-    StringFormat stringFormat;
-    Brush textBrush = new SolidBrush(Color.Black);
-
-    Brush backBrush = new SolidBrush(Color.LightGray);
+    readonly Font font = new Font("Ariel", fontSize);
+    readonly StringFormat stringFormat;
+    readonly Brush textBrush = new SolidBrush(Color.Black);
+    readonly Brush backBrush = new SolidBrush(Color.LightGray);
 
     public const int portraitSize = 50;
 
@@ -79,21 +78,21 @@ public class DisplayManager
     #region Node-Specific Methods
     private void paintNode(Node n)
     {
-        if (n is NodeDialogue)
+        if (n is NodeDialogue dialogue)
         {
-            paintNode((NodeDialogue)n);
+            paintNode(dialogue);
         }
-        else if (n is NodeQuote)
+        else if (n is NodeQuote quote)
         {
-            paintNode((NodeQuote)n);
+            paintNode(quote);
         }
-        else if (n is NodeCondition)
+        else if (n is NodeCondition condition)
         {
-            paintNode((NodeCondition)n);
+            paintNode(condition);
         }
-        else if (n is NodeAction)
+        else if (n is NodeAction action)
         {
-            paintNode((NodeAction)n);
+            paintNode(action);
         }
     }
     private void paintNode(NodeDialogue nd)

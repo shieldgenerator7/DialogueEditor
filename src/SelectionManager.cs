@@ -5,7 +5,7 @@ using System.Linq;
 
 public class SelectionManager
 {
-    private List<Node> selectedNodes = new List<Node>();
+    private readonly List<Node> selectedNodes = new List<Node>();
     private Node editingNode = null;//the node that's currently being edited
     public Node EditNode
     {

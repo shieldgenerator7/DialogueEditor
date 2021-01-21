@@ -218,15 +218,13 @@ namespace DialogueEditor.src
         public void delete(Node n)
         {
             //2021-01-14: TODO
-            if (n is NodeComponent)
+            if (n is NodeComponent node)
             {
-                NodeComponent node = (NodeComponent)n;
                 node.data.path.remove(node.data);
                 //node.Dispose();
             }
-            else if (n is NodeDialogue)
+            else if (n is NodeDialogue container)
             {
-                NodeDialogue container = (NodeDialogue)n;
                 dialogueData.dialogues.Remove(container.path);
                 containers.Remove(container);
                 //container.Dispose();
@@ -299,9 +297,9 @@ namespace DialogueEditor.src
                 {
                     foreach (Node n in container.Nodes)
                     {
-                        if (n is NodeQuote)
+                        if (n is NodeQuote quote)
                         {
-                            ((NodeQuote)n).refreshImage();
+                            quote.refreshImage();
                         }
                     }
                 }

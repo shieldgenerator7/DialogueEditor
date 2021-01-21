@@ -4,7 +4,7 @@ using System.Drawing;
 
 public class ImageBank
 {
-    private Dictionary<string, Image> images = new Dictionary<string, Image>();
+    private readonly Dictionary<string, Image> images = new Dictionary<string, Image>();
     public Image getImage(string filename)
     {
         if (images.ContainsKey(filename))
