@@ -59,7 +59,7 @@ public class Managers
         this.mainForm = mf;
         this.nodeManager = new NodeManager();
         this.controlManager = new ControlManager();
-        this.selectionManager = new SelectionManager();
+        this.selectionManager = new SelectionManager(mainForm.txtEdit);
         this.fileManager = new FileManager();
         this.displayManager = new DisplayManager();
         this.layoutManager = new LayoutManager();

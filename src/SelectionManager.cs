@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
 
 public class SelectionManager
 {
@@ -10,11 +11,14 @@ public class SelectionManager
     public Node EditNode
     {
         get => editingNode;
-        set => editingNode = value;
+        set { editingNode = value; }
     }
 
-    public SelectionManager()
+    private TextBox txtEdit;
+
+    public SelectionManager(TextBox txtEdit)
     {
+        this.txtEdit = txtEdit;
     }
 
     /// <summary>
@@ -81,5 +85,19 @@ public class SelectionManager
         deselectAll();
         selectedNodes.ForEach(n => action(n));
         return prevSelected.Count > 0;
+    }
+
+    private void openEditNode(bool open)
+    {
+        if (open)
+        {
+            txtEdit.Location = EditNode.position.toPoint();
+            txtEdit.Size = EditNode.size.toSize();
+            txtEdit.Visible = true;
+        }
+        else
+        {
+            txtEdit.Visible = false;
+        }
     }
 }
