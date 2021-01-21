@@ -42,9 +42,9 @@ public class SelectionManager
     {
         //node.BackColor = Managers.Colors.unselectColor;
         selectedNodes.Remove(node);
-        if (node is NodeQuote)
+        if (node == EditNode)
         {
-            ((NodeQuote)node).Editing = false;
+            EditNode = null;
         }
     }
 

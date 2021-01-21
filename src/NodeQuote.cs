@@ -48,16 +48,6 @@ namespace DialogueEditor.src
             }
         }
 
-        private bool _editing = false;
-        public bool Editing
-        {
-            get => _editing;
-            set
-            {
-                _editing = value;
-            }
-        }
-
         public override int OrderCode => 2;
         public string SortString => "" + quote.Index;
 
@@ -73,8 +63,6 @@ namespace DialogueEditor.src
                 ofdPicture.Filter = "PNG Files (*.png)|*.png|All files (*.*)|*.*";
                 ofdPicture.Title = "Choose picture";
             }
-            //
-            Editing = false;
             //
             int imageWidth = DisplayManager.portraitSize + DisplayManager.BUFFER_WIDTH;
             this.textBox = new TextDisplayable(QuoteText, DisplayManager.MAX_WIDTH - imageWidth);

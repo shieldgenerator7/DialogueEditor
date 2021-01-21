@@ -28,8 +28,8 @@ public class ControlManager
         //Create a new quote with no path,
         //which will auto-create a new path with a new quote
         NodeQuote node = Managers.Node.createNodeQuote();
-        node.Editing = true;
         select(node);
+        Managers.Select.EditNode = node;
         return node.data.path;
     }
 
@@ -43,8 +43,8 @@ public class ControlManager
                     ? ((NodeQuote)n).quote.Index
                     : -1;
                 NodeQuote node = Managers.Node.createNodeQuote(path, index);
-                node.Editing = true;
                 Managers.Select.select(node, true);
+                Managers.Select.EditNode = node;
             });
         if (!anyPrevSelected)
         {
@@ -97,15 +97,15 @@ public class ControlManager
         NodeQuote activeNode = Managers.Select.getOne<NodeQuote>();
         if (activeNode != null)
         {
-            activeNode.Editing = false;
+            Managers.Select.EditNode = null;
             //If it's the last in the path,
             DialoguePath path = activeNode.quote.path;
             if (activeNode.quote.Index == path.quotes.Count - 1)
             {
                 //Add new node at the end
                 NodeQuote newNode = Managers.Node.createNodeQuote(path);
-                newNode.Editing = true;
                 select(newNode);
+                Managers.Select.EditNode = newNode;
             }
         }
     }
@@ -156,8 +156,8 @@ public class ControlManager
     public void receiveInfoDump(DialoguePath path, string[] textArray)
     {
         NodeQuote lastNode = Managers.Node.createNodes(path, textArray);
-        lastNode.Editing = true;
         select(lastNode);
+        Managers.Select.EditNode = lastNode;
     }
 }
 
