@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -17,6 +18,8 @@ namespace DialogueEditor
 
         private SaveFileDialog sfd;
         private OpenFileDialog ofd;
+
+        private bool hasBeenSavedToFile = true;//true if this file has ever been saved to a file
 
         public FileManager()
         {
@@ -40,6 +43,8 @@ namespace DialogueEditor
         {
             DialogueEditor.Properties.Settings.Default.defaultFileName = defaultFileName;
             DialogueEditor.Properties.Settings.Default.Save();
+            sfd.Dispose();
+            ofd.Dispose();
         }
 
         public void saveFileWithDialog()
@@ -61,6 +66,7 @@ namespace DialogueEditor
 
         public void openFileWithDialog(bool append = false)
         {
+            checkFileSaved();
             if (defaultFileName != null && defaultFileName != "")
             {
                 ofd.FileName = defaultFileName;
@@ -81,9 +87,12 @@ namespace DialogueEditor
 
         public void newFile()
         {
+            checkFileSaved();
             Managers.Node.clear();
             Managers.Control.createQuote();
             defaultFileName = null;
+            updateTitleBar();
+            hasBeenSavedToFile = false;
         }
 
         public bool saveFile(string filename = null)
@@ -106,6 +115,9 @@ namespace DialogueEditor
 
                 file.Write(jsonString);
             }
+            defaultFileName = filename;
+            updateTitleBar();
+            hasBeenSavedToFile = true;
             return true;
         }
 
@@ -148,11 +160,38 @@ namespace DialogueEditor
                 //don't do anything,
                 //except unset the default file name
                 defaultFileName = null;
+                updateTitleBar();
                 //(tho it's possible you may want to keep it instead,
                 //im not sure which is more user-friendly)
                 return false;
             }
+            defaultFileName = filename;
+            updateTitleBar();
+            hasBeenSavedToFile = true;
             return true;
+        }
+
+        private void checkFileSaved()
+        {
+            if (!hasBeenSavedToFile)
+            {
+                saveFileWithDialog();
+            }
+            else
+            {
+                saveFile();
+            }
+        }
+
+        private void updateTitleBar()
+        {
+            string title = "Untitled";
+            if (defaultFileName != null && defaultFileName != "")
+            {
+                string[] split = defaultFileName.Split('\\');
+                title = split[split.Length - 1];
+            }
+            Managers.Form.Text = title + " - Dialogue Editor";
         }
 
     }
