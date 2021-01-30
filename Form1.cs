@@ -47,6 +47,7 @@ namespace DialogueEditor
         {
             Managers.File.saveFile();
             Managers.File.savePropertiesBeforeClose();
+            NodeQuote.disposeDialogs();
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)

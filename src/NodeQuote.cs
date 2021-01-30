@@ -18,7 +18,10 @@ namespace DialogueEditor.src
 
         private RichTextBox textBox;
         private PictureBox pictureBox;
+        private PictureBox imgVoiceLine;
+        private ToolTip toolTip;
         private static OpenFileDialog ofdPicture;
+        private static OpenFileDialog ofdVoiceLine;
 
         public string QuoteText
         {
@@ -92,6 +95,15 @@ namespace DialogueEditor.src
                 ofdPicture.Title = "Choose picture";
             }
 
+            if (ofdVoiceLine == null)
+            {
+                ofdVoiceLine = new OpenFileDialog();
+                ofdVoiceLine.Filter = "MP3 Files (*.mp3)|*.mp3|WAV Files (*.wav)|*.wav|All files (*.*)|*.*";
+                ofdVoiceLine.Title = "Choose voice line";
+            }
+
+            toolTip = new ToolTip();
+
             // Panel (self) properties
             AutoSize = true;
             AutoScroll = false;
@@ -110,6 +122,19 @@ namespace DialogueEditor.src
             pictureBox.Size = new System.Drawing.Size(SIZE_PICTURE, SIZE_PICTURE);
             pictureBox.DoubleClick += selectPicture;
             pictureBox.Click += (sender, e) => Managers.Control.select(this);
+
+            // imgVoiceLine properties
+            imgVoiceLine = new PictureBox();
+            this.Controls.Add(imgVoiceLine);
+            refreshVoiceLine();
+            imgVoiceLine.BackColor = System.Drawing.Color.LightGray;
+            imgVoiceLine.Location = new System.Drawing.Point(0, SIZE_PICTURE + NodeManager.BUFFER_NODE);
+            imgVoiceLine.SizeMode = PictureBoxSizeMode.Zoom;
+            imgVoiceLine.BackgroundImageLayout = ImageLayout.Stretch;
+            imgVoiceLine.BackgroundImage = DialogueEditor.Properties.Resources.noVoiceLine;
+            imgVoiceLine.Size = new System.Drawing.Size(SIZE_PICTURE, SIZE_PICTURE);
+            imgVoiceLine.DoubleClick += selectVoiceLine;
+            imgVoiceLine.Click += (sender, e) => Managers.Control.select(this);
 
             // TextBox properties
             textBox = new RichTextBox();
@@ -183,12 +208,48 @@ namespace DialogueEditor.src
                 try
                 {
                     pictureBox.Image = Image.FromFile(this.quote.imageFileName);
+                    toolTip.SetToolTip(pictureBox, this.quote.imageFileName);
                 }
                 catch (FileNotFoundException fnfe)
                 {
-                    //do nothing
+                    toolTip.SetToolTip(pictureBox, "Image not found: " + this.quote.imageFileName);
                 }
             }
+            else
+            {
+                toolTip.SetToolTip(pictureBox, "No image chosen");
+            }
+        }
+        private void selectVoiceLine(object sender, EventArgs e)
+        {
+            //Open file dialog
+            DialogResult dr = ofdVoiceLine.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+                this.quote.voiceLineFileName = ofdVoiceLine.FileName;
+                refreshVoiceLine();
+            }
+        }
+
+        public void refreshVoiceLine()
+        {
+            string filename = this.quote.voiceLineFileName;
+            if (filename != null && filename != "")
+            {
+                imgVoiceLine.Image = DialogueEditor.Properties.Resources.setVoiceLine;
+                toolTip.SetToolTip(imgVoiceLine, filename);
+            }
+            else
+            {
+                imgVoiceLine.Image = DialogueEditor.Properties.Resources.noVoiceLine;
+                toolTip.SetToolTip(imgVoiceLine, "No voice line chosen");
+            }
+        }
+
+        public static void disposeDialogs()
+        {
+            ofdPicture.Dispose();
+            ofdVoiceLine.Dispose();
         }
 
         public override int CompareTo(Node n)
