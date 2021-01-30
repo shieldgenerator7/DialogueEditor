@@ -26,13 +26,18 @@ namespace DialogueEditor.src
         /// <returns></returns>
         public NodeQuote createNodeQuote(DialoguePath path = null, int index = -1)
         {
+            NodeDialogue container;
             //If no path,
             if (path == null)
             {
                 //create a path
-                path = createContainerNode().path;
+                container = createContainerNode();
+                path = container.path;
             }
-            NodeDialogue container = containers.First(cn => cn.path == path);
+            else
+            {
+                container = containers.First(cn => cn.path == path);
+            }
             //Add a node to the path
             Quote quote = new Quote();
             quote.path = path;
@@ -209,6 +214,7 @@ namespace DialogueEditor.src
         /// </summary>
         public void clearNodes()
         {
+            Managers.Control.deselectAll();
             containers.ForEach(cn => cn.Dispose());
             containers.Clear();
         }
