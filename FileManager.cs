@@ -14,7 +14,18 @@ namespace DialogueEditor
     public class FileManager
     {
 
-        public string defaultFileName = null;
+        private string defaultFileName = null;
+        public string DefaultFileName
+        {
+            get => defaultFileName;
+            set
+            {
+                defaultFileName = value;
+                updateTitleBar();
+                sfd.FileName = defaultFileName;
+                ofd.FileName = defaultFileName;
+            }
+        }
 
         private SaveFileDialog sfd;
         private OpenFileDialog ofd;
@@ -26,22 +37,22 @@ namespace DialogueEditor
             //Save Dialog
             sfd = new SaveFileDialog();
             sfd.Filter = "Dialogue JSON Files (*.json)|*.json|All files|*.*";
-            sfd.FileName = defaultFileName;
+            sfd.FileName = DefaultFileName;
             sfd.Title = "Save Dialogue";
             sfd.DefaultExt = ".json";
             //Open Dialog
             ofd = new OpenFileDialog();
             ofd.Filter = "Dialogue JSON Files (*.json)|*.json|All files|*.*";
-            ofd.FileName = defaultFileName;
+            ofd.FileName = DefaultFileName;
             ofd.Title = "Open Dialogue";
             ofd.DefaultExt = ".json";
             //Default file
-            defaultFileName = DialogueEditor.Properties.Settings.Default.defaultFileName;
+            DefaultFileName = DialogueEditor.Properties.Settings.Default.defaultFileName;
         }
 
         public void savePropertiesBeforeClose()
         {
-            DialogueEditor.Properties.Settings.Default.defaultFileName = defaultFileName;
+            DialogueEditor.Properties.Settings.Default.defaultFileName = DefaultFileName;
             DialogueEditor.Properties.Settings.Default.Save();
             sfd.Dispose();
             ofd.Dispose();
@@ -49,16 +60,16 @@ namespace DialogueEditor
 
         public void saveFileWithDialog()
         {
-            if (defaultFileName != null && defaultFileName != "")
+            if (DefaultFileName != null && DefaultFileName != "")
             {
-                sfd.FileName = defaultFileName;
+                sfd.FileName = DefaultFileName;
             }
             DialogResult dr = sfd.ShowDialog();
             if (dr == DialogResult.OK)
             {
                 if (sfd.FileName != null && sfd.FileName.ToLower().EndsWith(".json"))
                 {
-                    defaultFileName = sfd.FileName;
+                    DefaultFileName = sfd.FileName;
                 }
                 saveFile(sfd.FileName);
             }
@@ -67,9 +78,9 @@ namespace DialogueEditor
         public void openFileWithDialog(bool append = false)
         {
             checkFileSaved();
-            if (defaultFileName != null && defaultFileName != "")
+            if (DefaultFileName != null && DefaultFileName != "")
             {
-                ofd.FileName = defaultFileName;
+                ofd.FileName = DefaultFileName;
             }
             DialogResult dr = ofd.ShowDialog();
             if (dr == DialogResult.OK)
@@ -79,7 +90,7 @@ namespace DialogueEditor
                 //Open next file
                 if (ofd.FileName != null && ofd.FileName.ToLower().EndsWith(".json"))
                 {
-                    defaultFileName = ofd.FileName;
+                    DefaultFileName = ofd.FileName;
                 }
                 openFile(ofd.FileName, append);
             }
@@ -90,7 +101,7 @@ namespace DialogueEditor
             checkFileSaved();
             Managers.Node.clear();
             Managers.Control.createQuote();
-            defaultFileName = null;
+            DefaultFileName = null;
             updateTitleBar();
             hasBeenSavedToFile = false;
         }
@@ -99,7 +110,7 @@ namespace DialogueEditor
         {
             if (filename == null || filename == "")
             {
-                filename = defaultFileName;
+                filename = DefaultFileName;
             }
             //If it's still null
             if (filename == null || filename == "")
@@ -107,7 +118,7 @@ namespace DialogueEditor
                 //don't do anything
                 return false;
             }
-            sfd.FileName = filename;
+            DefaultFileName = filename;
             //2020-09-22: copied from https://stackoverflow.com/a/16921677/2336212
             using (StreamWriter file = new StreamWriter(sfd.OpenFile()))
             {
@@ -115,8 +126,6 @@ namespace DialogueEditor
 
                 file.Write(jsonString);
             }
-            defaultFileName = filename;
-            updateTitleBar();
             hasBeenSavedToFile = true;
             return true;
         }
@@ -125,7 +134,7 @@ namespace DialogueEditor
         {
             if (filename == null || filename == "")
             {
-                filename = defaultFileName;
+                filename = DefaultFileName;
             }
             //If it's still null,
             if (filename == null || filename == "")
@@ -134,7 +143,7 @@ namespace DialogueEditor
                 return false;
             }
             //
-            ofd.FileName = filename;
+            DefaultFileName = filename;
             //2020-09-22: copied from https://stackoverflow.com/a/13297964/2336212
             try
             {
@@ -159,14 +168,11 @@ namespace DialogueEditor
             {
                 //don't do anything,
                 //except unset the default file name
-                defaultFileName = null;
-                updateTitleBar();
+                DefaultFileName = null;
                 //(tho it's possible you may want to keep it instead,
                 //im not sure which is more user-friendly)
                 return false;
             }
-            defaultFileName = filename;
-            updateTitleBar();
             hasBeenSavedToFile = true;
             return true;
         }
@@ -186,9 +192,9 @@ namespace DialogueEditor
         private void updateTitleBar()
         {
             string title = "Untitled";
-            if (defaultFileName != null && defaultFileName != "")
+            if (DefaultFileName != null && DefaultFileName != "")
             {
-                string[] split = defaultFileName.Split('\\');
+                string[] split = DefaultFileName.Split('\\');
                 title = split[split.Length - 1];
             }
             Managers.Form.Text = title + " - Dialogue Editor";
