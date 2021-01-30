@@ -110,5 +110,28 @@ namespace DialogueEditor.src
             this.Controls.Clear();
             this.Controls.AddRange(controlArray);
         }
+
+        public bool empty()
+        {
+            if (Controls.Count == 0)
+            {
+                return true;
+            }
+            foreach (Control control in Controls)
+            {
+                if (control is NodeQuote nq)
+                {
+                    string text = nq.QuoteText.Trim();
+                    if (text != null && text != "")
+                    {
+                        //not empty
+                        return false;
+                    }
+                }
+            }
+            //empty
+            return true;
+        }
+
     }
 }

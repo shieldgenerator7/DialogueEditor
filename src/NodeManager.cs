@@ -324,5 +324,8 @@ namespace DialogueEditor.src
                 }
                 );
         }
+
+        public bool empty
+            => containers.Count == 0 || containers.All(container => container.empty());
     }
 }

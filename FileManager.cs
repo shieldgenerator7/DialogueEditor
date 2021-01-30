@@ -179,7 +179,7 @@ namespace DialogueEditor
 
         private void checkFileSaved()
         {
-            if (!hasBeenSavedToFile)
+            if (!hasBeenSavedToFile && !Managers.Node.empty)
             {
                 saveFileWithDialog();
             }
