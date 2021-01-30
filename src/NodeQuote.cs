@@ -188,6 +188,13 @@ namespace DialogueEditor.src
 
         private void selectPicture(object sender, EventArgs e)
         {
+            if (this.quote.imageFileName != null && this.quote.imageFileName != "")
+            {
+                if (File.Exists(this.quote.imageFileName))
+                {
+                    ofdPicture.FileName = this.quote.imageFileName;
+                }
+            }
             //Open file dialog
             DialogResult dr = ofdPicture.ShowDialog();
             if (dr == DialogResult.OK)
@@ -222,6 +229,13 @@ namespace DialogueEditor.src
         }
         private void selectVoiceLine(object sender, EventArgs e)
         {
+            if (this.quote.voiceLineFileName != null && this.quote.voiceLineFileName != "")
+            {
+                if (File.Exists(this.quote.voiceLineFileName))
+                {
+                    ofdVoiceLine.FileName = this.quote.voiceLineFileName;
+                }
+            }
             //Open file dialog
             DialogResult dr = ofdVoiceLine.ShowDialog();
             if (dr == DialogResult.OK)
