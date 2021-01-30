@@ -121,4 +121,10 @@
   <data name="defaultQuoteImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\defaultQuoteImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="noVoiceLine" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\noVoiceLine.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="setVoiceLine" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\setVoiceLine.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

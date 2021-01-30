@@ -156,5 +156,11 @@
   <ItemGroup>
     <None Include="Images\defaultQuoteImage.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\setVoiceLine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\noVoiceLine.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
