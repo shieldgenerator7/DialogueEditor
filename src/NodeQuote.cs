@@ -45,6 +45,7 @@ namespace DialogueEditor.src
                 {
                     quote.text = value;
                 }
+                textBox.text = QuoteText;
             }
         }
 

@@ -13,6 +13,7 @@ public class SelectionManager
         get => editingNode;
         set
         {
+            saveEditNode();
             editingNode = value;
             openEditNode(editingNode != null);
         }
@@ -89,6 +90,15 @@ public class SelectionManager
         deselectAll();
         selectedNodes.ForEach(n => action(n));
         return prevSelected.Count > 0;
+    }
+
+    private void saveEditNode()
+    {
+        if (EditNode && EditNode is NodeQuote nq)
+        {
+            nq.QuoteText = txtEdit.Text;
+            Managers.Form.pnlDialogue.Refresh();
+        }
     }
 
     private void openEditNode(bool open)
