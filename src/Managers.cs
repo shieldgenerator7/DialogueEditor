@@ -66,7 +66,7 @@ public class Managers
         this.selectionManager = new SelectionManager(mainForm.txtEdit);
         this.fileManager = new FileManager();
         this.displayManager = new DisplayManager();
-        this.cameraManager = new CameraManager();
+        this.cameraManager = new CameraManager(mf.pnlDialogue);
         this.layoutManager = new LayoutManager();
         this.colorSettings = new ColorSettings();
         this.images = new ImageBank();

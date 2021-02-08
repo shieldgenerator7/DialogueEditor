@@ -52,7 +52,7 @@
             this.moveToTopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.moveToBottomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pnlDialogue = new DisplayPanel();
+            //this.pnlDialogue = new DisplayPanel();
             this.txtEdit = new System.Windows.Forms.TextBox();
             this.spltMain = new System.Windows.Forms.SplitContainer();
             this.tabInfo = new System.Windows.Forms.TabControl();
@@ -551,7 +551,7 @@
         private System.Windows.Forms.Button btnAddCharacterFilter;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.RichTextBox txtCharacterFilters;
-        private DisplayPanel pnlDialogue;
+        public readonly DisplayPanel pnlDialogue = new DisplayPanel();
         public System.Windows.Forms.TextBox txtEdit;
     }
 }

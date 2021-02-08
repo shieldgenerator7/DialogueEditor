@@ -52,6 +52,17 @@ public struct Vector
     public static Vector operator /(Vector v, int f)
         => new Vector(v.x / f, v.y / f);
 
+    public static Vector operator *(Vector v, float f)
+        => new Vector(
+            (int)((float)v.x * f),
+            (int)((float)v.y * f)
+            );
+    public static Vector operator /(Vector v, float f)
+        => new Vector(
+            (int)((float)v.x / f),
+            (int)((float)v.y / f)
+            );
+
     public static bool operator <(Vector a, Vector b)
         => a.Magnitude < b.Magnitude;
 
