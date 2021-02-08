@@ -298,7 +298,12 @@ namespace DialogueEditor
 
         private void pnlDialogue_DoubleClick(object sender, EventArgs e)
         {
-            //Managers.Control.
+            Managers.Control.doubleClick();
+        }
+
+        private void pnlDialogue_MouseMove(object sender, MouseEventArgs e)
+        {
+            Managers.Control.MousePos = e.Location.toVector();
         }
     }
 }

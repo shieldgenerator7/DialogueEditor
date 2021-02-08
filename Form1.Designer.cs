@@ -52,7 +52,7 @@
             this.moveToTopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.moveToBottomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            //this.pnlDialogue = new DisplayPanel();
+            this.pnlDialogue = new DisplayPanel();
             this.txtEdit = new System.Windows.Forms.TextBox();
             this.spltMain = new System.Windows.Forms.SplitContainer();
             this.tabInfo = new System.Windows.Forms.TabControl();
@@ -306,6 +306,7 @@
             this.pnlDialogue.TabIndex = 2;
             this.pnlDialogue.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlDialogue_Paint);
             this.pnlDialogue.DoubleClick += new System.EventHandler(this.pnlDialogue_DoubleClick);
+            this.pnlDialogue.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlDialogue_MouseMove);
             // 
             // txtEdit
             // 
@@ -318,6 +319,7 @@
             this.txtEdit.TabIndex = 1;
             this.txtEdit.Text = "Jubilee: Hello there! I\'m Jubilee! What\'s your name? You\'re a new person! I\'ve ne" +
     "ver met you before! What\'s your name? What\'s your name?";
+            this.txtEdit.Visible = false;
             // 
             // spltMain
             // 
@@ -551,7 +553,7 @@
         private System.Windows.Forms.Button btnAddCharacterFilter;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.RichTextBox txtCharacterFilters;
-        public readonly DisplayPanel pnlDialogue = new DisplayPanel();
+        public DisplayPanel pnlDialogue = new DisplayPanel();
         public System.Windows.Forms.TextBox txtEdit;
     }
 }

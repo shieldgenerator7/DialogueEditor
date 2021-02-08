@@ -8,6 +8,21 @@ using System.Windows.Forms;
 
 public class ControlManager
 {
+    private Vector mousePos;
+    private Vector mousePosWorld;
+    /// <summary>
+    /// The position of the mouse in screen coordinates
+    /// </summary>
+    public Vector MousePos
+    {
+        get => mousePos;
+        set
+        {
+            mousePos = value;
+            mousePosWorld = Managers.Camera.ScreenToWorld(mousePos);
+        }
+    }
+
     public ControlManager()
     {
     }
@@ -23,13 +38,10 @@ public class ControlManager
         Managers.Select.select(node, Control.ModifierKeys == Keys.Shift);
     }
 
-    public void doubleClick(Vector screenPos)
+    public void doubleClick()
     {
-        Node n = Managers.Node.getNode(Managers.Camera.ScreenToWorld(screenPos));
-        if (n)
-        {
-            Managers.Select.EditNode = n;
-        }
+        Node n = Managers.Node.getNode(mousePosWorld);
+        Managers.Select.EditNode = n;
     }
 
     public DialoguePath createDialoguePath()

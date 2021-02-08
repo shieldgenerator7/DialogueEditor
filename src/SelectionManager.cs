@@ -11,7 +11,11 @@ public class SelectionManager
     public Node EditNode
     {
         get => editingNode;
-        set { editingNode = value; }
+        set
+        {
+            editingNode = value;
+            openEditNode(editingNode != null);
+        }
     }
 
     private TextBox txtEdit;
@@ -94,6 +98,10 @@ public class SelectionManager
             txtEdit.Location = EditNode.position;
             txtEdit.Size = EditNode.size;
             txtEdit.Visible = true;
+            if (EditNode is NodeQuote nq)
+            {
+                txtEdit.Text = nq.QuoteText;
+            }
         }
         else
         {
