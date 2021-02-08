@@ -281,7 +281,7 @@ namespace DialogueEditor.src
 
         public void setDefaultImageFileName(string character, string imageFileName)
         {
-            if (imageFileName == null || imageFileName == "")
+            if (String.IsNullOrEmpty(imageFileName))
             {
                 return;
             }
@@ -293,7 +293,7 @@ namespace DialogueEditor.src
                         {
                             if (q.characterName == character)
                             {
-                                if (q.imageFileName == null || q.imageFileName == "")
+                                if (String.IsNullOrEmpty(q.imageFileName))
                                 {
                                     q.imageFileName = imageFileName;
                                 }

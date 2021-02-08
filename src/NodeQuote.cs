@@ -21,7 +21,7 @@ namespace DialogueEditor.src
         {
             get =>
                 (
-                    (quote.characterName != "" && quote.characterName != null)
+                    (!String.IsNullOrEmpty(quote.characterName))
                         ? quote.characterName + ": "
                         : ""
                 )

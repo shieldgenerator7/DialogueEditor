@@ -44,7 +44,7 @@ namespace DialogueEditor
 
         public void saveFileWithDialog()
         {
-            if (defaultFileName != null && defaultFileName != "")
+            if (!String.IsNullOrEmpty(defaultFileName))
             {
                 sfd.FileName = defaultFileName;
             }
@@ -61,7 +61,7 @@ namespace DialogueEditor
 
         public void openFileWithDialog(bool append = false)
         {
-            if (defaultFileName != null && defaultFileName != "")
+            if (!String.IsNullOrEmpty(defaultFileName))
             {
                 ofd.FileName = defaultFileName;
             }
@@ -88,12 +88,12 @@ namespace DialogueEditor
 
         public bool saveFile(string filename = null)
         {
-            if (filename == null || filename == "")
+            if (String.IsNullOrEmpty(filename))
             {
                 filename = defaultFileName;
             }
             //If it's still null
-            if (filename == null || filename == "")
+            if (String.IsNullOrEmpty(filename))
             {
                 //don't do anything
                 return false;
@@ -111,12 +111,12 @@ namespace DialogueEditor
 
         public bool openFile(string filename = null, bool append = false)
         {
-            if (filename == null || filename == "")
+            if (String.IsNullOrEmpty(filename))
             {
                 filename = defaultFileName;
             }
             //If it's still null,
-            if (filename == null || filename == "")
+            if (String.IsNullOrEmpty(filename))
             {
                 //can't open the file
                 return false;

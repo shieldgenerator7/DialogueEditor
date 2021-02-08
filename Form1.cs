@@ -246,7 +246,7 @@ namespace DialogueEditor
         private void checkEnableCharacterControls()
         {
             string character = (string)cmbCharacters.SelectedItem;
-            if (character == null || character == "" || character == "(All)")
+            if (String.IsNullOrEmpty(character) || character == "(All)")
             {
                 if (txtCharacterName.Text != "")
                 {
