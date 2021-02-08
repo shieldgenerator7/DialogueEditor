@@ -94,9 +94,9 @@ public class SelectionManager
 
     private void saveEditNode()
     {
-        if (EditNode && EditNode is NodeQuote nq)
+        if (EditNode && EditNode is NodeComponent nc)
         {
-            nq.QuoteText = txtEdit.Text;
+            nc.QuoteText = txtEdit.Text;
             Managers.Form.pnlDialogue.Refresh();
         }
     }
@@ -109,9 +109,9 @@ public class SelectionManager
         {
             txtEdit.Location = EditNode.position;
             txtEdit.Size = EditNode.size;
-            if (EditNode is NodeQuote nq)
+            if (EditNode is NodeComponent nc)
             {
-                txtEdit.Text = nq.QuoteText;
+                txtEdit.Text = nc.QuoteText;
                 txtEdit.Visible = true;
                 txtEdit.Refresh();
             }

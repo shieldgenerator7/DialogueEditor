@@ -13,6 +13,12 @@ namespace DialogueEditor.src
         public readonly Condition condition;
         public override DialogueComponent data => condition;
 
+        public override string QuoteText
+        {
+            get { return ""; }
+            set { }
+        }
+
         public override int OrderCode => 1;
 
         public TextDisplayable txtVariableName;

@@ -9,6 +9,7 @@ public abstract class NodeComponent : Node
     }
 
     public abstract DialogueComponent data { get; }
+    public abstract string QuoteText { get; set; }
 
     /// <summary>
     /// Used to determine which types should be sorted before other types

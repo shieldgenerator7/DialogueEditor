@@ -17,7 +17,7 @@ namespace DialogueEditor.src
         private static OpenFileDialog ofdPicture;
         public Image image { get; private set; }
 
-        public string QuoteText
+        public override string QuoteText
         {
             get =>
                 (
