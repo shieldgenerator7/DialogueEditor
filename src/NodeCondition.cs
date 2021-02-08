@@ -15,8 +15,17 @@ namespace DialogueEditor.src
 
         public override string QuoteText
         {
-            get { return ""; }
-            set { }
+            get => condition.variableName + " " + condition.TestTypeString + " " + condition.testValue;
+            set
+            {
+                string[] split = value.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
+                condition.variableName = split[0];
+                condition.TestTypeString = split[1];
+                condition.testValue = int.Parse(split[2]);
+                txtVariableName.text = condition.variableName;
+                txtTestType.text = condition.TestTypeString;
+                txtTestValue.text = "" + condition.testValue;
+            }
         }
 
         public override int OrderCode => 1;
