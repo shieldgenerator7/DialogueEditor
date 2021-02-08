@@ -23,6 +23,15 @@ public class ControlManager
         Managers.Select.select(node, Control.ModifierKeys == Keys.Shift);
     }
 
+    public void doubleClick(Vector screenPos)
+    {
+        Node n = Managers.Node.getNode(Managers.Camera.ScreenToWorld(screenPos));
+        if (n)
+        {
+            Managers.Select.EditNode = n;
+        }
+    }
+
     public DialoguePath createDialoguePath()
     {
         //Create a new quote with no path,

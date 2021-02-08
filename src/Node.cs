@@ -19,6 +19,10 @@ namespace DialogueEditor.src
         {
         }
 
+        public bool overlap(Vector pos)
+            => pos.x >= position.x && pos.x <= position.x + size.x
+            && pos.y >= position.y && pos.y <= position.y + size.y;
+
         public static implicit operator bool(Node node)
             => node != null;
     }

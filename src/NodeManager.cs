@@ -197,6 +197,21 @@ namespace DialogueEditor.src
             Managers.Form.restoreScroll();
         }
 
+        public Node getNode(Vector pos)
+        {
+            NodeDialogue nd = containers.FirstOrDefault(nd2 => nd2.overlap(pos));
+            if (nd)
+            {
+                Node n = nd.Nodes.FirstOrDefault(n2 => n2.overlap(pos));
+                if (n)
+                {
+                    return n;
+                }
+                return nd;
+            }
+            return null;
+        }
+
         public void clear()
         {
             clearNodes();
