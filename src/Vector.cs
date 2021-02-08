@@ -34,8 +34,14 @@ public struct Vector
     public override string ToString()
         => "(" + x + ", " + y + ")";
 
+    public static implicit operator Point(Vector a)
+        => new Point(a.x, a.y);
+
     public static implicit operator PointF(Vector a)
         => new PointF(a.x, a.y);
+
+    public static implicit operator Size(Vector a)
+        => new Size(a.x, a.y);
 
     public static Vector operator -(Vector a)
         => new Vector(-a.x, -a.y);

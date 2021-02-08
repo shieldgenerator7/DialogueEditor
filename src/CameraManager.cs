@@ -1,5 +1,6 @@
 ﻿using DialogueEditor.src;
 using System;
+using System.Drawing;
 using System.Linq;
 
 public class CameraManager
@@ -26,14 +27,31 @@ public class CameraManager
     }
 
     public Vector WorldToScreen(Vector pos)
-    {
-        return (pos - position) * zoomScale;
-    }
+        => (pos - position) * zoomScale;
+
+    private Rectangle WorldToScreen(Vector pos, Vector sz)
+        => new Rectangle(
+            WorldToScreen(pos),
+            sz * zoomScale
+            );
+
+    public Rectangle WorldToScreen(Vector pos, int sz)
+        => new Rectangle(
+            WorldToScreen(pos),
+            new Size((int)(sz * zoomScale), (int)(sz * zoomScale))
+            );
+
+    public Rectangle WorldToScreen(Vector pos, int w, int h)
+        => new Rectangle(
+            WorldToScreen(pos),
+            new Size((int)(w * zoomScale), (int)(h * zoomScale))
+            );
+
+    public Rectangle WorldToScreen(Node n)
+        => WorldToScreen(n.position, n.size);
 
     public Vector ScreenToWorld(Vector pos)
-    {
-        return (pos / zoomScale) + position;
-    }
+        => (pos / zoomScale) + position;
 
     public bool nodeOnScreen(Node n)
         => n.position.x + n.size.x >= position.x

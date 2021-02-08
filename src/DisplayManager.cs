@@ -19,7 +19,6 @@ public class DisplayManager
 
     Graphics g;
 
-    Vector mapPos = Vector.zero;
 
 
     public DisplayManager()
@@ -36,43 +35,9 @@ public class DisplayManager
         Managers.Layout.layoutNodes();
         Vector panelSize = new Vector(panel.Size);
         Managers.Node.containers
-            .FindAll(n => nodeOnScreen(n, mapPos, panelSize))
+            .FindAll(n => Managers.Camera.nodeOnScreen(n))
             .ForEach(n => paintNode(n));
         this.g = null;
-    }
-    public bool nodeOnScreen(Node n, Vector mapPos, Vector screenSize)
-        => n.position.x + n.size.x >= mapPos.x
-        && mapPos.x + screenSize.x >= n.position.x
-        && n.position.y + n.size.y >= mapPos.y
-        && mapPos.y + screenSize.y >= n.position.y;
-
-    public void unscroll()
-    {
-        mapPos = Vector.zero;
-    }
-    public void scroll(int dirX, int dirY)
-    {
-        int width = MAX_WIDTH + BUFFER_WIDTH * 3;
-        mapPos.x += dirX * width;
-        if (mapPos.x < 0)
-        {
-            mapPos.x = 0;
-        }
-        int maxPosX = (Managers.Node.containers.Count - 1) * width;
-        if (mapPos.x > maxPosX)
-        {
-            mapPos.x = maxPosX;
-        }
-        mapPos.y += dirY * (50);
-        if (mapPos.y < 0)
-        {
-            mapPos.y = 0;
-        }
-        int maxPosY = Managers.Node.containers.Max(c => c.size.y) - 50;
-        if (mapPos.y > maxPosY)
-        {
-            mapPos.y = maxPosY;
-        }
     }
 
     #region Node-Specific Methods
@@ -100,10 +65,7 @@ public class DisplayManager
         //Draw back
         g.FillRectangle(
             backBrush,
-            nd.position.x - mapPos.x,
-            nd.position.y - mapPos.y,
-            nd.size.x,
-            nd.size.y
+            Managers.Camera.WorldToScreen(nd)
             );
         //Draw nodes
         nd.Nodes.ForEach(n => paintNode(n));
@@ -119,10 +81,7 @@ public class DisplayManager
         {
             g.DrawImage(
                 nq.image,
-                nq.position.x - mapPos.x,
-                nq.position.y - mapPos.y,
-                portraitSize,
-                portraitSize
+                Managers.Camera.WorldToScreen(nq.position, portraitSize)
                 );
         }
     }
@@ -156,9 +115,8 @@ public class DisplayManager
     }
     public void drawString(string text, Vector position, int maxWidth = MAX_WIDTH)
     {
-        RectangleF rectf = new RectangleF(
-            position.x - mapPos.x,
-            position.y - mapPos.y,
+        RectangleF rectf = Managers.Camera.WorldToScreen(
+            position,
             maxWidth,
             2000
             );
