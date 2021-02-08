@@ -30,6 +30,10 @@ public class Managers
     public static DisplayManager Display
         => instance.displayManager;
 
+    private readonly CameraManager cameraManager;
+    public static CameraManager Camera
+        => instance.cameraManager;
+
     private readonly LayoutManager layoutManager;
     public static LayoutManager Layout
         => instance.layoutManager;
@@ -62,6 +66,7 @@ public class Managers
         this.selectionManager = new SelectionManager(mainForm.txtEdit);
         this.fileManager = new FileManager();
         this.displayManager = new DisplayManager();
+        this.cameraManager = new CameraManager();
         this.layoutManager = new LayoutManager();
         this.colorSettings = new ColorSettings();
         this.images = new ImageBank();
