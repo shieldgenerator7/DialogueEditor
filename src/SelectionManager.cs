@@ -91,8 +91,8 @@ public class SelectionManager
     {
         if (open)
         {
-            txtEdit.Location = EditNode.position.toPoint();
-            txtEdit.Size = EditNode.size.toSize();
+            txtEdit.Location = EditNode.position;
+            txtEdit.Size = EditNode.size;
             txtEdit.Visible = true;
         }
         else
