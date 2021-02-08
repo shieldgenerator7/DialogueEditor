@@ -18,6 +18,7 @@ namespace DialogueEditor
             InitializeComponent();
             Managers.init(this);
             Managers.Node.dialoguePanel = this.pnlDialogue;
+            DoubleBuffered = true;
         }
 
         void refresh()

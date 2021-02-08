@@ -93,19 +93,18 @@ public class SelectionManager
 
     private void openEditNode(bool open)
     {
+        txtEdit.Visible = false;
+        Managers.Form.Refresh();
         if (open)
         {
             txtEdit.Location = EditNode.position;
             txtEdit.Size = EditNode.size;
-            txtEdit.Visible = true;
             if (EditNode is NodeQuote nq)
             {
                 txtEdit.Text = nq.QuoteText;
+                txtEdit.Visible = true;
+                txtEdit.Refresh();
             }
-        }
-        else
-        {
-            txtEdit.Visible = false;
         }
     }
 }
