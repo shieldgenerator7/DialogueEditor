@@ -81,25 +81,25 @@ namespace DialogueEditor
             }
             else if (keyData == Keys.Left)
             {
-                Managers.Display.scroll(-1, 0);
+                Managers.Camera.scroll(-1, 0);
                 refresh();
                 return true;
             }
             else if (keyData == Keys.Right)
             {
-                Managers.Display.scroll(1, 0);
+                Managers.Camera.scroll(1, 0);
                 refresh();
                 return true;
             }
             else if (keyData == Keys.Down)
             {
-                Managers.Display.scroll(0, 1);
+                Managers.Camera.scroll(0, 1);
                 refresh();
                 return true;
             }
             else if (keyData == Keys.Up)
             {
-                Managers.Display.scroll(0, -1);
+                Managers.Camera.scroll(0, -1);
                 refresh();
                 return true;
             }
@@ -238,7 +238,7 @@ namespace DialogueEditor
             Managers.Node.filterCharacters(
                 new List<string>(txtCharacterFilters.Text.Split(','))
                 );
-            Managers.Display.unscroll();
+            Managers.Camera.unscroll();
             pnlDialogue.Invalidate();
         }
 
