@@ -33,6 +33,10 @@ namespace DialogueEditor.src
             nodes.Add(n);
             sortList();
         }
+        public void RemoveNode(NodeComponent n)
+        {
+            nodes.Remove(n);
+        }
 
         private void sortList()
         {

@@ -236,13 +236,12 @@ namespace DialogueEditor.src
             if (n is NodeComponent node)
             {
                 node.data.path.remove(node.data);
-                //node.Dispose();
+                containers.Find(nd => nd.Nodes.Contains(node)).RemoveNode(node);
             }
             else if (n is NodeDialogue container)
             {
                 dialogueData.dialogues.Remove(container.path);
                 containers.Remove(container);
-                //container.Dispose();
             }
         }
 

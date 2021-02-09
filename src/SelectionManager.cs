@@ -100,7 +100,18 @@ public class SelectionManager
     {
         if (EditNode && EditNode is NodeComponent nc)
         {
+            //Save edits
             nc.QuoteText = txtEdit.Text;
+            //If node is an empty NodeQuote,
+            if (nc is NodeQuote nq)
+            {
+                if (String.IsNullOrEmpty(nq.quote.text))
+                {
+                    //Delete it
+                    Managers.Node.delete(nq);
+                }
+            }
+            //Update display
             Managers.Form.pnlDialogue.Refresh();
         }
     }
