@@ -52,8 +52,6 @@
             this.moveToTopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.moveToBottomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pnlDialogue = new DisplayPanel();
-            this.txtEdit = new System.Windows.Forms.TextBox();
             this.spltMain = new System.Windows.Forms.SplitContainer();
             this.tabInfo = new System.Windows.Forms.TabControl();
             this.tabCharacters = new System.Windows.Forms.TabPage();
@@ -68,8 +66,9 @@
             this.btnAddCharacterFilter = new System.Windows.Forms.Button();
             this.txtCharacterFilters = new System.Windows.Forms.RichTextBox();
             this.tabVariables = new System.Windows.Forms.TabPage();
+            this.pnlDialogue = new DisplayPanel();
+            this.txtEdit = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
-            this.pnlDialogue.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spltMain)).BeginInit();
             this.spltMain.Panel1.SuspendLayout();
             this.spltMain.Panel2.SuspendLayout();
@@ -79,6 +78,7 @@
             this.flowLayoutPanel1.SuspendLayout();
             this.grpCharacterFilters.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
+            this.pnlDialogue.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -91,7 +91,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1309, 40);
+            this.menuStrip1.Size = new System.Drawing.Size(1309, 48);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -104,7 +104,7 @@
             this.saveToolStripMenuItem,
             this.saveAsToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(72, 36);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(72, 44);
             this.fileToolStripMenuItem.Text = "&File";
             // 
             // newToolStripMenuItem
@@ -164,7 +164,7 @@
             this.moveToTopToolStripMenuItem,
             this.moveToBottomToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(75, 36);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(75, 44);
             this.editToolStripMenuItem.Text = "&Edit";
             // 
             // addNewToolStripMenuItem
@@ -289,43 +289,15 @@
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(85, 36);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(85, 44);
             this.helpToolStripMenuItem.Text = "&Help";
             this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
-            // 
-            // pnlDialogue
-            // 
-            this.pnlDialogue.AutoScroll = true;
-            this.pnlDialogue.AutoSize = true;
-            this.pnlDialogue.BackColor = System.Drawing.Color.DarkGray;
-            this.pnlDialogue.Controls.Add(this.txtEdit);
-            this.pnlDialogue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlDialogue.Location = new System.Drawing.Point(0, 0);
-            this.pnlDialogue.Name = "pnlDialogue";
-            this.pnlDialogue.Size = new System.Drawing.Size(1053, 865);
-            this.pnlDialogue.TabIndex = 2;
-            this.pnlDialogue.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlDialogue_Paint);
-            this.pnlDialogue.DoubleClick += new System.EventHandler(this.pnlDialogue_DoubleClick);
-            this.pnlDialogue.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlDialogue_MouseMove);
-            // 
-            // txtEdit
-            // 
-            this.txtEdit.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.txtEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.txtEdit.Location = new System.Drawing.Point(518, 83);
-            this.txtEdit.Multiline = true;
-            this.txtEdit.Name = "txtEdit";
-            this.txtEdit.Size = new System.Drawing.Size(204, 393);
-            this.txtEdit.TabIndex = 1;
-            this.txtEdit.Text = "Jubilee: Hello there! I\'m Jubilee! What\'s your name? You\'re a new person! I\'ve ne" +
-    "ver met you before! What\'s your name? What\'s your name?";
-            this.txtEdit.Visible = false;
             // 
             // spltMain
             // 
             this.spltMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.spltMain.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-            this.spltMain.Location = new System.Drawing.Point(0, 40);
+            this.spltMain.Location = new System.Drawing.Point(0, 48);
             this.spltMain.Name = "spltMain";
             // 
             // spltMain.Panel1
@@ -335,7 +307,7 @@
             // spltMain.Panel2
             // 
             this.spltMain.Panel2.Controls.Add(this.tabInfo);
-            this.spltMain.Size = new System.Drawing.Size(1309, 865);
+            this.spltMain.Size = new System.Drawing.Size(1309, 857);
             this.spltMain.SplitterDistance = 1053;
             this.spltMain.TabIndex = 3;
             // 
@@ -347,7 +319,7 @@
             this.tabInfo.Location = new System.Drawing.Point(0, 0);
             this.tabInfo.Name = "tabInfo";
             this.tabInfo.SelectedIndex = 0;
-            this.tabInfo.Size = new System.Drawing.Size(252, 865);
+            this.tabInfo.Size = new System.Drawing.Size(252, 857);
             this.tabInfo.TabIndex = 0;
             // 
             // tabCharacters
@@ -356,7 +328,7 @@
             this.tabCharacters.Location = new System.Drawing.Point(8, 39);
             this.tabCharacters.Name = "tabCharacters";
             this.tabCharacters.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCharacters.Size = new System.Drawing.Size(236, 818);
+            this.tabCharacters.Size = new System.Drawing.Size(236, 810);
             this.tabCharacters.TabIndex = 0;
             this.tabCharacters.Text = "Characters";
             this.tabCharacters.UseVisualStyleBackColor = true;
@@ -374,7 +346,7 @@
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(230, 812);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(230, 804);
             this.flowLayoutPanel1.TabIndex = 1;
             this.flowLayoutPanel1.WrapContents = false;
             // 
@@ -480,6 +452,35 @@
             this.tabVariables.Text = "Variables";
             this.tabVariables.UseVisualStyleBackColor = true;
             // 
+            // pnlDialogue
+            // 
+            this.pnlDialogue.AutoScroll = true;
+            this.pnlDialogue.AutoSize = true;
+            this.pnlDialogue.BackColor = System.Drawing.Color.DarkGray;
+            this.pnlDialogue.Controls.Add(this.txtEdit);
+            this.pnlDialogue.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlDialogue.Location = new System.Drawing.Point(0, 0);
+            this.pnlDialogue.Name = "pnlDialogue";
+            this.pnlDialogue.Size = new System.Drawing.Size(1053, 857);
+            this.pnlDialogue.TabIndex = 2;
+            this.pnlDialogue.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlDialogue_Paint);
+            this.pnlDialogue.DoubleClick += new System.EventHandler(this.pnlDialogue_DoubleClick);
+            this.pnlDialogue.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlDialogue_MouseMove);
+            // 
+            // txtEdit
+            // 
+            this.txtEdit.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.txtEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.txtEdit.Location = new System.Drawing.Point(518, 79);
+            this.txtEdit.Multiline = true;
+            this.txtEdit.Name = "txtEdit";
+            this.txtEdit.Size = new System.Drawing.Size(204, 393);
+            this.txtEdit.TabIndex = 1;
+            this.txtEdit.Text = "Jubilee: Hello there! I\'m Jubilee! What\'s your name? You\'re a new person! I\'ve ne" +
+    "ver met you before! What\'s your name? What\'s your name?";
+            this.txtEdit.Visible = false;
+            this.txtEdit.DoubleClick += new System.EventHandler(this.txtEdit_DoubleClick);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -494,8 +495,6 @@
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.pnlDialogue.ResumeLayout(false);
-            this.pnlDialogue.PerformLayout();
             this.spltMain.Panel1.ResumeLayout(false);
             this.spltMain.Panel1.PerformLayout();
             this.spltMain.Panel2.ResumeLayout(false);
@@ -509,6 +508,8 @@
             this.grpCharacterFilters.PerformLayout();
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel2.PerformLayout();
+            this.pnlDialogue.ResumeLayout(false);
+            this.pnlDialogue.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

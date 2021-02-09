@@ -306,5 +306,10 @@ namespace DialogueEditor
         {
             Managers.Control.MousePos = e.Location.toVector();
         }
+
+        private void txtEdit_DoubleClick(object sender, EventArgs e)
+        {
+            Managers.Select.EditNode = null;
+        }
     }
 }
