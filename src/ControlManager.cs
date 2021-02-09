@@ -38,6 +38,12 @@ public class ControlManager
         Managers.Select.select(node, Control.ModifierKeys == Keys.Shift);
     }
 
+    public void click()
+    {
+        Node n = Managers.Node.getNode(mousePosWorld);
+        select(n);
+    }
+
     public void doubleClick()
     {
         Node n = Managers.Node.getNode(mousePosWorld);

@@ -14,6 +14,7 @@ public class DisplayManager
     readonly StringFormat stringFormat;
     readonly Brush textBrush = new SolidBrush(Color.Black);
     readonly Brush backBrush = new SolidBrush(Color.LightGray);
+    readonly Pen selectBrush = new Pen(Color.LimeGreen, 3);
 
     public const int portraitSize = 50;
 
@@ -59,6 +60,10 @@ public class DisplayManager
         {
             paintNode(action);
         }
+        if (Managers.Select.selected(n))
+        {
+            paintNodeBorder(n);
+        }
     }
     private void paintNode(NodeDialogue nd)
     {
@@ -98,6 +103,11 @@ public class DisplayManager
         drawString(na.txtActionValue);
     }
     #endregion
+
+    private void paintNodeBorder(Node n)
+    {
+        g.DrawRectangle(selectBrush, Managers.Camera.WorldToScreen(n));
+    }
 
     #region Graphics Wrapper Methods
     public Vector measureString(TextDisplayable txt)

@@ -104,7 +104,7 @@
             this.saveToolStripMenuItem,
             this.saveAsToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(72, 44);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(72, 40);
             this.fileToolStripMenuItem.Text = "&File";
             // 
             // newToolStripMenuItem
@@ -164,7 +164,7 @@
             this.moveToTopToolStripMenuItem,
             this.moveToBottomToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(75, 44);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(75, 40);
             this.editToolStripMenuItem.Text = "&Edit";
             // 
             // addNewToolStripMenuItem
@@ -289,7 +289,7 @@
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(85, 44);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(85, 40);
             this.helpToolStripMenuItem.Text = "&Help";
             this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
             // 
@@ -447,7 +447,7 @@
             this.tabVariables.Location = new System.Drawing.Point(8, 39);
             this.tabVariables.Name = "tabVariables";
             this.tabVariables.Padding = new System.Windows.Forms.Padding(3);
-            this.tabVariables.Size = new System.Drawing.Size(236, 818);
+            this.tabVariables.Size = new System.Drawing.Size(236, 810);
             this.tabVariables.TabIndex = 1;
             this.tabVariables.Text = "Variables";
             this.tabVariables.UseVisualStyleBackColor = true;
@@ -463,6 +463,7 @@
             this.pnlDialogue.Name = "pnlDialogue";
             this.pnlDialogue.Size = new System.Drawing.Size(1053, 857);
             this.pnlDialogue.TabIndex = 2;
+            this.pnlDialogue.Click += new System.EventHandler(this.pnlDialogue_Click);
             this.pnlDialogue.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlDialogue_Paint);
             this.pnlDialogue.DoubleClick += new System.EventHandler(this.pnlDialogue_DoubleClick);
             this.pnlDialogue.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlDialogue_MouseMove);

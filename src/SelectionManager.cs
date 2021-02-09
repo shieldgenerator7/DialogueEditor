@@ -33,23 +33,24 @@ public class SelectionManager
     /// <param name="append">true to add to list, false to overwrite it</param>
     public void select(Node node, bool append)
     {
-        if (node is NodeDialogue || node is Node)
+        if (!append)
         {
-            if (!append)
-            {
-                //selectedNodes.ForEach(c => c.BackColor = Managers.Colors.unselectColor);
-                selectedNodes.Clear();
-            }
+            selectedNodes.Clear();
+        }
+        if (node)
+        {
             if (!selectedNodes.Contains(node))
             {
-                //node.BackColor = Managers.Colors.selectColor;
                 selectedNodes.Add(node);
             }
+        }
+        if (!selectedNodes.Contains(EditNode))
+        {
+            EditNode = null;
         }
     }
     public void deselect(Node node)
     {
-        //node.BackColor = Managers.Colors.unselectColor;
         selectedNodes.Remove(node);
         if (node == EditNode)
         {
@@ -67,6 +68,9 @@ public class SelectionManager
             deselect(selectedNodes[i]);
         }
     }
+
+    public bool selected(Node n)
+        => selectedNodes.Contains(n);
 
     public T getOne<T>() where T : Node
         => (T)selectedNodes.FirstOrDefault(n => n is T);
