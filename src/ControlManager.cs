@@ -121,14 +121,14 @@ public class ControlManager
 
     public void enterPressed()
     {
-        if (Managers.Select.EditNode)
+        NodeQuote activeNode = Managers.Select.getOne<NodeQuote>();
+        if (activeNode != null)
         {
-            Managers.Select.EditNode = null;
-        }
-        else
-        {
-            NodeQuote activeNode = Managers.Select.getOne<NodeQuote>();
-            if (activeNode != null)
+            if (!Managers.Select.EditNode)
+            {
+                Managers.Select.EditNode = activeNode;
+            }
+            else
             {
                 Managers.Select.EditNode = null;
                 //If it's the last in the path,
@@ -139,11 +139,6 @@ public class ControlManager
                     NodeQuote newNode = Managers.Node.createNodeQuote(path);
                     select(newNode);
                     Managers.Select.EditNode = newNode;
-                }
-                //Else edit this node
-                else
-                {
-                    Managers.Select.EditNode = activeNode;
                 }
             }
         }
