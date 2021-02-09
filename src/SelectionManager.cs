@@ -119,6 +119,8 @@ public class SelectionManager
                 txtEdit.Visible = true;
                 txtEdit.Refresh();
                 txtEdit.Focus();
+                txtEdit.DeselectAll();
+                txtEdit.SelectionStart = txtEdit.Text.Length;
             }
         }
     }
