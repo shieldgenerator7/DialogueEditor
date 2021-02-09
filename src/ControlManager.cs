@@ -121,18 +121,30 @@ public class ControlManager
 
     public void enterPressed()
     {
-        NodeQuote activeNode = Managers.Select.getOne<NodeQuote>();
-        if (activeNode != null)
+        if (Managers.Select.EditNode)
         {
             Managers.Select.EditNode = null;
-            //If it's the last in the path,
-            DialoguePath path = activeNode.quote.path;
-            if (activeNode.quote.Index == path.quotes.Count - 1)
+        }
+        else
+        {
+            NodeQuote activeNode = Managers.Select.getOne<NodeQuote>();
+            if (activeNode != null)
             {
-                //Add new node at the end
-                NodeQuote newNode = Managers.Node.createNodeQuote(path);
-                select(newNode);
-                Managers.Select.EditNode = newNode;
+                Managers.Select.EditNode = null;
+                //If it's the last in the path,
+                DialoguePath path = activeNode.quote.path;
+                if (activeNode.quote.Index == path.quotes.Count - 1)
+                {
+                    //Add new node at the end
+                    NodeQuote newNode = Managers.Node.createNodeQuote(path);
+                    select(newNode);
+                    Managers.Select.EditNode = newNode;
+                }
+                //Else edit this node
+                else
+                {
+                    Managers.Select.EditNode = activeNode;
+                }
             }
         }
     }
