@@ -118,6 +118,7 @@ public class SelectionManager
                 txtEdit.Text = nc.QuoteText;
                 txtEdit.Visible = true;
                 txtEdit.Refresh();
+                txtEdit.Focus();
             }
         }
     }

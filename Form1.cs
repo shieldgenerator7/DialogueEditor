@@ -82,32 +82,41 @@ namespace DialogueEditor
             }
             else if (keyData == Keys.Left)
             {
-                Managers.Camera.scroll(-1, 0);
-                refresh();
-                return true;
+                if (Managers.Control.arrowKeyPressed(-1, 0))
+                {
+                    refresh();
+                    return true;
+                }
             }
             else if (keyData == Keys.Right)
             {
-                Managers.Camera.scroll(1, 0);
-                refresh();
-                return true;
+                if (Managers.Control.arrowKeyPressed(1, 0))
+                {
+                    refresh();
+                    return true;
+                }
             }
             else if (keyData == Keys.Down)
             {
-                Managers.Camera.scroll(0, 1);
-                refresh();
-                return true;
+                if (Managers.Control.arrowKeyPressed(0, 1))
+                {
+                    refresh();
+                    return true;
+                }
             }
             else if (keyData == Keys.Up)
             {
-                Managers.Camera.scroll(0, -1);
-                refresh();
-                return true;
+                if (Managers.Control.arrowKeyPressed(0, -1))
+                {
+                    refresh();
+                    return true;
+                }
             }
             else
             {
                 return base.ProcessCmdKey(ref msg, keyData);
             }
+            return false;
         }
 
         private void helpToolStripMenuItem_Click(object sender, EventArgs e)

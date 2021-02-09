@@ -192,6 +192,18 @@ public class ControlManager
         return false;
     }
 
+    public bool arrowKeyPressed(int x, int y)
+    {
+        //If a node is being edited,
+        if (Managers.Select.EditNode)
+        {
+            //Don't scroll
+            return false;
+        }
+        Managers.Camera.scroll(x, y);
+        return true;
+    }
+
     public void receiveInfoDump(DialoguePath path, string[] textArray)
     {
         NodeQuote lastNode = Managers.Node.createNodes(path, textArray);
