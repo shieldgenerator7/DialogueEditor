@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="DialogueEditor.exe" size="59872">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="DialogueEditor.exe" size="62944">
       <assemblyIdentity name="DialogueEditor" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>lYkpOL/8zNgbG8kpNnB3HyGZKkmiHS9VjiC2FLcKdvo=</dsig:DigestValue>
+        <dsig:DigestValue>SBNquAQrg5WShKm5ggj3mrR1sS/XK9tN3dlzGK5SyWs=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
